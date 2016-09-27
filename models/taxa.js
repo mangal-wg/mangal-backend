@@ -25,19 +25,29 @@ module.exports = function(sequelize, DataTypes) {
             comment: "Unique identifier from the Integrated Taxonomic Information System",
             unique: 'uq_stn'
         },
-        gbif: {
-            type: DataTypes.INTEGER,
-            comment: "Unique identifier from the Global Biodiversity Information Facility",
-            unique: 'uq_gbif'
-        },
         eol: {
             type: DataTypes.INTEGER,
             comment: "Unique identifier from the Encyclopedia of Life",
             unique: 'uq_eol'
         },
+        bold: {
+            type: DataTypes.INTEGER,
+            comment: "Unique identifier from the Barcode of Life Database",
+            unique: 'uq_bold'
+        },
         status: {
             type: DataTypes.ENUM,
-            values: ['pending', 'confirmed', 'unresolved'],
+            values: [
+                "confirmed",
+                "trophic species",
+                "morphospecies",
+                "nomen dubium",
+                "nomen oblitum",
+                "nomen nudum",
+                "nomen novum",
+                "nomen conservandum",
+                "species inquirenda"
+            ],
             comment: "Status of the taxonomic validation"
         },
         public: {
