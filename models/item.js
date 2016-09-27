@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
         units: {
             type: DataTypes.STRING,
             comment: "Units in which the population size was measured."
-        }
+        },
         description: {
             type: DataTypes.TEXT('long'),
             comment: "Description of the item"
