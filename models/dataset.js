@@ -13,21 +13,18 @@ module.exports = function(sequelize, DataTypes) {
             comment: "Collection date"
         },
         description: {
-            type: DataTypes.TEXT('long'),
+            type: DataTypes.TEXT,
             comment: "Description of the dataset collected"
         },
         public: {
             type: DataTypes.BOOLEAN,
             comment: "Is this available publicly? "
         }
-
     }, {
+        underscored: true,
         classMethods: {
             associate: function(models) {
                 dataset.hasMany(models.network, {
-                    onDelete: 'cascade'
-                }),
-                dataset.hasOne(models.user, {
                     onDelete: 'cascade'
                 })
             }

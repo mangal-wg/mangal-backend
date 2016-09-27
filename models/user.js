@@ -2,22 +2,43 @@
 
 module.exports = function(sequelize, DataTypes) {
     var user = sequelize.define('user', {
-      first:{
-        type: DataTypes.STRING
-      },
-      last:{
-        type: DataTypes.STRING
-      },
-      email:{
-        type: DataTypes.STRING
-      },
-      orcid:{
-        type: DataTypes.STRING
-      },
-      organization:{
-        type: DataTypes.STRING
-      }
-    });
+        first: {
+            type: DataTypes.STRING
+        },
+        last: {
+            type: DataTypes.STRING
+        },
+        email: {
+            type: DataTypes.STRING
+        },
+        orcid: {
+            type: DataTypes.STRING
+        },
+        organization: {
+            type: DataTypes.STRING
+        }
+    }, {
+        underscored: true,
+        classMethods: {
+            associate: function(models) {
+                user.hasMany(models.taxon, {
+                        onDelete: 'cascade'
+                    }),
+                    user.hasMany(models.item, {
+                        onDelete: 'cascade'
+                    }),
+                    user.hasMany(models.network, {
+                        onDelete: 'cascade'
+                    }),
+                    user.hasMany(models.interaction, {
+                        onDelete: 'cascade'
+                    }),
+                    user.hasMany(models.dataset, {
+                        onDelete: 'cascade'
+                    })
+            }
+        }
+    })
 
     return user
 

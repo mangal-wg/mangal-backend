@@ -12,22 +12,22 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             comment: "Collection date"
         },
-        localisation:{
-          type: DataTypes.GEOMETRY('POINT')
+        localisation: {
+            type: DataTypes.GEOMETRY('POINT')
         },
         description: {
-            type: DataTypes.TEXT('long'),
+            type: DataTypes.TEXT,
             comment: "Description of the network collected"
         },
         public: {
             type: DataTypes.BOOLEAN,
             comment: "Is this network is available publicly? "
         }
-
     }, {
+        underscored: true,
         classMethods: {
             associate: function(models) {
-                network.hasOne(models.user, {
+                network.hasMany(models.interaction, {
                     onDelete: 'cascade'
                 })
             },

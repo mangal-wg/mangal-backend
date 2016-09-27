@@ -8,6 +8,10 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             defaultValue: 'taxon'
         },
+        taxon_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false
+        },
         name: {
             type: DataTypes.STRING,
             comment: "Name of the item"
@@ -20,9 +24,9 @@ module.exports = function(sequelize, DataTypes) {
         units: {
             type: DataTypes.STRING,
             comment: "Units in which the population size was measured."
-        }
+        },
         description: {
-            type: DataTypes.TEXT('long'),
+            type: DataTypes.TEXT,
             comment: "Description of the item"
         },
         public: {
@@ -30,18 +34,22 @@ module.exports = function(sequelize, DataTypes) {
             comment: "Is this available publicly? "
         }
     }, {
+        underscored: true,
         classMethods: {
             associate: function(models) {
-                item.hasOne(models.taxon, {
-                        onDelete: 'cascade'
+                item.hasMany(models.interaction, {
+                        onDelete: 'cascade',
+                        foreignKey: 'item_id_to'
                     }),
-                item.hasOne(models.user, {
-                        onDelete: 'cascade'
+                    item.hasMany(models.interaction, {
+                        onDelete: 'cascade',
+                        foreignKey: 'item_id_from'
                     })
+
             },
         }
     })
 
-return item
+    return item
 
 };

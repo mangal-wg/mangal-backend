@@ -69,7 +69,7 @@ module.exports = function(sequelize, DataTypes) {
             comment: "Value of the attribute"
         },
         description: {
-            type: DataTypes.TEXT('long'),
+            type: DataTypes.TEXT,
             comment: "Description of the interaction"
         },
         explicit_loc: {
@@ -81,24 +81,8 @@ module.exports = function(sequelize, DataTypes) {
             comment: "Is this available publicly? "
         }
     }, {
+        underscored: true,
         classMethods: {
-            associate: function(models) {
-                  interaction.hasOne(models.network, {
-                        onDelete: 'cascade',
-                        foreignKey: 'network_id'
-                    }),
-                    interaction.hasOne(models.user, {
-                        onDelete: 'cascade'
-                    }),
-                    interaction.hasMany(models.item, {
-                        onDelete: 'cascade',
-                        foreignKey: 'item_id_to'
-                    }),
-                    interaction.hasMany(models.item, {
-                        onDelete: 'cascade',
-                        foreignKey: 'item_id_from'
-                    })
-            },
             validate: {
                 bothAttrValue: function() {
                     if ((this.value === null) && (this.attr !== null)) {

@@ -30,8 +30,8 @@ var baseapiurl = '/api/v0/'
 
 // Create REST resource
 var taxaResource = epilogue.resource({
-  model: db.taxa,
-  endpoints: ['/api/v0/taxa','/api/v0/taxa/:id']
+  model: db.taxon,
+  endpoints: ['/api/v0/taxon','/api/v0/taxon/:id']
 });
 
 // Sync database with new models

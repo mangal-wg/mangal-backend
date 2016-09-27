@@ -3,16 +3,16 @@
 module.exports = function(sequelize, DataTypes) {
     var taxon = sequelize.define('taxon', {
         taxon_name_rec: {
-            type: DataTypes.TEXT('medium'),
+            type: DataTypes.STRING,
             comment: "Name of the recorded taxon set by the original owner"
         },
         vernacular: {
-            type: DataTypes.TEXT('medium'),
+            type: DataTypes.STRING,
             comment: "Vernacular name of the taxon",
             unique: 'uq_vernacular'
         },
         description: {
-            type: DataTypes.TEXT('long'),
+            type: DataTypes.TEXT,
             comment: "Description of the taxon"
         },
         ncbi: {
@@ -55,12 +55,14 @@ module.exports = function(sequelize, DataTypes) {
             comment: "Is this available publicly? "
         }
     }, {
+        underscored: true,
         classMethods: {
             associate: function(models) {
-                taxon.hasOne(models.user, {
-                    onDelete: 'SET NULL'
+                taxon.hasMany(models.item, {
+                    onDelete: 'cascade',
+                    foreignKey: 'taxon_id'
                 })
-            }
+            },
         }
     });
 
