@@ -4,18 +4,23 @@ module.exports = function(sequelize, DataTypes) {
     var item = sequelize.define('item', {
         level: {
             type: DataTypes.ENUM,
-            values: ['taxa', 'ind', 'pop'],
-            allowNull: false
+            values: ['taxon', 'ind', 'pop'],
+            allowNull: false,
+            defaultValue: 'taxon'
         },
         name: {
             type: DataTypes.STRING,
             comment: "Name of the item"
         },
         size: {
-            type: DataTypes.INTEGER,
-            comment: "Number of individus in the population. ONLY ALLOWED when level is set as pop"
+            type: DataTypes.FLOAT,
+            comment: "Population size. ONLY ALLOWED when level is set as `pop`."
                 // Add reference table
         },
+        units: {
+            type: DataTypes.STRING,
+            comment: "Units in which the population size was measured."
+        }
         description: {
             type: DataTypes.TEXT('long'),
             comment: "Description of the item"
@@ -27,22 +32,13 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function(models) {
-                item.hasOne(models.taxa, {
+                item.hasOne(models.taxon, {
                         onDelete: 'cascade'
                     }),
                 item.hasOne(models.user, {
                         onDelete: 'cascade'
                     })
             },
-            validate: {
-                bothAttrValue: function() {
-                    if ((this.value === null) && (this.attr !== null)) {
-                        throw new Error('Attribute set with no value')
-                    } else if (((this.value !== null) && (this.attr === null))) {
-                        throw new Error('Value set with no attribute')
-                    }
-                }
-            }
         }
     })
 
