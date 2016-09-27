@@ -1,19 +1,19 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-    var taxa = sequelize.define('taxa', {
-        taxa_name_rec: {
+    var taxon = sequelize.define('taxon', {
+        taxon_name_rec: {
             type: DataTypes.TEXT('medium'),
-            comment: "Name of the recorded taxa set by the original owner"
+            comment: "Name of the recorded taxon set by the original owner"
         },
         vernacular: {
             type: DataTypes.TEXT('medium'),
-            comment: "Vernacular name of the species",
+            comment: "Vernacular name of the taxon",
             unique: 'uq_vernacular'
         },
         description: {
             type: DataTypes.TEXT('long'),
-            comment: "Description of the taxa"
+            comment: "Description of the taxon"
         },
         ncbi: {
             type: DataTypes.INTEGER,
@@ -57,13 +57,13 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function(models) {
-                taxa.hasOne(models.user, {
+                taxon.hasOne(models.user, {
                     onDelete: 'SET NULL'
                 })
             }
         }
     });
 
-    return taxa
+    return taxon
 
 };

@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataTypes) {
     var item = sequelize.define('item', {
         level: {
             type: DataTypes.ENUM,
-            values: ['taxa', 'ind', 'pop'],
+            values: ['taxon', 'ind', 'pop'],
             allowNull: false
         },
         name: {
@@ -27,7 +27,7 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         classMethods: {
             associate: function(models) {
-                item.hasOne(models.taxa, {
+                item.hasOne(models.taxon, {
                         onDelete: 'cascade'
                     }),
                 item.hasOne(models.user, {
