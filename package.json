@@ -13,11 +13,10 @@
     "url": "git+https://github.com/mangal-wg/mangaljs.git"
   },
   "keywords": [
-    "Interactions",
+    "interactions",
     "networks",
     "species",
-    "ecological",
-    "database"
+    "ecology"
   ],
   "author": "Steve Vissault & Timothée Poisot",
   "license": "MIT",
