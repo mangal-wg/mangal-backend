@@ -18,6 +18,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         public: {
             type: DataTypes.BOOLEAN,
+            allowNull: false,
             comment: "Is this available publicly? "
         }
     }, {
