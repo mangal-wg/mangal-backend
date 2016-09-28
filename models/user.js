@@ -2,10 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
     var user = sequelize.define('user', {
-        first: {
-            type: DataTypes.STRING
-        },
-        last: {
+        name: {
             type: DataTypes.STRING
         },
         email: {
