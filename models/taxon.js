@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
     var taxon = sequelize.define('taxon', {
-        taxon_name_rec: {
+        name: {
             type: DataTypes.STRING,
             comment: "Name of the recorded taxon set by the original owner"
         },

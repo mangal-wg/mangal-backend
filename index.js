@@ -61,3 +61,6 @@ db.sequelize.sync({force:true});
 var port = process.env.PORT || 3000;
 server = http.createServer(app);
 server.listen(port);
+
+// export server for unit testing
+module.exports = server

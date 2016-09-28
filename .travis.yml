@@ -1,16 +1,19 @@
 language: node_js
+sudo: required
+dist: trusty
 node_js:
   - "5.1"
 
 services:
   - postgresql
 
-before_script:
-  - psql -U postgres -c "CREATE DATABASE mangal_dev;"
-  - psql -U postgres -c "CREATE EXTENSION postgis;"
+addons:
+  postgresql: "9.5"
 
 install:
   - npm install
+  - npm run deploy_db
+  - npm run destroy_db
 
 script:
   - npm test
