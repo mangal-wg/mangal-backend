@@ -1,10 +1,10 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-    var item = sequelize.define('item', {
+    var instance = sequelize.define('instance', {
         level: {
             type: DataTypes.ENUM,
-            values: ['taxon', 'ind', 'pop'],
+            values: ['taxon', 'individual', 'population'],
             allowNull: false,
             defaultValue: 'taxon'
         },
@@ -14,11 +14,11 @@ module.exports = function(sequelize, DataTypes) {
         },
         name: {
             type: DataTypes.STRING,
-            comment: "Name of the item"
+            comment: "Name of the instance"
         },
         size: {
             type: DataTypes.FLOAT,
-            comment: "Population size. ONLY ALLOWED when level is set as `pop`."
+            comment: "Population size. ONLY ALLOWED when level is set as `population`."
                 // Add reference table
         },
         units: {
@@ -27,7 +27,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         description: {
             type: DataTypes.TEXT,
-            comment: "Description of the item"
+            comment: "Description of the instance"
         },
         public: {
             type: DataTypes.BOOLEAN,
@@ -37,19 +37,19 @@ module.exports = function(sequelize, DataTypes) {
         underscored: true,
         classMethods: {
             associate: function(models) {
-                item.hasMany(models.interaction, {
+                instance.hasMany(models.interaction, {
                         onDelete: 'cascade',
-                        foreignKey: 'item_id_to'
+                        foreignKey: 'instance_id_to'
                     }),
-                    item.hasMany(models.interaction, {
+                    instance.hasMany(models.interaction, {
                         onDelete: 'cascade',
-                        foreignKey: 'item_id_from'
+                        foreignKey: 'instance_id_from'
                     })
 
             },
         }
     })
 
-    return item
+    return instance
 
 };

@@ -2,13 +2,13 @@
 
 module.exports = function(sequelize, DataTypes) {
     var interaction = sequelize.define('interaction', {
-        item_id_from: {
+        instance_id_from: {
             type: DataTypes.INTEGER,
             comment: "Unique identifier of the observation (FROM)",
             unique: "uq_interac_const",
             allowNull: false
         },
-        item_id_to: {
+        instance_id_to: {
             type: DataTypes.INTEGER,
             comment: "Unique identifier of the observation (TO)",
             unique: "uq_interac_const",

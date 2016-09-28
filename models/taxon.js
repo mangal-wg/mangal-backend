@@ -58,7 +58,7 @@ module.exports = function(sequelize, DataTypes) {
         underscored: true,
         classMethods: {
             associate: function(models) {
-                taxon.hasMany(models.item, {
+                taxon.hasMany(models.instance, {
                     onDelete: 'cascade',
                     foreignKey: 'taxon_id'
                 })

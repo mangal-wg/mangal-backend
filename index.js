@@ -52,9 +52,9 @@ var interactionResource = epilogue.resource({
   endpoints: endpointize(['interaction','interaction/:id'])
 });
 
-var itemResource = epilogue.resource({
-  model: db.item,
-  endpoints: endpointize(['item','item/:id'])
+var instanceResource = epilogue.resource({
+  model: db.instance,
+  endpoints: endpointize(['instance','instance/:id'])
 });
 
 var networkResource = epilogue.resource({
