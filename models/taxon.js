@@ -2,9 +2,9 @@
 
 module.exports = function(sequelize, DataTypes) {
     var taxon = sequelize.define('taxon', {
-        taxon_name_rec: {
+        name: {
             type: DataTypes.STRING,
-            comment: "Name of the recorded taxon set by the original owner"
+            comment: "Name of the recorded taxon"
         },
         vernacular: {
             type: DataTypes.STRING,
@@ -51,10 +51,6 @@ module.exports = function(sequelize, DataTypes) {
             comment: "Status of the taxonomic validation",
             defaultValue: "confirmed",
             allowNull: false
-        },
-        public: {
-            type: DataTypes.BOOLEAN,
-            comment: "Is this available publicly? "
         }
     }, {
         underscored: true,

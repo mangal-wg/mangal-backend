@@ -58,11 +58,10 @@ module.exports = function(sequelize, DataTypes) {
             comment: "Sex of the TO species",
             allowNull: false
         },
-        attr: {
+        attr_id: {
             type: DataTypes.INTEGER,
             unique: "uq_interac_const",
             comment: "Unique Identifier to retrieve the name of the variable measured (if present)"
-                // Add reference table
         },
         value: {
             type: DataTypes.FLOAT,
@@ -78,6 +77,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         public: {
             type: DataTypes.BOOLEAN,
+            allowNull:false,
             comment: "Is this available publicly? "
         }
     }, {
@@ -85,9 +85,9 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             validate: {
                 bothAttrValue: function() {
-                    if ((this.value === null) && (this.attr !== null)) {
+                    if ((this.value === null) && (this.attr_id !== null)) {
                         throw new Error('Attribute set with no value')
-                    } else if (((this.value !== null) && (this.attr === null))) {
+                    } else if (((this.value !== null) && (this.attr_id === null))) {
                         throw new Error('Value set with no attribute')
                     }
                 }
