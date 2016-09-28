@@ -26,12 +26,12 @@ epilogue.initialize({
   sequelize: db.sequelize
 });
 
-var baseapiurl = '/api/v0/'
+var baseapiurl = '/api/v0/';
 
 // Create REST resource
 var taxaResource = epilogue.resource({
   model: db.taxon,
-  endpoints: ['/api/v0/taxon','/api/v0/taxon/:id']
+  endpoints: ['taxon','taxon/:id'].map(function(x){return(baseapiurl+x)});
 });
 
 // Sync database with new models
