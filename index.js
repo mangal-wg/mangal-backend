@@ -1,9 +1,9 @@
 // List module dependancies
-var express = require('express');
+var express    = require('express');
 var bodyParser = require('body-parser');
-var db = require('./models');
-var http = require('http');
-var epilogue = require('epilogue');
+var db         = require('./models');
+var http       = require('http');
+var epilogue   = require('epilogue');
 
 // Init express app
 var app = express();
