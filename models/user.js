@@ -21,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
                 user.hasMany(models.taxon, {
                         onDelete: 'cascade'
                     }),
-                    user.hasMany(models.item, {
+                    user.hasMany(models.instanc, {
                         onDelete: 'cascade'
                     }),
                     user.hasMany(models.network, {
