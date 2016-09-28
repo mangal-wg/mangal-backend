@@ -13,6 +13,17 @@ module.exports = function(sequelize, DataTypes) {
         },
         organization: {
             type: DataTypes.STRING
+        },
+        type: {
+            type: DataTypes.ENUM,
+            values: [
+                "user",
+                "curator",
+                "administrator"
+            ],
+            defaultValue: "user",
+            allowNull: false,
+            comment: "The status of the user. Can be user, curator, or administrator."
         }
     }, {
         underscored: true,

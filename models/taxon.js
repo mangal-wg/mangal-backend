@@ -48,7 +48,9 @@ module.exports = function(sequelize, DataTypes) {
                 "nomen conservandum",
                 "species inquirenda"
             ],
-            comment: "Status of the taxonomic validation"
+            comment: "Status of the taxonomic validation",
+            defaultValue: "confirmed",
+            allowNull: false
         },
         public: {
             type: DataTypes.BOOLEAN,
