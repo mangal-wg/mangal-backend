@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // test login authentification
 db.sequelize
   .authenticate()
-  .then(function(err) {
+  .then(function(success) {
     console.log('Connection has been established successfully.');
   })
   .catch(function (err) {
@@ -28,10 +28,30 @@ epilogue.initialize({
 
 var baseapiurl = '/api/v0/'
 
-// Create REST resource
-var taxaResource = epilogue.resource({
+// Create REST resources
+var taxonResource = epilogue.resource({
   model: db.taxon,
-  endpoints: ['/api/v0/taxon','/api/v0/taxon/:id']
+  endpoints: ['taxon','taxon/:id'].map(function(x){return(baseapiurl+x)})
+});
+
+var datasetResource = epilogue.resource({
+  model: db.dataset,
+  endpoints: ['dataset','dataset/:id'].map(function(x){return(baseapiurl+x)})
+});
+
+var interactionResource = epilogue.resource({
+  model: db.interaction,
+  endpoints: ['interaction','interaction/:id'].map(function(x){return(baseapiurl+x)})
+});
+
+var itemResource = epilogue.resource({
+  model: db.item,
+  endpoints: ['item','item/:id'].map(function(x){return(baseapiurl+x)})
+});
+
+var networkResource = epilogue.resource({
+  model: db.network,
+  endpoints: ['network','network/:id'].map(function(x){return(baseapiurl+x)})
 });
 
 // Sync database with new models
