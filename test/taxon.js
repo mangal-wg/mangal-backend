@@ -2,11 +2,20 @@ var fs = require('fs');
 var db = require('../models');
 var should = require('should');
 var supertest = require('supertest');
-var app = require('../index')
 
+// Set Test environment
+process.env.NODE_ENV = 'test'
+var app = require('../')
 var server = supertest.agent("http://localhost:3000");
 
 describe("Operations on taxa", function() {
+
+    // beforeEach(function(){
+    //   return db.sequelize.sync({
+    //     force:true,
+    //     logging: false
+    //   });
+    // });
 
     describe("Adding a taxon", function() {
 
