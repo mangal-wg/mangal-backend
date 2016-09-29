@@ -5,6 +5,7 @@ var request = require('supertest');
 
 // Set app test
 var server = require('../')
+var addr = 'localhost:3000'
 
 beforeEach(function(done) {
     db.sequelize.sync({
@@ -14,30 +15,48 @@ beforeEach(function(done) {
     });
 });
 
-describe("Adding a taxon", function() {
+describe("POSTing a taxon", function() {
 
-    it("should work if the taxon is unique", function(done){
+    it("should work if the taxon is not unique", function(done) {
 
-      var file = './test/data/taxon/vulpes_vulpes.json'
-      var data = JSON.parse(fs.readFileSync(file, 'utf8'));
-      
-        request('http://localhost:3000')
+        var data = [{
+            "name": "Vulpes vulpes",
+            "vernacular": "Red fox",
+            "tsn": 180604
+        }, {
+            "name": "Alces alces",
+            "vernacular": "Moose",
+            "tsn": 180604
+        }];
+
+        request(addr)
             .post('/api/v0/taxon')
-            .send(data)
-            .end(function(err, res) {
-              if (err) return done(err);
-              done();
-            });
+            .send(data[0], data[1])
+            .expect(400,done)
     });
 
-    it("should not work if the taxon is not unique");
-    it("should not work if the taxon has no name");
+    it("should not work if the taxon has no name", function(done) {
+        var data = {
+            "vernacular": "Moose",
+            "tsn": 180604
+        };
+
+        request(addr)
+            .post('/api/v0/taxon')
+            .send(data)
+            .expect(400,done)
+    });
 
 });
 
 describe("GETting a taxon", function() {
 
-    it("should return 404 if there is no taxon with this ID");
+    it("should return 404 if there is no taxon with this ID",function(done){
+
+      request(addr)
+          .get('/api/v0/taxon?tsn=0000')
+          
+    });
     it("should return a taxon with the correct ID if it exists");
 
 })

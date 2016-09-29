@@ -6,7 +6,7 @@
   "scripts": {
     "deploy_db": "createdb mangal_dev; psql -U postgres -d mangal_dev -c 'CREATE EXTENSION postgis';",
     "destroy_db": "dropdb mangal_dev",
-    "test": "export NODE_ENV=test | node_modules/.bin/mocha"
+    "test": "export NODE_ENV=test && node_modules/.bin/mocha"
   },
   "repository": {
     "type": "git",

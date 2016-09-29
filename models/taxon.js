@@ -4,7 +4,8 @@ module.exports = function(sequelize, DataTypes) {
     var taxon = sequelize.define('taxon', {
         name: {
             type: DataTypes.STRING,
-            comment: "Name of the recorded taxon"
+            comment: "Name of the recorded taxon",
+            allowNull: false
         },
         vernacular: {
             type: DataTypes.STRING,
