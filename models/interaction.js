@@ -2,27 +2,27 @@
 
 module.exports = function(sequelize, DataTypes) {
     var interaction = sequelize.define('interaction', {
-        taxa_1: {
+        taxon_1: {
             type: DataTypes.INTEGER,
             comment: "Unique identifier of the first taxon",
             unique: "uq_interac_const",
             allowNull: false
         },
-        taxa_2: {
+        taxon_2: {
             type: DataTypes.INTEGER,
             comment: "Unique identifier of the second taxon",
             unique: "uq_interac_const",
             allowNull: false
         },
-        taxa_1_level: {
+        taxon_1_level: {
             type: DataTypes.ENUM,
-            values = ["taxon", "population", "individual"],
+            values: ["taxon", "population", "individual"],
             defaultValue: "taxon",
             allowNull: false
         },
-        taxa_2_level: {
+        taxon_2_level: {
             type: DataTypes.ENUM,
-            values = ["taxon", "population", "individual"],
+            values: ["taxon", "population", "individual"],
             defaultValue: "taxon",
             allowNull: false
         },
@@ -53,23 +53,23 @@ module.exports = function(sequelize, DataTypes) {
             comment: "Method: observation, biblio, ..."
                 // Add reference table
         },
-        taxa_1_stage: {
+        taxon_1_stage: {
             type: DataTypes.STRING(25),
             comment: "Developmental stage of the FROM species",
             allowNull: false
         },
-        taxa_2_stage: {
+        taxon_2_stage: {
             type: DataTypes.STRING(25),
             comment: "Developmental stage of the TO species",
             allowNull: false
         },
-        taxa_1_sex: {
+        taxon_1_sex: {
             type: DataTypes.ENUM,
             values: ['M', 'F'],
             comment: "Sex of the FROM species",
             allowNull: false
         },
-        taxa_2_sex: {
+        taxon_2_sex: {
             type: DataTypes.ENUM,
             values: ['M', 'F'],
             comment: "Sex of the TO species",
