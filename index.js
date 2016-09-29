@@ -1,9 +1,9 @@
 // List module dependancies
-var express = require('express');
+var express    = require('express');
 var bodyParser = require('body-parser');
-var db = require('./models');
-var http = require('http');
-var epilogue = require('epilogue');
+var db         = require('./models');
+var http       = require('http');
+var epilogue   = require('epilogue');
 
 // Init express app
 var app = express();
@@ -28,30 +28,33 @@ epilogue.initialize({
 
 var baseapiurl = '/api/v0/'
 
+function endpointize(endpoints, baseurl) {
+    return endpoints.map(
+        function(e){
+            return(baseurl+e)
+        }
+    )
+}
+
 // Create REST resources
 var taxonResource = epilogue.resource({
   model: db.taxon,
-  endpoints: ['taxon','taxon/:id'].map(function(x){return(baseapiurl+x)})
+  endpoints: endpointize(['taxon','taxon/:id'])
 });
 
 var datasetResource = epilogue.resource({
   model: db.dataset,
-  endpoints: ['dataset','dataset/:id'].map(function(x){return(baseapiurl+x)})
+  endpoints: endpointize(['dataset','dataset/:id'])
 });
 
 var interactionResource = epilogue.resource({
   model: db.interaction,
-  endpoints: ['interaction','interaction/:id'].map(function(x){return(baseapiurl+x)})
-});
-
-var itemResource = epilogue.resource({
-  model: db.item,
-  endpoints: ['item','item/:id'].map(function(x){return(baseapiurl+x)})
+  endpoints: endpointize(['interaction','interaction/:id'])
 });
 
 var networkResource = epilogue.resource({
   model: db.network,
-  endpoints: ['network','network/:id'].map(function(x){return(baseapiurl+x)})
+  endpoints: endpointize(['network','network/:id'])
 });
 
 // Sync database with new models

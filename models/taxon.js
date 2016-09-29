@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataTypes) {
     var taxon = sequelize.define('taxon', {
         name: {
             type: DataTypes.STRING,
-            comment: "Name of the recorded taxon set by the original owner"
+            comment: "Name of the recorded taxon"
         },
         vernacular: {
             type: DataTypes.STRING,
@@ -48,20 +48,22 @@ module.exports = function(sequelize, DataTypes) {
                 "nomen conservandum",
                 "species inquirenda"
             ],
-            comment: "Status of the taxonomic validation"
-        },
-        public: {
-            type: DataTypes.BOOLEAN,
-            comment: "Is this available publicly? "
+            comment: "Status of the taxonomic validation",
+            defaultValue: "confirmed",
+            allowNull: false
         }
     }, {
         underscored: true,
         classMethods: {
             associate: function(models) {
-                taxon.hasMany(models.item, {
-                    onDelete: 'cascade',
-                    foreignKey: 'taxon_id'
-                })
+                taxon.hasMany(models.interaction, {
+                        onDelete: 'cascade',
+                        foreignKey: 'taxon_1'
+                    }),
+                taxon.hasMany(models.interaction, {
+                        onDelete: 'cascade',
+                        foreignKey: 'taxon_2'
+                    })
             },
         }
     });
