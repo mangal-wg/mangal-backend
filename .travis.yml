@@ -12,8 +12,7 @@ addons:
 
 install:
   - npm install
-  - npm run deploy_db
-  - npm run destroy_db
-
+  - npm run deploy_test_db
+  
 script:
   - npm test
