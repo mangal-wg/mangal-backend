@@ -33,5 +33,4 @@ createuser postgres --superuser
 npm install
 npm run deploy_dbs
 npm test
-npm start
 ```
