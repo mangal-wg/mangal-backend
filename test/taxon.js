@@ -1,8 +1,7 @@
 var fs = require('fs');
 var db = require('../models');
-var should = require('should');
 var request = require('supertest');
-
+var should = require('should')
 // Set app test
 var server = require('../')
 var addr = 'localhost:3000'
@@ -29,10 +28,17 @@ describe("POSTing a taxon", function() {
             "tsn": 180604
         }];
 
+        var endpoint = '/api/v0/taxon'
+
         request(addr)
-            .post('/api/v0/taxon')
-            .send(data[0], data[1])
-            .expect(400,done)
+            .post(endpoint)
+            .send(data[0])
+            .end(function() {
+                request(addr)
+                    .post(endpoint)
+                    .send(data[1])
+                    .expect(400,done)
+            })
     });
 
     it("should not work if the taxon has no name", function(done) {
@@ -44,19 +50,45 @@ describe("POSTing a taxon", function() {
         request(addr)
             .post('/api/v0/taxon')
             .send(data)
-            .expect(400,done)
+            .expect(400, done)
     });
 
 });
 
 describe("GETting a taxon", function() {
 
-    it("should return 404 if there is no taxon with this ID",function(done){
+    it("should return 200 status and empty json/body if ID doesn't exist", function(done) {
 
-      request(addr)
-          .get('/api/v0/taxon?tsn=0000')
-          
+        request(addr)
+            .get('/api/v0/taxon?tsn=0000')
+            .expect('Content-Type', /json/)
+            .end(function (err, res) {
+                 res.body.length.should.equal(0);
+                 done();
+            })
+
     });
-    it("should return a taxon with the correct ID if it exists");
+    it("should return a taxon with the correct ID if it exists", function(done){
+           
+           var data = {
+               "name": "Echiura",
+               "bold": 27333
+        };
+           
+           request(addr)
+              .post('/api/v0/taxon')
+              .send(data)
+              .expect(201)
+              .end(function(){
+                     request(addr)
+                            .get('/api/v0/taxon?name=Echiura')
+                            .expect(200)
+                            .end(function(err, res){
+                                   res.body.length.should.equal(1);
+                                   res.body[0].bold.should.be.equal(data.bold);
+                                   done();
+                            })
+              });
+    });
 
 })
