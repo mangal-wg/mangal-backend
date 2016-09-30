@@ -62,6 +62,7 @@ describe("GETting a taxon", function() {
         request(addr)
             .get('/api/v0/taxon?tsn=0000')
             .expect('Content-Type', /json/)
+            .expect(200)
             .end(function (err, res) {
                  res.body.length.should.equal(0);
                  done();
@@ -82,6 +83,7 @@ describe("GETting a taxon", function() {
               .end(function(){
                      request(addr)
                             .get('/api/v0/taxon?name=Echiura')
+                            .expect('Content-Type', /json/)
                             .expect(200)
                             .end(function(err, res){
                                    res.body.length.should.equal(1);
