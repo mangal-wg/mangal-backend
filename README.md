@@ -6,11 +6,32 @@ Server backend with API services.
 
 **:warning: in development**
 
-## Getting started
+## Install and set postgresql
+
+### on Fedora
 
 ```bash
-brew install postgresql postgis
+dnf install postgresql95-server postgresql95-contrib
+/usr/pgsql-9.5/bin/postgresql95-setup initdb
+systemctl enable postgresql-9.5.service
+systemctl start postgresql-9.5.service
+createuser postgres --superuser
+```
+
+### on MACOS
+
+```bash
+brew install postgresql
+brew services start postgresql
+initdb /usr/local/var/postgres
+createuser postgres --superuser
+```
+
+## Getting started with mangaljs
+
+```bash
 npm install
-npm run deploy_db
-nodemon
+npm run deploy_dbs
+npm test
+npm start
 ```
