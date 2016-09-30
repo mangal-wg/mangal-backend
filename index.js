@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Init ressources
 var api = require('./ressources').initialize(app);
 
-// Start DB and server
+// Start DB 
 if(process.env.NODE_ENV == 'development') {
 
   // test authentification
