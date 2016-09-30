@@ -12,7 +12,8 @@ addons:
 
 install:
   - npm install
-  - npm run deploy_test_db
+  - npm run deploy_dbs
   
 script:
   - npm test
+  - npm start

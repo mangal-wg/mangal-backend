@@ -18,7 +18,7 @@ systemctl start postgresql-9.5.service
 createuser postgres --superuser
 ```
 
-### on MACOS
+### on Mac OSX
 
 ```bash
 brew install postgresql
