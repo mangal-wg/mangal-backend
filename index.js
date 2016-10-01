@@ -40,7 +40,8 @@ app.get('/auth/callback', function(req, res) {
 
   if (req.query.error == 'access_denied') {
     // User denied access
-    res.render('index', { message: 'User denied access' });
+    res.status(400);
+    res.send('App access denied by user');
 
   } else {
 
@@ -59,11 +60,12 @@ app.get('/auth/callback', function(req, res) {
     }
 
     var exchangingCallback = function(error,response) {
-      if(response != null){
-        res.render('index', { message: 'Access response', details: response.body});
-      } else {
-        console.log(error.body);
-        res.render('index', { message: 'Access denied', details: error.body});
+      if(response){
+        res.status(200);
+        res.send('User access granted');
+      } else if (error) {
+        res.status(400);
+        res.send('User access denied');
       }
     };
 
