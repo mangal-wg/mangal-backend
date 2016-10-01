@@ -1,16 +1,21 @@
-# mangaljs
+# `mangaljs`
 
 [![license](https://img.shields.io/github/license/mangal-wg/mangaljs.svg?maxAge=2592000?style=flat-square)]() [![Build Status](https://travis-ci.org/mangal-wg/mangaljs.svg?branch=master)](https://travis-ci.org/mangal-wg/mangaljs)
 
 Server backend with API services.
 
-**:warning: in development**
+:warning: **in development** :warning:
 
-## Getting started
+When released, this will introduce *v2* of the [mangal.io](http://mangal.io)
+API, *and* be used for the front-end.
 
 ## Install and set `postgresql`
 
+<<<<<<< HEAD
 ### on Fedorda
+=======
+### on Fedora
+>>>>>>> master
 
 ``` bash
 # dnf install postgresql95-server postgresql95-contrib
@@ -33,6 +38,6 @@ createuser postgres --superuser
 
 ``` bash
 npm install
-npm run deploy_db
-nodemon
+npm run deploy_dbs
+npm test
 ```

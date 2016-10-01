@@ -4,7 +4,8 @@ module.exports = function(sequelize, DataTypes) {
     var taxon = sequelize.define('taxon', {
         name: {
             type: DataTypes.STRING,
-            comment: "Name of the recorded taxon"
+            comment: "Name of the recorded taxon",
+            allowNull: false
         },
         vernacular: {
             type: DataTypes.STRING,
@@ -56,10 +57,14 @@ module.exports = function(sequelize, DataTypes) {
         underscored: true,
         classMethods: {
             associate: function(models) {
-                taxon.hasMany(models.instance, {
-                    onDelete: 'cascade',
-                    foreignKey: 'taxon_id'
-                })
+                taxon.hasMany(models.interaction, {
+                        onDelete: 'cascade',
+                        foreignKey: 'taxon_1'
+                    }),
+                taxon.hasMany(models.interaction, {
+                        onDelete: 'cascade',
+                        foreignKey: 'taxon_2'
+                    })
             },
         }
     });

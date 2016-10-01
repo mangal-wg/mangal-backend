@@ -2,57 +2,74 @@
 
 module.exports = function(sequelize, DataTypes) {
     var interaction = sequelize.define('interaction', {
-        instance_id_from: {
+        taxon_1: {
             type: DataTypes.INTEGER,
-            comment: "Unique identifier of the observation (FROM)",
+            comment: "Unique identifier of the first taxon",
             unique: "uq_interac_const",
             allowNull: false
         },
-        instance_id_to: {
+        taxon_2: {
             type: DataTypes.INTEGER,
-            comment: "Unique identifier of the observation (TO)",
+            comment: "Unique identifier of the second taxon",
             unique: "uq_interac_const",
             allowNull: false
         },
-        network_id: {
-            type: DataTypes.INTEGER,
-            comment: "Unique identifier of the proprietary network",
-            unique: "uq_interac_const",
+        taxon_1_level: {
+            type: DataTypes.ENUM,
+            values: ["taxon", "population", "individual"],
+            defaultValue: "taxon",
             allowNull: false
         },
-        date_interac: {
+        taxon_2_level: {
+            type: DataTypes.ENUM,
+            values: ["taxon", "population", "individual"],
+            defaultValue: "taxon",
+            allowNull: false
+        },
+        date: {
             type: DataTypes.DATE,
             comment: "Date of the recorded interaction",
             unique: "uq_interac_const",
+            allowNull: true
+        },
+        direction: {
+            type: DataTypes.ENUM,
+            comment: "Direction of the interaction",
+            values: [
+                "directed",
+                "undirected",
+                "unknown"
+            ],
+            defaultValue: "directed",
             allowNull: false
         },
-        unidirectional: {
-            type: DataTypes.BOOLEAN,
-            comment: "Is this interaction unidirectional?",
-            defaultValue: true
-        },
-        link_type: {
+        type: {
             type: DataTypes.STRING(25),
             comment: "Interaction type"
                 // Add reference table
         },
-        stage_f: {
+        method: {
+            type: DataTypes.STRING(25),
+            comment: "Method: observation, biblio, ..."
+                // Add reference table
+        },
+        taxon_1_stage: {
             type: DataTypes.STRING(25),
             comment: "Developmental stage of the FROM species",
             allowNull: false
         },
-        stage_t: {
+        taxon_2_stage: {
             type: DataTypes.STRING(25),
             comment: "Developmental stage of the TO species",
             allowNull: false
         },
-        sex_f: {
+        taxon_1_sex: {
             type: DataTypes.ENUM,
             values: ['M', 'F'],
             comment: "Sex of the FROM species",
             allowNull: false
         },
-        sex_t: {
+        taxon_2_sex: {
             type: DataTypes.ENUM,
             values: ['M', 'F'],
             comment: "Sex of the TO species",
@@ -71,12 +88,13 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.TEXT,
             comment: "Description of the interaction"
         },
-        explicit_loc: {
+        coordinates: {
             type: DataTypes.GEOMETRY('POINT'),
             comment: "Explicit localisation of the interaction"
         },
         public: {
             type: DataTypes.BOOLEAN,
+            defaultValue: true,
             allowNull:false,
             comment: "Is this available publicly? "
         }

@@ -4,20 +4,19 @@
   "description": "Backend server with API services for the mangal.io project",
   "main": "index.js",
   "scripts": {
-    "deploy_db": "createdb mangal_dev; psql -U postgres -c mangal_dev -c 'CREATE EXTENSION postgis';",
-    "destroy_db": "dropdb mangal_dev",
-    "test": "node_modules/.bin/mocha"
+    "deploy_dbs": "createdb mangal_dev; psql -U postgres -d mangal_dev -c 'CREATE EXTENSION postgis'; createdb mangal_test; psql -U postgres -d mangal_test -c 'CREATE EXTENSION postgis';",
+    "test": "NODE_ENV=test node_modules/.bin/mocha",
+    "start": "NODE_ENV=development nodemon"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mangal-wg/mangaljs.git"
   },
   "keywords": [
-    "Interactions",
+    "interactions",
     "networks",
     "species",
-    "ecological",
-    "database"
+    "ecology"
   ],
   "author": "Steve Vissault & Timothée Poisot",
   "license": "MIT",
@@ -30,13 +29,17 @@
     "epilogue": "^0.7.0",
     "express": "^4.14.0",
     "http": "0.0.0",
+    "npm": "^3.10.8",
     "pg": "^6.1.0",
     "pg-hstore": "^2.3.2",
+    "pug": "^0.1.0",
     "sequelize": "^3.24.3"
   },
   "devDependencies": {
     "mocha": "^3.1.0",
     "nodemon": "^1.10.2",
-    "sequelize-cli": "^2.4.0"
+    "sequelize-cli": "^2.4.0",
+    "should": "^11.1.0",
+    "supertest": "^2.0.0"
   }
 }

@@ -1,71 +1,98 @@
 // List module dependancies
-var express    = require('express');
+var express = require('express');
 var bodyParser = require('body-parser');
-var db         = require('./models');
-var http       = require('http');
-var epilogue   = require('epilogue');
+var db = require('./models');
+var http = require('http');
+var config = require('./config/orcid');
+var querystring = require('querystring');
+var request = require('request');
 
 // Init express app
 var app = express();
+app.set('view engine', 'pug')
+app.set('views', __dirname + '/views');
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-// test login authentification
-db.sequelize
-  .authenticate()
-  .then(function(success) {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(function (err) {
-    console.log('Unable to connect to the database:', err);
-  });
-
-// Init Epilogue
-epilogue.initialize({
-  app: app,
-  sequelize: db.sequelize
-});
-
-var baseapiurl = '/api/v0/'
-
-function endpointize(endpoints, baseurl) {
-    return endpoints.map(
-        function(e){
-            return(baseurl+e)
-        }
-    )
-}
-
-// Create REST resources
-var taxonResource = epilogue.resource({
-  model: db.taxon,
-  endpoints: endpointize(['taxon','taxon/:id'])
-});
-
-var datasetResource = epilogue.resource({
-  model: db.dataset,
-  endpoints: endpointize(['dataset','dataset/:id'])
-});
-
-var interactionResource = epilogue.resource({
-  model: db.interaction,
-  endpoints: endpointize(['interaction','interaction/:id'])
-});
-
-var instanceResource = epilogue.resource({
-  model: db.instance,
-  endpoints: endpointize(['instance','instance/:id'])
-});
-
-var networkResource = epilogue.resource({
-  model: db.network,
-  endpoints: endpointize(['network','network/:id'])
-});
-
-// Sync database with new models
-db.sequelize.sync({force:true});
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 
 // start server
 var port = process.env.PORT || 3000;
 server = http.createServer(app);
 server.listen(port);
+
+app.get('/auth', function(req, res) { // Redeem code URL
+
+    var auth_link = config.AUTHORIZE_URI + '?' +
+        querystring.stringify({
+            'redirect_uri': config.CODE_CALLBACK_URI,
+            'scope': '/authenticate /activities/update',
+            'response_type': 'code',
+            'client_id': config.CLIENT_ID
+        });
+
+    return res.redirect(auth_link);
+
+});
+
+app.get('/auth/callback', function(req, res) {
+
+  if (req.query.error == 'access_denied') {
+    // User denied access
+    res.render('index', { message: 'User denied access' });
+
+  } else {
+
+    var exchangingReq = {
+        url: config.TOKEN_EXCHANGE_URI,
+        method: 'post',
+        body: querystring.stringify({
+            'code': req.query.code,
+            'client_id': config.CLIENT_ID,
+            'client_secret': config.CLIENT_SECRET,
+            'grant_type': 'authorization_code',
+        }),
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded; charset=utf-8'
+        }
+    }
+
+    var exchangingCallback = function(error,response) {
+      if(response != null){
+        res.render('index', { message: 'Access response', details: response.body});
+      } else {
+        console.log(error.body);
+        res.render('index', { message: 'Access denied', details: error.body});
+      }
+    };
+
+    return request(exchangingReq, exchangingCallback);
+  }
+});
+
+
+// Init ressources
+var api = require('./ressources').initialize(app);
+
+// Start DB
+if (process.env.NODE_ENV == 'development') {
+
+    // test authentification
+    db.sequelize
+        .authenticate()
+        .then(function(success) {
+            console.log('Connection has been established successfully.');
+        })
+        .catch(function(err) {
+            console.log('Unable to connect to the database:', err);
+        });
+
+    // sync DB
+    db.sequelize.sync({
+        force: true
+    });
+
+};
+
+module.exports = server;
