@@ -11,11 +11,7 @@ API, *and* be used for the front-end.
 
 ## Install and set `postgresql`
 
-<<<<<<< HEAD
-### on Fedorda
-=======
 ### on Fedora
->>>>>>> master
 
 ``` bash
 # dnf install postgresql95-server postgresql95-contrib
