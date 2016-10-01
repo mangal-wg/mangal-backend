@@ -9,8 +9,6 @@ var request = require('request');
 
 // Init express app
 var app = express();
-app.set('view engine', 'pug')
-app.set('views', __dirname + '/views');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
