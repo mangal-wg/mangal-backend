@@ -6,7 +6,8 @@
   "scripts": {
     "deploy_dbs": "createdb mangal_dev; psql -U postgres -d mangal_dev -c 'CREATE EXTENSION postgis'; createdb mangal_test; psql -U postgres -d mangal_test -c 'CREATE EXTENSION postgis';",
     "test": "NODE_ENV=test node_modules/.bin/mocha",
-    "start": "NODE_ENV=development nodemon"
+    "start": "NODE_ENV=development nodemon",
+    "doc": "./node_modules/.bin/docco -o docs index.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   "homepage": "https://github.com/mangal-wg/mangaljs#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "docco": "^0.7.0",
     "epilogue": "^0.7.0",
     "express": "^4.14.0",
     "http": "0.0.0",
