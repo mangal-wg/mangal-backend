@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         date: {
             type: DataTypes.DATEONLY,
-            allowNull: false,
+            allowNull: true,
             comment: "Collection date"
         },
         localisation: {
