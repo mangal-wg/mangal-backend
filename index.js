@@ -34,7 +34,6 @@ const oauth2 = new OAuth2Strategy(orcidConf,
 });
 
 app.use(passport.initialize());
-app.use(passport.session());
 passport.use(oauth2);
 
 // Init ressources
