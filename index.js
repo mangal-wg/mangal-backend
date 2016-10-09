@@ -3,9 +3,10 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var db = require('./models');
 var http = require('http');
-var config = require('./config/orcid');
-var querystring = require('querystring');
-var request = require('request');
+var orcidConf = require('./config/orcid');
+var passport = require('passport')
+var OAuth2Strategy = require('passport-oauth2').Strategy
+var epilogue = require('epilogue')
 
 // Init express app
 var app = express();
@@ -17,65 +18,47 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-// start server
-var port = process.env.PORT || 3000;
-server = http.createServer(app);
-server.listen(port);
 
-app.get('/auth', function(req, res) { // Redeem code URL
-
-    var auth_link = config.AUTHORIZE_URI + '?' +
-        querystring.stringify({
-            'redirect_uri': config.CODE_CALLBACK_URI,
-            'scope': '/authenticate /activities/update',
-            'response_type': 'code',
-            'client_id': config.CLIENT_ID
+// Set Authentification Strategy
+// configure oauth2 strategy for orcid use
+const oauth2 = new OAuth2Strategy(orcidConf,
+    function(req, accessToken, refreshToken, params, profile, cb) {
+      db.user.findOrCreate({where: {
+          name: params.name,
+          orcid: params.orcid
+        }}).spread(function(user, created) {
+          profile.name = user.get('name');
+          profile.orcid = user.get('orcid');
+          return cb(null,profile)
         });
-
-    return res.redirect(auth_link);
-
 });
 
-app.get('/auth/callback', function(req, res) {
-
-  if (req.query.error == 'access_denied') {
-    // User denied access
-    res.status(400);
-    res.send('App access denied by user');
-
-  } else {
-
-    var exchangingReq = {
-        url: config.TOKEN_EXCHANGE_URI,
-        method: 'post',
-        body: querystring.stringify({
-            'code': req.query.code,
-            'client_id': config.CLIENT_ID,
-            'client_secret': config.CLIENT_SECRET,
-            'grant_type': 'authorization_code',
-        }),
-        headers: {
-            'content-type': 'application/x-www-form-urlencoded; charset=utf-8'
-        }
-    }
-
-    var exchangingCallback = function(error,response) {
-      if(response){
-        res.status(200);
-        res.send('User access granted');
-      } else if (error) {
-        res.status(400);
-        res.send('User access denied');
-      }
-    };
-
-    return request(exchangingReq, exchangingCallback);
-  }
-});
-
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(oauth2);
 
 // Init ressources
-var api = require('./ressources').initialize(app);
+epilogue.initialize({
+    app: app,
+    sequelize: db.sequelize
+});
+
+// Create REST resources
+var taxonResource = epilogue.resource({
+    model: db.taxon,
+    endpoints: ['/api/v0/taxon', '/api/v0/taxon/:id']
+});
+
+taxonResource.all.auth(function(req, res, context) {
+    console.log(req.isAuthenticated());
+});
+
+app.get('/auth', passport.authenticate('oauth2',{ session:false })); // empty route handler function, it won't be triggered
+app.get('/auth/callback', passport.authenticate('oauth2', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    session:false
+})); // route handler
 
 // Start DB
 if (process.env.NODE_ENV == 'development') {
@@ -96,5 +79,10 @@ if (process.env.NODE_ENV == 'development') {
     });
 
 };
+
+// start server
+var port = process.env.PORT || 3000;
+server = http.createServer(app);
+server.listen(port);
 
 module.exports = server;
