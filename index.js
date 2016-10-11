@@ -49,8 +49,9 @@ var taxonResource = epilogue.resource({
 });
 
 taxonResource.all.auth(function(req, res, context) {
-    console.log(req.isAuthenticated());
+  // Use IsAuthenticated
 });
+
 
 app.get('/auth', passport.authenticate('oauth2',{ session:false })); // empty route handler function, it won't be triggered
 app.get('/auth/callback', passport.authenticate('oauth2', {
