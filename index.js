@@ -11,8 +11,6 @@ var epilogue = require('epilogue')
 
 // Init express app
 var app = express();
-app.set('view engine', 'pug')
-app.set('views', __dirname + '/views');
 
 app.use(session({
     secret: 'keyboard cat',
