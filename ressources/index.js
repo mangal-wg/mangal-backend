@@ -1,5 +1,6 @@
 var epilogue   = require('epilogue');
 var db = require('../models');
+var middlewares = require('./middlewares')
 
 // Init Epilogue
 var initialize = function(app) {
@@ -28,6 +29,12 @@ var initialize = function(app) {
     model: db.network,
     endpoints: ['/api/v0/network','/api/v0/network/:id']
   });
+
+  taxonResource.use(middlewares);
+  datasetResource.use(middlewares);
+  interactionResource.use(middlewares);
+  networkResource.use(middlewares);
+
 };
 
 module.exports = {
