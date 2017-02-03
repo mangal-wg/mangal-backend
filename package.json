@@ -1,5 +1,5 @@
 {
-  "name": "mangaljs",
+  "name": "mangal-backend",
   "version": "0.0.1",
   "description": "Backend server with API services for the mangal.io project",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mangal-wg/mangaljs.git"
+    "url": "git+https://github.com/mangal-wg/mangal-backend.git"
   },
   "keywords": [
     "interactions",
@@ -22,9 +22,9 @@
   "author": "Steve Vissault & Timothée Poisot",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mangal-wg/mangaljs/issues"
+    "url": "https://github.com/mangal-wg/mangal-backend/issues"
   },
-  "homepage": "https://github.com/mangal-wg/mangaljs#readme",
+  "homepage": "https://github.com/mangal-wg/mangal-backend#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
     "docco": "^0.7.0",
