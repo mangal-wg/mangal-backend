@@ -16,3 +16,7 @@ install:
   
 script:
   - npm test
+
+webhooks:
+    urls:
+        - https://webhooks.gitter.im/e/c6efa15aba2be0d915e0
