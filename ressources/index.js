@@ -30,10 +30,12 @@ var initialize = function(app) {
     endpoints: ['/api/v0/network','/api/v0/network/:id']
   });
 
-  taxonResource.use(middlewares);
-  datasetResource.use(middlewares);
-  interactionResource.use(middlewares);
-  networkResource.use(middlewares);
+
+  // Temporarly desactivate oauth middlewares
+  // taxonResource.use(middlewares);
+  // datasetResource.use(middlewares);
+  // interactionResource.use(middlewares);
+  // networkResource.use(middlewares);
 
 };
 

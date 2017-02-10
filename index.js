@@ -3,7 +3,6 @@ var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var http = require('http');
-var passport = require('passport');
 var db = require('./models');
 
 // Init express app
@@ -20,8 +19,6 @@ app.use(session({
 }))
 
 // Init all dependencies used by the app
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
@@ -41,7 +38,7 @@ if (process.env.NODE_ENV == 'development') {
             console.log('Unable to connect to the database:', err);
         });
 
-    // sync DB
+    // sync DB - WARNING at each npm start dbs are dropped and re-created
     db.sequelize.sync({
         force: true
     });
@@ -50,16 +47,6 @@ if (process.env.NODE_ENV == 'development') {
 
 // Init REST ressources
 require('./ressources').initialize(app);
-
-// Init oauth middleware
-require('./oauth')(passport);
-
-// Basic oauth routes set in orcid URI callback
-app.get('/auth', passport.authenticate('oauth2'));
-app.get('/auth/callback', passport.authenticate('oauth2', {
-    successRedirect: '/success',
-    failureRedirect: '/login'
-}));
 
 // start server
 var port = process.env.PORT || 3000;
