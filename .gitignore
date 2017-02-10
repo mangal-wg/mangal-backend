@@ -1,3 +1,7 @@
+# MACOSX junks
+# This .DS_Store deserve to be trashed.
+.DS_Store
+
 # Logs
 logs
 *.log

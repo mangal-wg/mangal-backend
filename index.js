@@ -10,7 +10,7 @@ var app = express();
 
 // Config on express-session
 app.use(session({
-    secret: 'keyboard cat',
+    secret: 'keyboard cat', // Set in ENV in production
     resave: false,
     saveUninitialized: true,
     cookie: {
