@@ -4,7 +4,7 @@
   "description": "Backend server with API services for the mangal.io project",
   "main": "index.js",
   "scripts": {
-    "deploy_dbs": "createdb mangal_dev; psql -U postgres -d mangal_dev -c 'CREATE EXTENSION postgis'; createdb mangal_test; psql -U postgres -d mangal_test -c 'CREATE EXTENSION postgis';",
+    "deploy_dbs": "createdb -U postgres  mangal_dev; psql -U postgres -d mangal_dev -c 'CREATE EXTENSION postgis'; createdb -U postgres mangal_test; psql -U postgres -d mangal_test -c 'CREATE EXTENSION postgis';",
     "drop_dbs": "dropdb mangal_dev -U postgres --if-exists; dropdb mangal_test -U postgres  --if-exists;",
     "test": "NODE_ENV=test node_modules/.bin/mocha",
     "start": "NODE_ENV=development nodemon",
