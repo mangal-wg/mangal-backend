@@ -88,7 +88,7 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.TEXT,
             comment: "Description of the interaction"
         },
-        coordinates: {
+        localisation: {
             type: DataTypes.GEOMETRY('POINT'),
             comment: "Explicit localisation of the interaction"
         },
