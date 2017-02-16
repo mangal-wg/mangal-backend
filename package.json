@@ -28,6 +28,7 @@
   "homepage": "https://github.com/mangal-wg/mangal-backend#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "chai": "^3.5.0",
     "docco": "^0.7.0",
     "epilogue": "^0.7.0",
     "express": "^4.14.0",
@@ -39,13 +40,13 @@
     "pug": "^0.1.0",
     "querystring": "^0.2.0",
     "request": "^2.75.0",
-    "sequelize": "^3.24.3"
+    "sequelize": "^3.24.3",
+    "should": "^11.1.0"
   },
   "devDependencies": {
     "mocha": "^3.1.0",
     "nodemon": "^1.10.2",
     "sequelize-cli": "^2.4.0",
-    "should": "^11.1.0",
     "supertest": "^2.0.0"
   }
 }

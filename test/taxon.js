@@ -1,6 +1,6 @@
 var db = require('../models');
 var request = require('supertest');
-var should = require('should')
+var expect = require('chai').expect;
 
 // Set app test
 var server = require('../')
@@ -27,7 +27,7 @@ describe("Operation on ressources", function() {
                 "tsn": 180604
             }];
 
-            var endpoint = '/api/v0/taxon'
+            var endpoint = '/api/v0/taxons'
 
             request(addr)
                 .post(endpoint)
@@ -47,7 +47,7 @@ describe("Operation on ressources", function() {
             };
 
             request(addr)
-                .post('/api/v0/taxon')
+                .post('/api/v0/taxons')
                 .send(data)
                 .expect(400, done)
         });
@@ -59,11 +59,11 @@ describe("Operation on ressources", function() {
         it("should return 200 status and empty json/body if ID doesn't exist", function(done) {
 
             request(addr)
-                .get('/api/v0/taxon?tsn=0000')
+                .get('/api/v0/taxons?tsn=0000')
                 .expect('Content-Type', /json/)
                 .expect(200)
                 .end(function(err, res) {
-                    res.body.length.should.equal(0);
+                    expect(res.body).to.have.length(0);
                     done();
                 })
 
@@ -76,17 +76,17 @@ describe("Operation on ressources", function() {
             };
 
             request(addr)
-                .post('/api/v0/taxon')
+                .post('/api/v0/taxons')
                 .send(data)
                 .expect(201)
                 .end(function() {
                     request(addr)
-                        .get('/api/v0/taxon?name=Echiura')
+                        .get('/api/v0/taxons?name=Echiura')
                         .expect('Content-Type', /json/)
                         .expect(200)
                         .end(function(err, res) {
-                            res.body.length.should.equal(1);
-                            res.body[0].bold.should.be.equal(data.bold);
+                            expect(res.body).to.have.length(1);
+                            expect(res.body[0].bold).to.equal(data.bold);
                             done();
                         })
                 });
