@@ -58,9 +58,12 @@ module.exports = function(sequelize, DataTypes) {
                         foreignKey: 'taxon_1'
                     }),
                 taxon.hasMany(models.interaction, {
-                        onDelete: 'cascade',
-                        foreignKey: 'taxon_2'
-                    })
+                    onDelete: 'cascade',
+                    foreignKey: 'taxon_2'
+                }),
+                taxon.hasMany(models.trait, {
+                    onDelete: 'cascade'
+                })
             },
         }
     });

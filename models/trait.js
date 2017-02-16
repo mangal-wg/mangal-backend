@@ -34,14 +34,7 @@ module.exports = function(sequelize, DataTypes) {
         },
 
     }, {
-        underscored: true,
-        classMethods: {
-            associate: function(models) {
-                trait.hasMany(models.taxon, {
-                    onDelete: 'cascade'
-                })
-            }
-        }
+        underscored: true
     });
 
     return trait
