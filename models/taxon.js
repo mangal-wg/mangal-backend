@@ -5,12 +5,8 @@ module.exports = function(sequelize, DataTypes) {
         name: {
             type: DataTypes.STRING,
             comment: "Name of the recorded taxon",
-            allowNull: false
-        },
-        vernacular: {
-            type: DataTypes.STRING,
-            comment: "Vernacular name of the taxon",
-            unique: 'uq_vernacular'
+            allowNull: false,
+            unique: "uq_name"
         },
         description: {
             type: DataTypes.TEXT,
@@ -24,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
         tsn: {
             type: DataTypes.INTEGER,
             comment: "Unique identifier from the Integrated Taxonomic Information System",
-            unique: 'uq_stn'
+            unique: 'uq_tsn'
         },
         eol: {
             type: DataTypes.INTEGER,
