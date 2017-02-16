@@ -21,11 +21,9 @@ describe("Operation on ressources", function() {
 
             var data = [{
                 "name": "Vulpes vulpes",
-                "vernacular": "Red fox",
                 "tsn": 180604
             }, {
                 "name": "Alces alces",
-                "vernacular": "Moose",
                 "tsn": 180604
             }];
 
