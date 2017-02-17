@@ -15,6 +15,10 @@ beforeEach(function(done) {
 });
 
 describe("Operation on ressources", function() {
+
+    // TODO Add a test to get /api/v0/taxon/{id} where {id} is the mangal id 
+    // of a previously added taxon.
+
     describe("POSTing a taxon", function() {
 
         it("should work if the taxon is not unique", function(done) {
@@ -68,6 +72,7 @@ describe("Operation on ressources", function() {
                 })
 
         });
+        
         it("should return a taxon with the correct ID if it exists", function(done) {
 
             var data = {
