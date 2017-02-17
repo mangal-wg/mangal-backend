@@ -16,9 +16,6 @@ beforeEach(function(done) {
 
 describe("Operation on ressources", function() {
 
-    // TODO Add a test to get /api/v0/taxon/{id} where {id} is the mangal id 
-    // of a previously added taxon.
-
     describe("POSTing a taxon", function() {
 
         it("should work if the taxon is not unique", function(done) {
@@ -59,6 +56,10 @@ describe("Operation on ressources", function() {
     });
 
     describe("GETting a taxon", function() {
+
+        // TODO Add a test to get /api/v0/taxon/{id} where {id} is the mangal id 
+        // of a previously added taxon.
+        it("should work when calling /api/v0/taxon/id"), function(done) {};
 
         it("should return 200 status and empty json/body if ID doesn't exist", function(done) {
 
