@@ -1,13 +1,13 @@
 {
   "development": {
-    "username": "postgres",
+    "username": "mangal_bot",
     "password": null,
     "database": "mangal_dev",
     "host": "127.0.0.1",
     "dialect": "postgresql"
   },
   "test": {
-    "username": "postgres",
+    "username": "mangal_bot",
     "password": null,
     "database": "mangal_test",
     "host": "127.0.0.1",
@@ -15,10 +15,10 @@
     "logging": false
   },
   "production": {
-    "username": "root",
+    "username": "mangal_bot",
     "password": null,
-    "database": "database_production",
+    "database": "mangal",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgresql"
   }
 }

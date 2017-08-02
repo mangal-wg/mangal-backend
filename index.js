@@ -49,7 +49,7 @@ if (process.env.NODE_ENV == 'development') {
 require('./ressources').initialize(app);
 
 // start server
-var port = process.env.PORT || 3000;
+var port = process.env.PORT_MANGAL_API || 3000;
 server = http.createServer(app);
 server.listen(port);
 
