@@ -46,12 +46,12 @@ module.exports = function(sequelize, DataTypes) {
         type: {
             type: DataTypes.STRING(25),
             comment: "Interaction type"
-                // Add reference table
+            // TODO Add reference table
         },
         method: {
             type: DataTypes.STRING(25),
             comment: "Method: observation, biblio, ..."
-                // Add reference table
+            // TODO Add reference table
         },
         taxon_1_stage: {
             type: DataTypes.STRING(25),
