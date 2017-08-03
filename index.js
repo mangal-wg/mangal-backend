@@ -24,19 +24,18 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
+// test authentification
+db.sequelize
+    .authenticate()
+    .then(function(success) {
+        console.log('Connection has been established successfully.');
+    })
+    .catch(function(err) {
+        console.log('Unable to connect to the database:', err);
+    });
 
 // Init Databases
 if (process.env.NODE_ENV == 'development') {
-
-    // test authentification
-    db.sequelize
-        .authenticate()
-        .then(function(success) {
-            console.log('Connection has been established successfully.');
-        })
-        .catch(function(err) {
-            console.log('Unable to connect to the database:', err);
-        });
 
     // sync DB - WARNING at each npm start dbs are dropped and re-created
     db.sequelize.sync({
@@ -44,6 +43,8 @@ if (process.env.NODE_ENV == 'development') {
     });
 
 };
+
+
 
 // Init REST ressources
 require('./ressources').initialize(app);
