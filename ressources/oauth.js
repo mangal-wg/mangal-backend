@@ -4,7 +4,11 @@ var db = require('../models');
 
 module.exports = function(passport) {
 
-  const bearer = new BearerStrategy(
+  var options = { // not required
+    missingTokenMessage: 'token is missing'
+  };
+
+  const bearer = new BearerStrategy(options,
     function(token, done) {
       db.user.findOne({
           where: {
