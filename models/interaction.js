@@ -65,13 +65,13 @@ module.exports = function(sequelize, DataTypes) {
         },
         taxon_1_sex: {
             type: DataTypes.ENUM,
-            values: ['M', 'F'],
+            values: ['M', 'F','all'],
             comment: "Sex of the FROM species",
             allowNull: false
         },
         taxon_2_sex: {
             type: DataTypes.ENUM,
-            values: ['M', 'F'],
+            values: ['M', 'F','all'],
             comment: "Sex of the TO species",
             allowNull: false
         },
