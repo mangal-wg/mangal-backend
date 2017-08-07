@@ -14,16 +14,6 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-// test authentification
-db.sequelize
-    .authenticate()
-    .then(function(success) {
-        console.log('Connection has been established successfully.');
-    })
-    .catch(function(err) {
-        console.log('Unable to connect to the database:', err);
-    });
-
 // Init Databases
 if (process.env.NODE_ENV == 'development') {
   db.sequelize.sync();

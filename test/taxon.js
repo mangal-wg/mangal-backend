@@ -1,24 +1,35 @@
 var db = require('../models');
-var request = require('supertest');
-var expect = require('chai').expect;
+
+var chai = require('chai');
+var chaiHttp = require('chai-http');
+var should = chai.should();
 
 // Set app test
-var server = require('../')
+var server = require('../index.js')
 var addr = 'localhost:3000'
 
+chai.use(chaiHttp);
+
+// Clean and add token access in the db
 beforeEach(function(done) {
-    db.sequelize.sync({
-        force: true
+  db.sequelize.sync({
+    force: true
+  }).then(function() {
+    // insert fake token
+    db.user.create({
+      name: 'Han Solo',
+      access_token: '12345'
     }).then(function() {
-        done();
+      done();
     });
+  });
 });
 
 describe("Operation on ressources", function() {
 
     describe("POSTing a taxon", function() {
 
-        it("should work if the taxon is not unique", function(done) {
+        it("should work if the taxon is unique", function(done) {
 
             var data = [{
                 "name": "Vulpes vulpes",
@@ -28,17 +39,22 @@ describe("Operation on ressources", function() {
                 "tsn": 180604
             }];
 
-            var endpoint = '/api/v0/taxons'
+            chai.request(server)
+              .post('/api/v0/taxons')
+              .set('Authorization','bearer 12345')
+              .send(data[0])
+              .end((err, res) => {
+                chai.request(server)
+                  .post('/api/v0/taxons')
+                  .set('Authorization','bearer 12345')
+                  .send(data[1])
+                  .end((err, res) => {
+                    res.body.message.should.eql('Validation error');
+                    res.should.have.status(400);
+                    done();
+                  });
+              });
 
-            request(addr)
-                .post(endpoint)
-                .send(data[0])
-                .end(function() {
-                    request(addr)
-                        .post(endpoint)
-                        .send(data[1])
-                        .expect(400, done)
-                })
         });
 
         it("should not work if the taxon has no name", function(done) {
@@ -47,33 +63,38 @@ describe("Operation on ressources", function() {
                 "tsn": 180604
             };
 
-            request(addr)
-                .post('/api/v0/taxons')
-                .send(data)
-                .expect(400, done)
+            chai.request(server)
+              .post('/api/v0/taxons')
+              .set('Authorization','bearer 12345')
+              .send(data[0])
+              .end((err, res) => {
+                res.body.message.should.eql('notNull Violation: name cannot be null');
+                res.should.have.status(400);
+                done();
+              });
         });
 
     });
 
     describe("GETting a taxon", function() {
 
-        // TODO Add a test to get /api/v0/taxon/{id} where {id} is the mangal id 
+        // TODO Add a test to get /api/v0/taxon/{id} where {id} is the mangal id
         // of a previously added taxon.
-        it("should work when calling /api/v0/taxon/id"), function(done) {};
+        // it("should work when calling /api/v0/taxon/id"), function(done) {};
 
         it("should return 200 status and empty json/body if ID doesn't exist", function(done) {
 
-            request(addr)
-                .get('/api/v0/taxons?tsn=0000')
-                .expect('Content-Type', /json/)
-                .expect(200)
-                .end(function(err, res) {
-                    expect(res.body).to.have.length(0);
-                    done();
-                })
+          chai.request(server)
+            .get('/api/v0/taxons?tsn=0000')
+            .set('Authorization','bearer 12345')
+            .end((err, res) => {
+              res.should.have.status(200);
+              res.body.length.should.be.eql(0);
+              done();
+            });
 
         });
-        
+
         it("should return a taxon with the correct ID if it exists", function(done) {
 
             var data = {
@@ -81,21 +102,22 @@ describe("Operation on ressources", function() {
                 "bold": 27333
             };
 
-            request(addr)
-                .post('/api/v0/taxons')
-                .send(data)
-                .expect(201)
-                .end(function() {
-                    request(addr)
-                        .get('/api/v0/taxons?name=Echiura')
-                        .expect('Content-Type', /json/)
-                        .expect(200)
-                        .end(function(err, res) {
-                            expect(res.body).to.have.length(1);
-                            expect(res.body[0].bold).to.equal(data.bold);
-                            done();
-                        })
-                });
+            chai.request(server)
+              .post('/api/v0/taxons')
+              .send(data)
+              .set('Authorization','bearer 12345')
+              .end((err, res) => {
+                res.should.have.status(201);
+                chai.request(server)
+                  .get('/api/v0/taxons?name=Echiura')
+                  .set('Authorization','bearer 12345')
+                  .end((err, res) => {
+                    res.body.length.should.be.eql(1);
+                    res.body[0].bold.should.eql(data.bold);
+                    done();
+                  });
+              });
+
         });
 
     })

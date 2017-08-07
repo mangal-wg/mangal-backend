@@ -28,6 +28,8 @@
   "homepage": "https://github.com/mangal-wg/mangal-backend#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "docco": "^0.7.0",
     "epilogue": "^0.7.0",
     "express": "^4.14.0",
