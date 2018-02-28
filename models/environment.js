@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
             comment: "Name of the environmentale variable collected"
         },
         localisation: {
-          type: DataTypes.GEOMETRY('POINT'),
+          type: DataTypes.GEOMETRY,
           comment: "Where the environmental variable has been measured",
           unique: "uq_env_const"
         },

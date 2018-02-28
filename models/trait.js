@@ -7,21 +7,14 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             comment: "Name of the trait collected"
         },
-        localisation: {
-          type: DataTypes.GEOMETRY('POINT'),
-          comment: "Where the trait has been measured",
-          unique: "uq_trait_const"
-        },
         date:{
           type: DataTypes.DATEONLY,
-          comment: "When the trait has been measured",
-          unique: "uq_trait_const"
+          comment: "When the trait has been measured"
         },
         attr_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            comment: "Unique Identifier to retrieve the name of the attribute/trait measured",
-            unique: "uq_trait_const"
+            comment: "Unique Identifier to retrieve the name of the attribute/trait measured"
         },
         value: {
             type: DataTypes.FLOAT,
@@ -32,10 +25,8 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.TEXT,
             comment: "Description of the trait and his measurement"
         },
-
-    }, {
-        underscored: true
-    });
+    })
 
     return trait
+
 };

@@ -5,12 +5,17 @@ module.exports = function(sequelize, DataTypes) {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
-            comment: "Name of the attribute/variable measured"
+            comment: "Name of the trait or environmental variable measured"
         },
         table_owner: {
-          type: DataTypes.STRING,
+          type: DataTypes.ENUM,
           allowNull: false,
-          comment: 'Name of table which owns this attribute'
+          comment: 'Name of table which owns this attribute',
+          values: [
+              "environments",
+              "traits",
+              "interactions"
+          ]
         },
         description: {
             type: DataTypes.TEXT,

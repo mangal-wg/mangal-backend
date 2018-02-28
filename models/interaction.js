@@ -44,36 +44,27 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         },
         type: {
-            type: DataTypes.STRING(25),
-            comment: "Interaction type"
-            // TODO Add reference table
+            type: DataTypes.ENUM,
+            comment: "Interaction type",
+            values: [
+                "competition",
+                "amensalism",
+                "neutralism",
+                "commensalism",
+                "mutualism",
+                "parasitism",
+                "predation",
+                "herbivory",
+                "symbiosis",
+                "scavenger",
+                "unknown"
+            ],
+            defaultValue: "unknown"
         },
         method: {
-            type: DataTypes.STRING(25),
-            comment: "Method: observation, biblio, ..."
+            type: DataTypes.STRING(35),
+            comment: "Method: observation, biblio, experimental"
             // TODO Add reference table
-        },
-        taxon_1_stage: {
-            type: DataTypes.STRING(25),
-            comment: "Developmental stage of the FROM species",
-            allowNull: false
-        },
-        taxon_2_stage: {
-            type: DataTypes.STRING(25),
-            comment: "Developmental stage of the TO species",
-            allowNull: false
-        },
-        taxon_1_sex: {
-            type: DataTypes.ENUM,
-            values: ['M', 'F','all'],
-            comment: "Sex of the FROM species",
-            allowNull: false
-        },
-        taxon_2_sex: {
-            type: DataTypes.ENUM,
-            values: ['M', 'F','all'],
-            comment: "Sex of the TO species",
-            allowNull: false
         },
         attr_id: {
             type: DataTypes.INTEGER,
@@ -89,7 +80,7 @@ module.exports = function(sequelize, DataTypes) {
             comment: "Description of the interaction"
         },
         localisation: {
-            type: DataTypes.GEOMETRY('POINT'),
+            type: DataTypes.GEOMETRY,
             comment: "Explicit localisation of the interaction"
         },
         public: {

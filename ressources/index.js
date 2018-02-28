@@ -55,16 +55,12 @@ var initialize = function(app) {
     endpoints: ['/api/v0/interactions', '/api/v0/interaction/:id']
   });
 
-  // Protections ressources with middlewares
-  attributeResource.use(middlewares);
-  refResource.use(middlewares);
-  userResource.use(middlewares);
-  traitResource.use(middlewares);
-  environmentResource.use(middlewares);
-  taxonResource.use(middlewares);
-  datasetResource.use(middlewares);
-  networkResource.use(middlewares);
-  interactionResource.use(middlewares);
+    var taxo_backResource = epilogue.resource({
+      model: db.taxo_back,
+      endpoints: ['/api/v0/taxo_backs', '/api/v0/taxo_back/:id']
+    });
+
+
 
 };
 

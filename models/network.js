@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
             comment: "Collection date"
         },
         localisation: {
-            type: DataTypes.GEOMETRY('POINT')
+            type: DataTypes.GEOMETRY
         },
         description: {
             type: DataTypes.TEXT,
@@ -22,13 +22,19 @@ module.exports = function(sequelize, DataTypes) {
         public: {
             type: DataTypes.BOOLEAN,
             allowNull:false,
-            comment: "Is this network is available publicly? "
+            comment: "Is this network is available publicly?"
+        },
+        all_interactions: {
+          type: DataTypes.BOOLEAN,
+          comment: "Is the network recording ALL presence AND absence of interactions",
+          defaultValue: false,
+          allowNull:false
         }
     }, {
         underscored: true,
         classMethods: {
             associate: function(models) {
-                network.hasMany(models.interaction, {
+                network.hasMany(models.network, {
                     onDelete: 'cascade'
                 })
             },
