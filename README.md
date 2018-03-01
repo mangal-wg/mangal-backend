@@ -11,8 +11,8 @@ API, *and* be used for the front-end.
 
 ## Dependancies
 
-- postgresql-9.5
-- postgis-2.3
+- postgresql-9.x
+- postgis-2.x
 
 ## Getting started with `mangal-backend`
 
