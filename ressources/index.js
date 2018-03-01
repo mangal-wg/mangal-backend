@@ -37,7 +37,7 @@ var initialize = function(app) {
 
   var taxonResource = epilogue.resource({
     model: db.taxon,
-    endpoints: ['/api/v0/taxons','/api/v0/taxon/:id']
+    endpoints: ['/api/v0/taxons', '/api/v0/taxon/:id']
   });
 
   var datasetResource = epilogue.resource({
@@ -55,12 +55,21 @@ var initialize = function(app) {
     endpoints: ['/api/v0/interactions', '/api/v0/interaction/:id']
   });
 
-    var taxo_backResource = epilogue.resource({
-      model: db.taxo_back,
-      endpoints: ['/api/v0/taxo_backs', '/api/v0/taxo_back/:id']
-    });
+  var taxo_backResource = epilogue.resource({
+    model: db.taxo_back,
+    endpoints: ['/api/v0/taxo_backs', '/api/v0/taxo_back/:id']
+  });
 
-
+  // Protections ressources with middlewares
+  attributeResource.use(middlewares);
+  refResource.use(middlewares);
+  userResource.use(middlewares);
+  traitResource.use(middlewares);
+  environmentResource.use(middlewares);
+  taxonResource.use(middlewares);
+  datasetResource.use(middlewares);
+  networkResource.use(middlewares);
+  interactionResource.use(middlewares);
 
 };
 
