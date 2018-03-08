@@ -6,6 +6,14 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             comment: "DOI of the attached publication"
         },
+        author: {
+            type: DataTypes.STRING,
+            comment: "firt author name"
+        },
+        year: {
+            type: DataTypes.STRING,
+            comment: "year of publication"
+        },
         jstor: {
           type: DataTypes.STRING,
           comment: "JSTOR of the attached publication"
@@ -30,18 +38,6 @@ module.exports = function(sequelize, DataTypes) {
         underscored: true,
         classMethods: {
             associate: function(models) {
-                ref.hasMany(models.network, {
-                    onDelete: 'cascade'
-                }),
-                ref.hasMany(models.environment, {
-                    onDelete: 'cascade'
-                }),
-                ref.hasMany(models.trait, {
-                    onDelete: 'cascade'
-                }),
-                ref.hasMany(models.interaction, {
-                    onDelete: 'cascade'
-                }),
                 ref.hasMany(models.dataset, {
                     onDelete: 'cascade'
                 })
