@@ -18,9 +18,13 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.TEXT,
             comment: "bibtex of the attached publication"
         },
-        url: {
+        paper_url: {
             type: DataTypes.STRING,
             comment: "URL of the attached publication"
+        },
+        data_url: {
+            type: DataTypes.STRING,
+            comment: "URL of the attached data"
         }
     }, {
         underscored: true,
