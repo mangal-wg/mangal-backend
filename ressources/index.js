@@ -61,15 +61,15 @@ var initialize = function(app) {
   });
 
   // Protections ressources with middlewares
-  attributeResource.use(middlewares);
-  refResource.use(middlewares);
-  userResource.use(middlewares);
-  traitResource.use(middlewares);
-  environmentResource.use(middlewares);
-  taxonResource.use(middlewares);
-  datasetResource.use(middlewares);
-  networkResource.use(middlewares);
-  interactionResource.use(middlewares);
+  // attributeResource.use(middlewares);
+  // refResource.use(middlewares);
+  // userResource.use(middlewares);
+  // traitResource.use(middlewares);
+  // environmentResource.use(middlewares);
+  // taxonResource.use(middlewares);
+  // datasetResource.use(middlewares);
+  // networkResource.use(middlewares);
+  // interactionResource.use(middlewares);
 
 };
 
