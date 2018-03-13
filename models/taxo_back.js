@@ -1,4 +1,4 @@
-"use strict";
+"use strict"; 
 
 module.exports = function(sequelize, DataTypes) {
     var taxo_back = sequelize.define('taxo_back', {
