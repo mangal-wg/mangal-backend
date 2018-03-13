@@ -26,7 +26,8 @@ module.exports = function(sequelize, DataTypes) {
         value: {
             type: DataTypes.FLOAT,
             allowNull: false,
-            comment: "Value of the environmental/attribute"
+            comment: "Value of the environmental/attribute",
+            unique: "uq_env_const"
         }
     }, {
         underscored: true,
