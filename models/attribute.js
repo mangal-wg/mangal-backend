@@ -29,7 +29,7 @@ module.exports = function(sequelize, DataTypes) {
     }, {
         underscored: true,
         classMethods: {
-            associate: function(models) {
+            associate: function(models){
                 attribute.hasMany(models.environment, {
                     onDelete: 'cascade',
                     foreignKey: 'attr_id'
@@ -42,7 +42,7 @@ module.exports = function(sequelize, DataTypes) {
                     onDelete: 'cascade',
                     foreignKey: 'attr_id'
                 })
-            }
+            },
         }
     });
 
