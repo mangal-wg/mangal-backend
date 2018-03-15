@@ -11,14 +11,17 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.DATEONLY,
             allowNull: true,
             comment: "Collection date"
+            //What should be the defaultValue? How to write a period?
         },
         description: {
             type: DataTypes.TEXT,
-            comment: "Description of the dataset collected"
+            comment: "Description of the dataset collected",
+            allowNull: false
         },
         public: {
             type: DataTypes.BOOLEAN,
-            allowNull: false,
+            defaultValue: true,
+            allowNull:false,
             comment: "Is this available publicly? "
         }
     }, {

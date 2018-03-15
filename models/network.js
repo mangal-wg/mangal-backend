@@ -11,17 +11,21 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.DATEONLY,
             allowNull: true,
             comment: "Collection date"
+            //What should be the defaultValue? How to write a period?
         },
         localisation: {
-            type: DataTypes.GEOMETRY
+            type: DataTypes.GEOMETRY,
+            comment: "Localisation of the network"
         },
         description: {
             type: DataTypes.TEXT,
+            allowNull: false,
             comment: "Description of the network collected"
         },
         public: {
             type: DataTypes.BOOLEAN,
             allowNull:false,
+            defaultValue: true,
             comment: "Is this network is available publicly?"
         },
         all_interactions: {

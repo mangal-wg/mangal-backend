@@ -10,6 +10,7 @@ module.exports = function(sequelize, DataTypes) {
         date:{
           type: DataTypes.DATEONLY,
           comment: "When the trait has been measured"
+          //What should be the defaultValue? How to write a period?
         },
         attr_id: {
             type: DataTypes.INTEGER,
