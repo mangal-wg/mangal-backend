@@ -24,7 +24,8 @@ module.exports = function(sequelize, DataTypes) {
         },
         unit: {
             type: DataTypes.STRING,
-            comment: "Unit of the attribute"
+            comment: "Unit of the attribute",
+            defaultValue: "NA"
         }
     }, {
         underscored: true,
