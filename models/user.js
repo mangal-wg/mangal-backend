@@ -7,6 +7,12 @@ module.exports = function(sequelize, DataTypes) {
           allowNull: false,
           unique: true
       },
+      email: {
+          type: DataTypes.STRING,
+          allowNull: true,
+          isUrl: true,
+          comment: "email of the user"
+      },
       orcid: {
           type: DataTypes.STRING,
           unique: true
