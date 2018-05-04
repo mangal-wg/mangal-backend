@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
             comment: "Unique Identifier to retrieve the name of the attribute/trait measured"
         },
         value: {
-            type: DataTypes.FLOAT,
+            type: DataTypes.STRING,
             allowNull: false,
             comment: "Value of the trait/attribute"
         },

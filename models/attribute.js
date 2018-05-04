@@ -5,7 +5,8 @@ module.exports = function(sequelize, DataTypes) {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
-            comment: "Name of the trait or environmental variable measured"
+            comment: "Name of the trait or environmental variable measured",
+            unique: "uq_name_unit"
         },
         table_owner: {
           type: DataTypes.ENUM,
@@ -25,7 +26,8 @@ module.exports = function(sequelize, DataTypes) {
         unit: {
             type: DataTypes.STRING,
             comment: "Unit of the attribute",
-            defaultValue: "NA"
+            defaultValue: "NA",
+            unique: "uq_name_unit"
         }
     }, {
         underscored: true,

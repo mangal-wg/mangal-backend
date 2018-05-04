@@ -30,7 +30,7 @@ module.exports = function(sequelize, DataTypes) {
         bibtex: {
             type: DataTypes.TEXT,
             defaultValue: "NA",
-            comment: "bibtex of the attached publication"
+            comment: "BibTex of the attached publication"
         },
         paper_url: {
             type: DataTypes.STRING,
