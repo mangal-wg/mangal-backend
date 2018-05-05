@@ -17,12 +17,12 @@ var initialize = function(app) {
 
   var refResource = epilogue.resource({
     model: db.ref,
-    endpoints: ['/api/v2/ref', '/api/v2/ref/:id']
+    endpoints: ['/api/v2/reference', '/api/v2/reference/:id']
   });
 
   var userResource = epilogue.resource({
     model: db.user,
-    endpoints: ['/api/v2/users', '/api/v2/user/:id']
+    endpoints: ['/api/v2/user', '/api/v2/user/:id']
   });
 
   var traitResource = epilogue.resource({
@@ -57,7 +57,7 @@ var initialize = function(app) {
 
   var taxaBackResource = epilogue.resource({
     model: db.taxo_back,
-    endpoints: ['/api/v2/taxa_back', '/api/v2/taxa_back/:id']
+    endpoints: ['/api/v2/taxonomy', '/api/v2/taxonomy/:id']
   });
 
   // Protections ressources with middlewares
