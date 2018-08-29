@@ -37,7 +37,7 @@ var initialize = function(app) {
 
   var taxonResource = epilogue.resource({
     model: db.taxon,
-    endpoints: ['/api/v2/taxa', '/api/v2/taxa/:id']
+    endpoints: ['/api/v2/taxon', '/api/v2/taxon/:id']
   });
 
   var datasetResource = epilogue.resource({
