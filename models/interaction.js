@@ -31,6 +31,7 @@ module.exports = function(sequelize, DataTypes) {
             comment: "Date of the recorded interaction",
             unique: "uq_interac_const",
             allowNull: true
+            //What should be the defaultValue? How to write a period?
         },
         direction: {
             type: DataTypes.ENUM,
@@ -40,7 +41,7 @@ module.exports = function(sequelize, DataTypes) {
                 "undirected",
                 "unknown"
             ],
-            defaultValue: "directed",
+            defaultValue: "unknown",
             allowNull: false
         },
         type: {
@@ -59,7 +60,8 @@ module.exports = function(sequelize, DataTypes) {
                 "scavenger",
                 "unknown"
             ],
-            defaultValue: "unknown"
+            defaultValue: "unknown",
+            allowNull: false
         },
         method: {
             type: DataTypes.STRING(35),

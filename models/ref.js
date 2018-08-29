@@ -4,40 +4,50 @@ module.exports = function(sequelize, DataTypes) {
     var ref = sequelize.define('ref', {
         doi: {
             type: DataTypes.STRING,
+            defaultValue: "NA",
             comment: "DOI of the attached publication"
+        },
+        author: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            comment: "firt author name"
+        },
+        year: {
+            type: DataTypes.STRING,
+            comment: "year of publication",
+            defaultValue: "NA"
         },
         jstor: {
           type: DataTypes.STRING,
+          defaultValue: "NA",
           comment: "JSTOR of the attached publication"
         },
         pmid: {
             type: DataTypes.STRING,
+            defaultValue: "NA",
             comment: "PMID of the attached publication"
         },
         bibtex: {
             type: DataTypes.TEXT,
-            comment: "bibtex of the attached publication"
+            defaultValue: "NA",
+            comment: "BibTex of the attached publication"
         },
-        url: {
+        paper_url: {
             type: DataTypes.STRING,
+            allowNull: true,
+            isUrl: true,
             comment: "URL of the attached publication"
+        },
+        data_url: {
+            type: DataTypes.STRING,
+            isUrl: true,
+            allowNull: false,
+            comment: "URL of the attached data"
         }
     }, {
         underscored: true,
         classMethods: {
             associate: function(models) {
-                ref.hasMany(models.network, {
-                    onDelete: 'cascade'
-                }),
-                ref.hasMany(models.environment, {
-                    onDelete: 'cascade'
-                }),
-                ref.hasMany(models.trait, {
-                    onDelete: 'cascade'
-                }),
-                ref.hasMany(models.interaction, {
-                    onDelete: 'cascade'
-                }),
                 ref.hasMany(models.dataset, {
                     onDelete: 'cascade'
                 })

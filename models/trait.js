@@ -10,6 +10,7 @@ module.exports = function(sequelize, DataTypes) {
         date:{
           type: DataTypes.DATEONLY,
           comment: "When the trait has been measured"
+          //What should be the defaultValue? How to write a period?
         },
         attr_id: {
             type: DataTypes.INTEGER,
@@ -17,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
             comment: "Unique Identifier to retrieve the name of the attribute/trait measured"
         },
         value: {
-            type: DataTypes.FLOAT,
+            type: DataTypes.STRING,
             allowNull: false,
             comment: "Value of the trait/attribute"
         },

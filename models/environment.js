@@ -5,7 +5,8 @@ module.exports = function(sequelize, DataTypes) {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
-            comment: "Name of the environmentale variable collected"
+            comment: "Name of the environmentale variable collected",
+            unique: "uq_env_const"
         },
         localisation: {
           type: DataTypes.GEOMETRY,
@@ -16,17 +17,18 @@ module.exports = function(sequelize, DataTypes) {
           type: DataTypes.DATEONLY,
           comment: "When the environmental variable has been measured",
           unique: "uq_env_const"
+          //What should be the defaultValue? How to write a period?
         },
         attr_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            comment: "Unique Identifier to retrieve the name of the attribute/variable measured",
-            unique: "uq_env_const"
+            comment: "Unique Identifier to retrieve the name of the attribute/variable measured"
         },
         value: {
             type: DataTypes.FLOAT,
             allowNull: false,
-            comment: "Value of the environmental/attribute"
+            comment: "Value of the environmental/attribute",
+            unique: "uq_env_const"
         }
     }, {
         underscored: true,
