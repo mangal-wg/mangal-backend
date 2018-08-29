@@ -15,7 +15,7 @@ module.exports = {
       });
     }
   },
-  write: {
+  create: {
     auth: function(req, res, context) {
       passport.authenticate('bearer', {
           session: false
@@ -29,5 +29,4 @@ module.exports = {
     }
   }
 };
-
 // SCOPE VS context.criteria();
