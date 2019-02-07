@@ -21,7 +21,7 @@ var initialize = function(app) {
   });
 
   var userResource = epilogue.resource({
-    model: db.user,
+    model: db.users,
     endpoints: ['/api/v2/user', '/api/v2/user/:id'],
     excludeAttributes: ['access_token','type']
   });

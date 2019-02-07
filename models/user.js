@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-  var user = sequelize.define('user', {
+  var users = sequelize.define('users', {
       name: {
           type: DataTypes.STRING,
           allowNull: false,
@@ -36,21 +36,22 @@ module.exports = function(sequelize, DataTypes) {
       }
   }, {
         underscored: true,
+        freezeTableName: true,
         classMethods: {
             associate: function(models) {
-                    user.hasMany(models.network, {
+                    users.hasMany(models.network, {
                         onDelete: 'cascade'
                     }),
-                    user.hasMany(models.interaction, {
+                    users.hasMany(models.interaction, {
                         onDelete: 'cascade'
                     }),
-                    user.hasMany(models.dataset, {
+                    users.hasMany(models.dataset, {
                         onDelete: 'cascade'
                     })
             }
         }
     })
 
-    return user
+    return users
 
 };

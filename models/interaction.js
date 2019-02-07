@@ -93,6 +93,7 @@ module.exports = function(sequelize, DataTypes) {
         }
     }, {
         underscored: true,
+        freezeTableName: true,
         classMethods: {
             validate: {
                 bothAttrValue: function() {

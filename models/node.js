@@ -10,6 +10,7 @@ module.exports = function(sequelize, DataTypes) {
         }
     }, {
         underscored: true,
+        freezeTableName: true,
         classMethods: {
             associate: function(models) {
                 node.hasMany(models.interaction, {

@@ -26,6 +26,8 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.TEXT,
             comment: "Description of the trait and his measurement"
         },
+    }, {
+        freezeTableName: true
     })
 
     return trait
