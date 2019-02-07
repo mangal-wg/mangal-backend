@@ -1,7 +1,7 @@
 "use strict"; 
 
 module.exports = function(sequelize, DataTypes) {
-    var taxo_back = sequelize.define('taxo_back', {
+    var taxonomy = sequelize.define('taxonomy', {
         name: {
             type: DataTypes.STRING,
             comment: "Scientific name of the recorded taxon",
@@ -49,14 +49,14 @@ module.exports = function(sequelize, DataTypes) {
         underscored: true,
         classMethods: {
             associate: function(models) {
-                taxo_back.hasMany(models.taxon, {
+                taxonomy.hasMany(models.node, {
                         onDelete: 'cascade',
-                        foreignKey: 'taxo_id'
+                        foreignKey: 'node_id'
                 })
             },
         }
     });
 
-    return taxo_back
+    return taxonomy
 
 };

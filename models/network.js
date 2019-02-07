@@ -38,7 +38,7 @@ module.exports = function(sequelize, DataTypes) {
         underscored: true,
         classMethods: {
             associate: function(models) {
-                network.hasMany(models.taxon, {
+                network.hasMany(models.interaction, {
                     onDelete: 'cascade'
                 })
             },

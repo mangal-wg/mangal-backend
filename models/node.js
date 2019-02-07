@@ -1,37 +1,33 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-    var taxon = sequelize.define('taxon', {
+    var node = sequelize.define('node', {
         original_name: {
             type: DataTypes.STRING,
             comment: "Name of the recorded taxon in the publication",
             allowNull: false,
             unique: "uq_name_network"
-        },
-        network_id: {
-            type: DataTypes.INTEGER,
-            unique: "uq_name_network"
-       }
+        }
     }, {
         underscored: true,
         classMethods: {
             associate: function(models) {
-                taxon.hasMany(models.interaction, {
+                node.hasMany(models.interaction, {
                         onDelete: 'cascade',
-                        foreignKey: 'taxon_1'
+                        foreignKey: 'node_1'
                 }),
-                taxon.hasMany(models.interaction, {
+                node.hasMany(models.interaction, {
                     onDelete: 'cascade',
-                    foreignKey: 'taxon_2'
+                    foreignKey: 'node_2'
                 }),
-                taxon.hasMany(models.trait, {
+                node.hasMany(models.trait, {
                     onDelete: 'cascade',
-                    foreignKey: 'taxon_id'
+                    foreignKey: 'node_id'
                 })
             }
         }
     });
 
-    return taxon
+    return node
 
 };

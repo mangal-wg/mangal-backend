@@ -1,5 +1,5 @@
 {
-  "name": "mangal-backend",
+  "name": "mangal-api",
   "version": "0.0.1",
   "description": "Backend server with API services for the mangal.io project",
   "main": "index.js",
@@ -7,12 +7,12 @@
     "deploy_dbs": "createdb -U postgres  mangal_dev; psql -U postgres -d mangal_dev -c 'CREATE EXTENSION postgis'; createdb -U postgres mangal_test; psql -U postgres -d mangal_test -c 'CREATE EXTENSION postgis';",
     "drop_dbs": "dropdb mangal_dev -U postgres --if-exists; dropdb mangal_test -U postgres  --if-exists;",
     "test": "NODE_ENV=test node_modules/.bin/mocha",
-    "start": "nodemon",
+    "start": " NODE_ENV=development nodemon",
     "docco": "./node_modules/.bin/docco -o docs/pages index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mangal-wg/mangal-backend.git"
+    "url": "git+https://github.com/mangal-wg/mangal-api.git"
   },
   "keywords": [
     "interactions",
@@ -23,9 +23,9 @@
   "author": "Steve Vissault & Timothée Poisot",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mangal-wg/mangal-backend/issues"
+    "url": "https://github.com/mangal-wg/mangal-api/issues"
   },
-  "homepage": "https://github.com/mangal-wg/mangal-backend#readme",
+  "homepage": "https://github.com/mangal-wg/mangal-api#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
     "chai": "^3.5.0",

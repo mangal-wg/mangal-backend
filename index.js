@@ -16,8 +16,8 @@ app.use(bodyParser.urlencoded({
 
 // Init Databases
 if (process.env.NODE_ENV == 'development') {
-  db.sequelize.sync();
-  //db.sequelize.sync({force:true});
+  //db.sequelize.sync();
+  db.sequelize.sync({force:true});
 };
 
 // Init REST ressources
@@ -25,7 +25,7 @@ require('./ressources').initialize(app);
 
 
 // start server
-var port = process.env.PORT_MANGAL_API || 3000;
+var port = process.env.PORT_MANGAL_API || 3004;
 server = http.createServer(app);
 server.listen(port);
 

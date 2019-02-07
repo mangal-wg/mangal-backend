@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "mangal_bot",
+    "username": "postgres",
     "password": null,
     "database": "mangal_dev",
     "host": "127.0.0.1",
