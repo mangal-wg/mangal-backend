@@ -52,7 +52,7 @@ module.exports = function(sequelize, DataTypes) {
             associate: function(models) {
                 taxonomy.hasMany(models.node, {
                         onDelete: 'cascade',
-                        foreignKey: 'node_id'
+                        foreignKey: 'taxonomy_id'
                 })
             },
         }
