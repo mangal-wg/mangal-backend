@@ -5,8 +5,17 @@ module.exports = function(sequelize, DataTypes) {
         original_name: {
             type: DataTypes.STRING,
             comment: "Name of the recorded taxon in the publication",
-            allowNull: false,
-            unique: "uq_name_network"
+            allowNull: false
+        },
+        node_level: {
+            type: DataTypes.ENUM,
+            values: ["taxon", "population", "individual"],
+            defaultValue: "taxon",
+            allowNull: false
+        },
+        taxonomy_id: {
+            type: DataTypes.INTEGER,
+            allowNull: true
         }
     }, {
         underscored: true,
@@ -15,11 +24,11 @@ module.exports = function(sequelize, DataTypes) {
             associate: function(models) {
                 node.hasMany(models.interaction, {
                         onDelete: 'cascade',
-                        foreignKey: 'node_1'
+                        foreignKey: 'node_from'
                 }),
                 node.hasMany(models.interaction, {
                     onDelete: 'cascade',
-                    foreignKey: 'node_2'
+                    foreignKey: 'node_to'
                 }),
                 node.hasMany(models.trait, {
                     onDelete: 'cascade',

@@ -2,28 +2,16 @@
 
 module.exports = function(sequelize, DataTypes) {
     var interaction = sequelize.define('interaction', {
-        node_1: {
+        node_from: {
             type: DataTypes.INTEGER,
             comment: "Unique identifier of the first taxon",
             unique: "uq_interac_const",
             allowNull: false
         },
-        node_2: {
+        node_to: {
             type: DataTypes.INTEGER,
             comment: "Unique identifier of the second taxon",
             unique: "uq_interac_const",
-            allowNull: false
-        },
-        node_1_level: {
-            type: DataTypes.ENUM,
-            values: ["taxon", "population", "individual"],
-            defaultValue: "taxon",
-            allowNull: false
-        },
-        node_2_level: {
-            type: DataTypes.ENUM,
-            values: ["taxon", "population", "individual"],
-            defaultValue: "taxon",
             allowNull: false
         },
         date: {
