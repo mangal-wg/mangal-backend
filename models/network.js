@@ -41,6 +41,9 @@ module.exports = function(sequelize, DataTypes) {
             associate: function(models) {
                 network.hasMany(models.interaction, {
                     onDelete: 'cascade'
+                }),
+                network.hasMany(models.node, {
+                    onDelete: 'cascade'
                 })
             },
             indexes: [{

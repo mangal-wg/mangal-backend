@@ -42,9 +42,6 @@ module.exports = function(sequelize, DataTypes) {
                     users.hasMany(models.network, {
                         onDelete: 'cascade'
                     }),
-                    users.hasMany(models.interaction, {
-                        onDelete: 'cascade'
-                    }),
                     users.hasMany(models.dataset, {
                         onDelete: 'cascade'
                     })
