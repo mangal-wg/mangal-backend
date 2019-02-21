@@ -79,7 +79,14 @@ module.exports = function(sequelize, DataTypes) {
             allowNull:false,
             comment: "Is this available publicly? "
         }
-    }, {
+    }, {        
+        classMethods: {
+            associate: function(models) {
+                interaction.hasMany(models.environment, {
+                    onDelete: 'cascade'
+                })
+            }
+        },
         underscored: true,
         freezeTableName: true,
         classMethods: {

@@ -32,17 +32,7 @@ module.exports = function(sequelize, DataTypes) {
         }
     }, {
         underscored: true,
-        freezeTableName: true,
-        classMethods: {
-            associate: function(models) {
-                environment.hasMany(models.network, {
-                    onDelete: 'cascade'
-                }),
-                environment.hasMany(models.interaction, {
-                    onDelete: 'cascade'
-                })
-            }
-        }
+        freezeTableName: true
     });
 
     return environment

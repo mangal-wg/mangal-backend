@@ -44,6 +44,9 @@ module.exports = function(sequelize, DataTypes) {
                 }),
                 network.hasMany(models.node, {
                     onDelete: 'cascade'
+                }),
+                network.hasMany(models.environment, {
+                    onDelete: 'cascade'
                 })
             },
             indexes: [{
