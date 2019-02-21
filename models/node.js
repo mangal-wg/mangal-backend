@@ -13,6 +13,10 @@ module.exports = function(sequelize, DataTypes) {
             defaultValue: "taxon",
             allowNull: false
         },
+        network_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
         taxonomy_id: {
             type: DataTypes.INTEGER,
             allowNull: true
