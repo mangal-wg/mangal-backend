@@ -16,7 +16,7 @@ beforeEach(function(done) {
     force: true
   }).then(function() {
     // insert fake token
-    db.user.create({
+    db.users.create({
       name: 'Han Solo',
       access_token: '12345'
     }).then(function() {

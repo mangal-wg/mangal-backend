@@ -10,7 +10,7 @@ module.exports = function(passport) {
 
   const bearer = new BearerStrategy(options,
     function(token, done) {
-      db.user.findOne({
+      db.users.findOne({
           where: {
             access_token: token
           }
