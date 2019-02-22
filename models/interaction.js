@@ -78,7 +78,11 @@ module.exports = function(sequelize, DataTypes) {
             defaultValue: true,
             allowNull:false,
             comment: "Is this available publicly? "
-        }
+        },
+        network_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
     }, {        
         classMethods: {
             associate: function(models) {
