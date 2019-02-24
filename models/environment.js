@@ -25,7 +25,7 @@ module.exports = function(sequelize, DataTypes) {
             comment: "Unique Identifier to retrieve the name of the attribute/variable measured"
         },
         value: {
-            type: DataTypes.FLOAT,
+            type: DataTypes.STRING,
             allowNull: false,
             comment: "Value of the environmental/attribute",
             unique: "uq_env_const"
