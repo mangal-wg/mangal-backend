@@ -5,12 +5,14 @@ module.exports = function(sequelize, DataTypes) {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
-            comment: "Name of the collected network"
+            comment: "Name of the collected network",
+            unique: 'uq_network'
         },
         date: {
             type: DataTypes.DATEONLY,
             allowNull: true,
-            comment: "Collection date"
+            comment: "Collection date",
+            unique: 'uq_network'
             //What should be the defaultValue? How to write a period?
         },
         localisation: {
