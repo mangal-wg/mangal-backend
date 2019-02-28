@@ -65,10 +65,6 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.FLOAT,
             comment: "Value of the attribute"
         },
-        description: {
-            type: DataTypes.TEXT,
-            comment: "Description of the interaction"
-        },
         localisation: {
             type: DataTypes.GEOMETRY,
             comment: "Explicit localisation of the interaction"
