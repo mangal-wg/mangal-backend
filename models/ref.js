@@ -33,7 +33,7 @@ module.exports = function(sequelize, DataTypes) {
             comment: "BibTex of the attached publication"
         },
         paper_url: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: true,
             isUrl: true,
             comment: "URL of the attached publication"

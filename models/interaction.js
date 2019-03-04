@@ -52,7 +52,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         },
         method: {
-            type: DataTypes.STRING(35),
+            type: DataTypes.STRING,
             comment: "Method: observation, biblio, experimental"
             // TODO Add reference table
         },
