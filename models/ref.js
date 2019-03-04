@@ -39,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
             comment: "URL of the attached publication"
         },
         data_url: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             isUrl: true,
             allowNull: false,
             comment: "URL of the attached data"
