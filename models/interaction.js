@@ -67,7 +67,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         geom: {
             type: DataTypes.GEOMETRY,
-            comment: "Explicit localisation of the interaction"
+            comment: "Explicit geom of the interaction"
         },
         public: {
             type: DataTypes.BOOLEAN,
