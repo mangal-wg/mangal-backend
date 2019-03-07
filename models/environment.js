@@ -8,11 +8,6 @@ module.exports = function(sequelize, DataTypes) {
             comment: "Name of the environmentale variable collected",
             unique: "uq_env_const"
         },
-        localisation: {
-          type: DataTypes.GEOMETRY,
-          comment: "Where the environmental variable has been measured",
-          unique: "uq_env_const"
-        },
         date:{
           type: DataTypes.DATEONLY,
           comment: "When the environmental variable has been measured",
