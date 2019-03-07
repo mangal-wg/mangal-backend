@@ -65,7 +65,7 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.FLOAT,
             comment: "Value of the attribute"
         },
-        localisation: {
+        geom: {
             type: DataTypes.GEOMETRY,
             comment: "Explicit localisation of the interaction"
         },
@@ -79,17 +79,19 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-    }, {        
-        classMethods: {
-            associate: function(models) {
-                interaction.hasMany(models.environment, {
-                    onDelete: 'cascade'
-                })
-            }
-        },
+    }, {
         underscored: true,
         freezeTableName: true,
         classMethods: {
+            associate: function(models) {
+                interaction.belongsTo(models.attribute, {
+                    foreignKey: 'attr_id', 
+                    targetKey: 'id'
+                }),
+                interaction.hasMany(models.environment, {
+                    onDelete: 'cascade'
+                })
+            },
             validate: {
                 bothAttrValue: function() {
                     if ((this.value === null) && (this.attr_id !== null)) {

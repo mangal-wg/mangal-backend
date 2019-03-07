@@ -34,6 +34,10 @@ module.exports = function(sequelize, DataTypes) {
                     onDelete: 'cascade',
                     foreignKey: 'node_to'
                 }),
+                node.belongsTo(models.taxonomy, {
+                    foreignKey: 'taxonomy_id', 
+                    targetKey: 'id'
+                }),
                 node.hasMany(models.trait, {
                     onDelete: 'cascade',
                     foreignKey: 'node_id'

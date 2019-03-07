@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
             unique: 'uq_network'
             //What should be the defaultValue? How to write a period?
         },
-        localisation: {
+        geom: {
             type: DataTypes.GEOMETRY,
             comment: "Localisation of the network"
         },
