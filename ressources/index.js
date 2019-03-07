@@ -38,7 +38,12 @@ var initialize = function(app) {
 
   var traitResource = epilogue.resource({
     model: db.trait,
-    endpoints: ['/api/v2/trait', '/api/v2/trait/:id']
+    endpoints: ['/api/v2/trait', '/api/v2/trait/:id'],
+    include: [
+      {
+        model: db.attribute
+      }
+    ]
   });
   
   var environmentResource = epilogue.resource({

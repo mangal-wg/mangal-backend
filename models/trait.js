@@ -27,7 +27,15 @@ module.exports = function(sequelize, DataTypes) {
             comment: "Description of the trait and his measurement"
         },
     }, {
-        freezeTableName: true
+        freezeTableName: true,
+        classMethods: {
+            associate: function(models) {
+                trait.belongsTo(models.attribute, {
+                    foreignKey: 'attr_id', 
+                    targetKey: 'id'
+                })
+            }
+        }
     })
 
     return trait
