@@ -17,13 +17,23 @@ var initialize = function(app) {
 
   var refResource = epilogue.resource({
     model: db.ref,
-    endpoints: ['/api/v2/reference', '/api/v2/reference/:id']
+    endpoints: ['/api/v2/reference', '/api/v2/reference/:id'],
+    include: [
+      {
+        model: db.dataset
+      }
+    ]
   });
 
   var userResource = epilogue.resource({
     model: db.users,
     endpoints: ['/api/v2/user', '/api/v2/user/:id'],
-    excludeAttributes: ['access_token','type']
+    excludeAttributes: ['access_token','type'],
+    include: [
+      {
+        model: db.dataset
+      }
+    ]
   });
 
   var traitResource = epilogue.resource({
@@ -33,17 +43,35 @@ var initialize = function(app) {
   
   var environmentResource = epilogue.resource({
     model: db.environment,
-    endpoints: ['/api/v2/environment', '/api/v2/environment/:id']
+    endpoints: ['/api/v2/environment', '/api/v2/environment/:id'],
+    include: [
+      {
+        model: db.attribute
+      }
+    ]
   });
 
   var nodeResource = epilogue.resource({
     model: db.node,
-    endpoints: ['/api/v2/node', '/api/v2/node/:id']
+    endpoints: ['/api/v2/node', '/api/v2/node/:id'],
+    include: [
+      {
+        model: db.taxonomy
+      },
+      {
+        model: db.trait
+      }
+    ]
   });
 
   var datasetResource = epilogue.resource({
     model: db.dataset,
-    endpoints: ['/api/v2/dataset', '/api/v2/dataset/:id']
+    endpoints: ['/api/v2/dataset', '/api/v2/dataset/:id'],
+    include: [
+      {
+        model: db.network
+      }
+    ]
   });
 
   var networkResource = epilogue.resource({
@@ -53,7 +81,12 @@ var initialize = function(app) {
 
   var interactionResource = epilogue.resource({
     model: db.interaction,
-    endpoints: ['/api/v2/interaction', '/api/v2/interaction/:id']
+    endpoints: ['/api/v2/interaction', '/api/v2/interaction/:id'],
+    include: [
+      {
+        model: db.attribute
+      }
+    ]
   });
 
   var taxonomyResource = epilogue.resource({
