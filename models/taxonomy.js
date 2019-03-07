@@ -8,10 +8,6 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             unique: "uq_name"
         },
-        description: {
-            type: DataTypes.TEXT,
-            comment: "Description of the taxon"
-        },
         ncbi: {
             type: DataTypes.INTEGER,
             comment: "Unique Identifier from the National Center for Biotechnology Information",
