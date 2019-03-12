@@ -17,23 +17,13 @@ var initialize = function(app) {
 
   var refResource = epilogue.resource({
     model: db.ref,
-    endpoints: ['/api/v2/reference', '/api/v2/reference/:id'],
-    include: [
-      {
-        model: db.dataset
-      }
-    ]
+    endpoints: ['/api/v2/reference', '/api/v2/reference/:id']
   });
 
   var userResource = epilogue.resource({
     model: db.users,
     endpoints: ['/api/v2/user', '/api/v2/user/:id'],
-    excludeAttributes: ['access_token','type'],
-    include: [
-      {
-        model: db.dataset
-      }
-    ]
+    excludeAttributes: ['access_token','type']
   });
 
   var traitResource = epilogue.resource({
@@ -62,21 +52,13 @@ var initialize = function(app) {
     include: [
       {
         model: db.taxonomy
-      },
-      {
-        model: db.trait
       }
     ]
   });
 
   var datasetResource = epilogue.resource({
     model: db.dataset,
-    endpoints: ['/api/v2/dataset', '/api/v2/dataset/:id'],
-    include: [
-      {
-        model: db.network
-      }
-    ]
+    endpoints: ['/api/v2/dataset', '/api/v2/dataset/:id']
   });
 
   var networkResource = epilogue.resource({

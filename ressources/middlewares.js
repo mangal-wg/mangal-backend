@@ -15,15 +15,6 @@ module.exports = {
       });
     }
   },
-  list: {
-    fetch: {
-      before: function (req, res, context) {
-        context.options = context.options || {};
-        context.options.distinct = true;
-        return context.continue;
-      }
-    }
-  },
   create: {
     auth: function(req, res, context) {
       passport.authenticate('bearer', {
