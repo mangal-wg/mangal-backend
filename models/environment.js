@@ -27,7 +27,15 @@ module.exports = function(sequelize, DataTypes) {
         }
     }, {
         underscored: true,
-        freezeTableName: true
+        freezeTableName: true,
+        classMethods: {
+            associate: function(models) {
+                environment.belongsTo(models.attribute, {
+                    foreignKey: 'attr_id', 
+                    targetKey: 'id'
+                })
+            }
+        }
     });
 
     return environment
