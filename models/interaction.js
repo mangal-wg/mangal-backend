@@ -47,7 +47,7 @@ module.exports = function(sequelize, DataTypes) {
                 "symbiosis",
                 "scavenger",
                 "detritivore",
-                "unknown"
+                "unspecified"
             ],
             defaultValue: "unknown",
             allowNull: false
