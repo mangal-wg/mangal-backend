@@ -47,7 +47,8 @@ module.exports = function(sequelize, DataTypes) {
                 "symbiosis",
                 "scavenger",
                 "detritivore",
-                "unspecified"
+                "unspecified",
+                "consumption"
             ],
             defaultValue: "unknown",
             allowNull: false
@@ -55,7 +56,6 @@ module.exports = function(sequelize, DataTypes) {
         method: {
             type: DataTypes.STRING,
             comment: "Method: observation, biblio, experimental"
-            // TODO Add reference table
         },
         attr_id: {
             type: DataTypes.INTEGER,
