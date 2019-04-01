@@ -16,7 +16,6 @@ app.use(bodyParser.urlencoded({
 
 // Init Databases
 if (process.env.NODE_ENV == 'development') {
-  //db.sequelize.sync();
   db.sequelize.sync();
 };
 
