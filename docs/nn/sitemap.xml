@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://mangal-wg/mangal-api/nn/main/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://mangal-wg/mangal-api/main/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="nn"
+                href="https://mangal-wg/mangal-api/nn/main/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://mangal-wg/mangal-api/nn/errors/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://mangal-wg/mangal-api/errors/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="nn"
+                href="https://mangal-wg/mangal-api/nn/errors/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://mangal-wg/mangal-api/nn/categories/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://mangal-wg/mangal-api/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="nn"
+                href="https://mangal-wg/mangal-api/nn/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://mangal-wg/mangal-api/nn/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://mangal-wg/mangal-api/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="nn"
+                href="https://mangal-wg/mangal-api/nn/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://mangal-wg/mangal-api/nn/tags/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://mangal-wg/mangal-api/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="nn"
+                href="https://mangal-wg/mangal-api/nn/tags/"
+                />
+  </url>
+  
+</urlset>

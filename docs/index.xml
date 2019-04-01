@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>API Documentation</title>
+    <link>https://mangal-wg/mangal-api/</link>
+    <description>Recent content on API Documentation</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://mangal-wg/mangal-api/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>API Reference</title>
+      <link>https://mangal-wg/mangal-api/main/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://mangal-wg/mangal-api/main/</guid>
+      <description>Introduction Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+This example API documentation page was created with DocuAPI, a multilingual documentation theme for the static site generator Hugo.</description>
+    </item>
+    
+    <item>
+      <title>Errors</title>
+      <link>https://mangal-wg/mangal-api/errors/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://mangal-wg/mangal-api/errors/</guid>
+      <description>Errors This error section is stored in a separate file, errors.md. DocuAPI allows you to split the single page documentation in as many files as needed. Files are included in the default Hugo page order . One way of ordering the pages is by setting the page `weight` in the front matter. Pages with lower weight will be listed first. The Kittn API uses the following error codes:
+   Error Code Meaning     400 Bad Request &amp;ndash; Your request sucks   401 Unauthorized &amp;ndash; Your API key is wrong   403 Forbidden &amp;ndash; The kitten requested is hidden for administrators only   404 Not Found &amp;ndash; The specified kitten could not be found   405 Method Not Allowed &amp;ndash; You tried to access a kitten with an invalid method   406 Not Acceptable &amp;ndash; You requested a format that isn&amp;rsquo;t json   410 Gone &amp;ndash; The kitten requested has been removed from our servers   418 I&amp;rsquo;m a teapot   429 Too Many Requests &amp;ndash; You&amp;rsquo;re requesting too many kittens!</description>
+    </item>
+    
+  </channel>
+</rss>
