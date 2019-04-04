@@ -2,11 +2,6 @@
 
 module.exports = function(sequelize, DataTypes) {
     var trait = sequelize.define('trait', {
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            comment: "Name of the trait collected"
-        },
         date:{
           type: DataTypes.DATEONLY,
           comment: "When the trait has been measured"
@@ -24,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         description: {
             type: DataTypes.TEXT,
-            comment: "Description of the trait and his measurement"
+            comment: "Description of the measurement if relevant"
         },
     }, {
         freezeTableName: true,

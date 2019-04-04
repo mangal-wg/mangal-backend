@@ -24,22 +24,9 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             comment: "Unique identifier from the Barcode of Life Database",
         },
-        status: {
-            type: DataTypes.ENUM,
-            values: [
-                "confirmed",
-                "trophic species",
-                "morphospecies",
-                "nomen dubium",
-                "nomen oblitum",
-                "nomen nudum",
-                "nomen novum",
-                "nomen conservandum",
-                "species inquirenda"
-            ],
-            comment: "Status of the taxonomic validation",
-            defaultValue: "confirmed",
-            allowNull: false
+        gbif: {
+            type: DataTypes.INTEGER,
+            comment: "Unique identifier from the GBIF infrastructure",
         }
     }, {
         underscored: true,
