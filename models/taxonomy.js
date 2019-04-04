@@ -47,8 +47,7 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 taxonomy.hasMany(models.node, {
-                        onDelete: 'cascade',
-                        foreignKey: 'taxonomy_id'
+                    foreignKey: 'taxonomy_id'
                 }),
                 taxonomy.hasMany(models.trait, {
                     onDelete: 'cascade',
