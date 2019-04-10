@@ -6,18 +6,19 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             comment: "Name of the trait or environmental variable measured",
-            unique: "uq_name_unit"
+            unique: "uq_name_unit_desc"
         },
         description: {
             type: DataTypes.TEXT,
             allowNull: false,
-            comment: "Description of the attribute"
+            comment: "Description of the attribute",
+            unique: "uq_name_unit_desc"
         },
         unit: {
             type: DataTypes.STRING,
             comment: "Unit of the attribute",
             defaultValue: "None",
-            unique: "uq_name_unit"
+            unique: "uq_name_unit_desc"
         }
     }, {
         underscored: true,
