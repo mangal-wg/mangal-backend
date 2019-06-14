@@ -15,7 +15,7 @@
 
     
 </head>
-<body class="index" data-languages="[ &#34;jl&#34; ,  &#34;r&#34; ,  &#34;javascript&#34; ]">
+<body class="index" data-languages="[ &#34;javascript&#34; ,  &#34;shell&#34; ]">
     <a href="#" id="nav-button">
         <span>
         NAV
@@ -28,11 +28,9 @@
         
         <div class="lang-selector">
             
-            <a href="#" data-language-name="jl">Julia</a>
-            
-            <a href="#" data-language-name="r">R</a>
-            
             <a href="#" data-language-name="javascript">Javascript</a>
+            
+            <a href="#" data-language-name="shell">Shell</a>
             
         </div>
          
@@ -44,27 +42,15 @@
         
         <div id="toc">
         </div>
-        
-        <div class="toc-footer">
-            <h3 class="translations-title">Translation</h3> 
-            
-<ul>
-    
-        <li><a href="https://mangal-wg/mangal-api/nn/">Nynorsk</a></li>
-    
-</ul>
-
-
-        </div>
          
         
         <ul class="toc-footer">
             
-            <li>Maintained by <a href="http://steveviss.github.io/" target="_blank">Steve Vissault</a></li>
+            <li>Maintained by <a href="http://steveviss.github.io/">Steve Vissault</a></li>
             
-            <li>Documentation generated with <a href="https://github.com/bep/docuapi" target="_blank">DocuAPI</a></li>
+            <li>Documentation generated with <a href="https://github.com/bep/docuapi">DocuAPI</a></li>
             
-            <li>Theme by <a href="https://github.com/bep" target="_blank">bep</a></li>
+            <li>Theme by <a href="https://github.com/bep">bep</a></li>
             
         </ul>
         
@@ -78,183 +64,421 @@
     
         
 
-<h1 id="introduction">Introduction</h1>
+<h1 id="api-documentation">API Documentation</h1>
 
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
-
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p><strong>This example API documentation page was created with <a href="https://github.com/bep/docuapi/" target="_blank">DocuAPI</a>, a multilingual documentation theme for the static site generator <a href="http://gohugo.io/" target="_blank">Hugo</a>.</strong></p>
+<p>Application Programming Interface (API) to support <a href="http://poisotlab.biol.umontreal.ca/#/">Mangal.io</a>, an ecological interactions database.</p>
 
 <h1 id="authentication">Authentication</h1>
 
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+<p>Authentification is mandatory only for <code>POST</code>, <code>PUT</code> &amp; <code>DELETE</code> operations. We use the ORCID authentification service. Registration is open and accessible at <a href="http://poisotlab.biol.umontreal.ca/auth">http://poisotlab.biol.umontreal.ca/auth</a>. We are currently developing templates to facilitate the conversion and publication of new ecological networks into mangal.</p>
 
-<span class="kn">import</span> <span class="s">&#34;github.com/bep/kittn/auth&#34;</span>
+<p><code>GET</code> doesn&rsquo;t require authentification. If you have any question, please email me steve.vissault[at]usherbrooke.ca</p>
 
-<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">api</span> <span class="o">:=</span> <span class="nx">auth</span><span class="p">.</span><span class="nx">Authorize</span><span class="p">(</span><span class="s">&#34;meowmeowmeow&#34;</span><span class="p">)</span>
-
-	<span class="c1">// Just to make it compile
-</span><span class="c1"></span>	<span class="nx">_</span> <span class="p">=</span> <span class="nx">api</span>
-<span class="p">}</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">&#39;kittn&#39;</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="o">.</span><span class="n">authorize!</span><span class="p">(</span><span class="s1">&#39;meowmeowmeow&#39;</span><span class="p">)</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;meowmeowmeow&#39;</span><span class="p">)</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># With shell, you can just pass the correct header with each request
-</span><span class="c1"></span>curl <span class="s2">&#34;api_endpoint_here&#34;</span>
-  -H <span class="s2">&#34;Authorization: meowmeowmeow&#34;</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;kittn&#39;</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">&#39;meowmeowmeow&#39;</span><span class="p">);</span>
-</code></pre></div>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers" target="_blank">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-<h1 id="kittens">Kittens</h1>
-
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
-
-<span class="kn">import</span> <span class="s">&#34;github.com/bep/kittn/auth&#34;</span>
-
-<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">api</span> <span class="o">:=</span> <span class="nx">auth</span><span class="p">.</span><span class="nx">Authorize</span><span class="p">(</span><span class="s">&#34;meowmeowmeow&#34;</span><span class="p">)</span>
-
-	<span class="nx">_</span> <span class="p">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">GetKittens</span><span class="p">()</span>
-<span class="p">}</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">&#39;kittn&#39;</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="o">.</span><span class="n">authorize!</span><span class="p">(</span><span class="s1">&#39;meowmeowmeow&#39;</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;meowmeowmeow&#39;</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;http://example.com/api/kittens&#34;</span>
-  -H <span class="s2">&#34;Authorization: meowmeowmeow&#34;</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;kittn&#39;</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">&#39;meowmeowmeow&#39;</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre></div>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Fluffums&#34;</span><span class="p">,</span>
-    <span class="nt">&#34;breed&#34;</span><span class="p">:</span> <span class="s2">&#34;calico&#34;</span><span class="p">,</span>
-    <span class="nt">&#34;fluffiness&#34;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-    <span class="nt">&#34;cuteness&#34;</span><span class="p">:</span> <span class="mi">7</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Max&#34;</span><span class="p">,</span>
-    <span class="nt">&#34;breed&#34;</span><span class="p">:</span> <span class="s2">&#34;unknown&#34;</span><span class="p">,</span>
-    <span class="nt">&#34;fluffiness&#34;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-    <span class="nt">&#34;cuteness&#34;</span><span class="p">:</span> <span class="mi">10</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre></div>
-<p>This endpoint retrieves all kittens.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code>GET http://example.com/api/kittens</code></p>
-
-<h3 id="query-parameters">Query Parameters</h3>
+<h1 id="endpoints">Endpoints</h1>
 
 <table>
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
+<th>Endpoint</th>
+<th>Content description</th>
 </tr>
 </thead>
 
 <tbody>
 <tr>
-<td>include_cats</td>
+<td><code>\reference</code></td>
+<td>Original publications (doi, bibtex, authors etc.)</td>
+</tr>
+
+<tr>
+<td><code>\dataset</code></td>
+<td>Collection of networks</td>
+</tr>
+
+<tr>
+<td><code>\network</code></td>
+<td>Network collected at specific location and date.</td>
+</tr>
+
+<tr>
+<td><code>\node</code></td>
+<td>Individu, taxa or population involved in the network</td>
+</tr>
+
+<tr>
+<td><code>\interaction</code></td>
+<td>Directed or undirected interaction among two nodes</td>
+</tr>
+
+<tr>
+<td><code>\taxonomy</code></td>
+<td>Homogeneized taxonomy / unique identifier from gbif, eol, col, itis, bold, ncbi</td>
+</tr>
+
+<tr>
+<td><code>\trait</code></td>
+<td>Trait variables from a node or taxon (generic traits)</td>
+</tr>
+
+<tr>
+<td><code>\environment</code></td>
+<td>Environment variables attached to a network</td>
+</tr>
+
+<tr>
+<td><code>\attribute</code></td>
+<td>Variables use to describe interaction, trait, environment</td>
+</tr>
+</tbody>
+</table>
+
+<p><a href="https://raw.githubusercontent.com/mangal-wg/mangal-api/master/mangal_dev.png">Download DB diagram</a></p>
+
+<h1 id="generic-parameters">Generic parameters</h1>
+
+<p>Generic parameters applicable for <code>GET</code> method</p>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Exemple</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>q</code></td>
+<td>Full search within the table, <strong>only working on string columns</strong>.</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/dataset?q=%insect%</code></td>
+</tr>
+
+<tr>
+<td><code>sort</code></td>
+<td>Sort specific column</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/dataset?sort=-id</code></td>
+</tr>
+
+<tr>
+<td><code>page</code></td>
+<td>Request specific page</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/dataset?page=0</code></td>
+</tr>
+
+<tr>
+<td><code>count</code></td>
+<td>Number of entries returned (max. 1000)</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/dataset?count=50</code></td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="datasets">Datasets</h1>
+
+<h2 id="get-all-datasets">Get all datasets</h2>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>
+
+<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;http://poisotlab.biol.umontreal.ca/api/v2/dataset&#39;</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
+  <span class="p">})</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;http://poisotlab.biol.umontreal.ca/api/v2/dataset&#34;</span></code></pre></div>
+<blockquote>
+<p>Output exemple</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">[{</span>
+  <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;howking_1968&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;date&#34;</span><span class="p">:</span> <span class="s2">&#34;1963-06-01T04:00:00.000Z&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Insect activity recorded 
+</span><span class="s2">    on flower at Lake Hazen, Ellesmere Island, 
+</span><span class="s2">    N.W.T., Canada&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;public&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-22T15:39:00.427Z&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-22T15:39:00.427Z&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;ref_id&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="nt">&#34;user_id&#34;</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">},</span> <span class="p">{</span>
+  <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+  <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;lundgren_olesen_2005&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;date&#34;</span><span class="p">:</span> <span class="s2">&#34;2002-08-04T04:00:00.000Z&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Pollnator activity 
+</span><span class="s2">    recorded on flowers, Uummannaq Island, Greenland, Danmark&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;public&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-22T20:04:25.322Z&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-22T20:04:25.322Z&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;ref_id&#34;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+  <span class="nt">&#34;user_id&#34;</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">}]</span></code></pre></div>
+<h3 id="http-request">HTTP Request</h3>
+
+<p>List all datasets available in mangal</p>
+
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset</code></p>
+
+<p>Request specific dataset <code>id</code></p>
+
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset/:id</code></p>
+
+<h3 id="parameters">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Exemple</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>Search by unique name (<code>firstAuthor_pubYear</code>)</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/dataset?name=howking_1968</code></td>
+</tr>
+
+<tr>
+<td><code>date</code></td>
+<td>Search by creation date &ndash; format <code>YYYY-mm-dd</code></td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/dataset?date=1963-06-01</code></td>
+</tr>
+
+<tr>
+<td><code>description</code></td>
+<td>Full text search in description</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/dataset?description=%Ellesmere%</code></td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="references">References</h1>
+
+<h2 id="get-all-datasets-1">Get all datasets</h2>
+
+<h3 id="http-request-1">HTTP REQUEST</h3>
+
+<p>List all datasets available in mangal</p>
+
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset</code></p>
+
+<p>Request specific entry based on the id</p>
+
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset/:id</code></p>
+
+<h3 id="parameters-1">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Exemple</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>q</td>
 <td>false</td>
 <td>If set to true, the result will also include cats.</td>
 </tr>
 
 <tr>
-<td>available</td>
+<td>sort</td>
+<td>true</td>
+<td>If set to false, the result will include kittens that have already been adopted.</td>
+</tr>
+
+<tr>
+<td>page</td>
 <td>true</td>
 <td>If set to false, the result will include kittens that have already been adopted.</td>
 </tr>
 </tbody>
 </table>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
+<h1 id="networks">Networks</h1>
 
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+<h2 id="get-all-datasets-2">Get all datasets</h2>
 
-<span class="kn">import</span> <span class="s">&#34;github.com/bep/kittn/auth&#34;</span>
+<h3 id="http-request-2">HTTP REQUEST</h3>
 
-<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">api</span> <span class="o">:=</span> <span class="nx">auth</span><span class="p">.</span><span class="nx">Authorize</span><span class="p">(</span><span class="s">&#34;meowmeowmeow&#34;</span><span class="p">)</span>
+<p>List all datasets available in mangal</p>
 
-	<span class="nx">_</span> <span class="p">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">GetKitten</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">&#39;kittn&#39;</span>
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset</code></p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="o">.</span><span class="n">authorize!</span><span class="p">(</span><span class="s1">&#39;meowmeowmeow&#39;</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="o"></span><span class="p">)</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">kittn</span>
+<p>Request specific entry based on the id</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;meowmeowmeow&#39;</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;http://example.com/api/kittens/2&#34;</span>
-  -H <span class="s2">&#34;Authorization: meowmeowmeow&#34;</span></code></pre></div><div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;kittn&#39;</span><span class="p">);</span>
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset/:id</code></p>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">&#39;meowmeowmeow&#39;</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre></div>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-  <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Max&#34;</span><span class="p">,</span>
-  <span class="nt">&#34;breed&#34;</span><span class="p">:</span> <span class="s2">&#34;unknown&#34;</span><span class="p">,</span>
-  <span class="nt">&#34;fluffiness&#34;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-  <span class="nt">&#34;cuteness&#34;</span><span class="p">:</span> <span class="mi">10</span>
-<span class="p">}</span></code></pre></div>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-<h3 id="http-request-1">HTTP Request</h3>
-
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-
-<h3 id="url-parameters">URL Parameters</h3>
+<h3 id="parameters-2">Parameters</h3>
 
 <table>
 <thead>
 <tr>
 <th>Parameter</th>
 <th>Description</th>
+<th>Exemple</th>
 </tr>
 </thead>
 
 <tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>q</td>
+<td>false</td>
+<td>If set to true, the result will also include cats.</td>
+</tr>
+
+<tr>
+<td>sort</td>
+<td>true</td>
+<td>If set to false, the result will include kittens that have already been adopted.</td>
+</tr>
+
+<tr>
+<td>page</td>
+<td>true</td>
+<td>If set to false, the result will include kittens that have already been adopted.</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="nodes">Nodes</h1>
+
+<h2 id="get-all-datasets-3">Get all datasets</h2>
+
+<h3 id="http-request-3">HTTP REQUEST</h3>
+
+<p>List all datasets available in mangal</p>
+
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset</code></p>
+
+<p>Request specific entry based on the id</p>
+
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset/:id</code></p>
+
+<h3 id="parameters-3">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Exemple</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>q</td>
+<td>false</td>
+<td>If set to true, the result will also include cats.</td>
+</tr>
+
+<tr>
+<td>sort</td>
+<td>true</td>
+<td>If set to false, the result will include kittens that have already been adopted.</td>
+</tr>
+
+<tr>
+<td>page</td>
+<td>true</td>
+<td>If set to false, the result will include kittens that have already been adopted.</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="interactions">Interactions</h1>
+
+<h2 id="get-all-datasets-4">Get all datasets</h2>
+
+<h3 id="http-request-4">HTTP REQUEST</h3>
+
+<p>List all datasets available in mangal</p>
+
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset</code></p>
+
+<p>Request specific entry based on the id</p>
+
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset/:id</code></p>
+
+<h3 id="parameters-4">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Exemple</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>q</td>
+<td>false</td>
+<td>If set to true, the result will also include cats.</td>
+</tr>
+
+<tr>
+<td>sort</td>
+<td>true</td>
+<td>If set to false, the result will include kittens that have already been adopted.</td>
+</tr>
+
+<tr>
+<td>page</td>
+<td>true</td>
+<td>If set to false, the result will include kittens that have already been adopted.</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="taxonomy">Taxonomy</h1>
+
+<h2 id="get-all-datasets-5">Get all datasets</h2>
+
+<h3 id="http-request-5">HTTP REQUEST</h3>
+
+<p>List all datasets available in mangal</p>
+
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset</code></p>
+
+<p>Request specific entry based on the id</p>
+
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset/:id</code></p>
+
+<h3 id="parameters-5">Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Exemple</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>q</td>
+<td>false</td>
+<td>If set to true, the result will also include cats.</td>
+</tr>
+
+<tr>
+<td>sort</td>
+<td>true</td>
+<td>If set to false, the result will include kittens that have already been adopted.</td>
+</tr>
+
+<tr>
+<td>page</td>
+<td>true</td>
+<td>If set to false, the result will include kittens that have already been adopted.</td>
 </tr>
 </tbody>
 </table>
@@ -262,74 +486,47 @@ Remember — a happy kitten is an authenticated kitten!
     
         
 
-<h1 id="errors">Errors</h1>
+<h1 id="status-code">Status code</h1>
 
-<aside class="notice">This error section is stored in a separate file, errors.md. DocuAPI allows you to split the single page documentation in as many files as needed. Files are included in the  default Hugo page order . One way of ordering the pages is by setting the page `weight` in the front matter. Pages with lower weight will be listed first.</aside>
-
-<p>The Kittn API uses the following error codes:</p>
+<p>The mangal API uses the following error codes</p>
 
 <table>
 <thead>
 <tr>
-<th>Error Code</th>
+<th>Code</th>
 <th>Meaning</th>
 </tr>
 </thead>
 
 <tbody>
 <tr>
+<td>200</td>
+<td>Successfull response from the API (<code>GET</code>, <code>PUT</code>, <code>DELETE</code>).</td>
+</tr>
+
+<tr>
+<td>201</td>
+<td>The request has been fulfilled, resulting in the creation of a new resource (<code>POST</code>).</td>
+</tr>
+
+<tr>
 <td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
-</tr>
-
-<tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
-</tr>
-
-<tr>
-<td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+<td>Bad Request, API failed to validate the body content.</td>
 </tr>
 
 <tr>
 <td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
-</tr>
-
-<tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
-</tr>
-
-<tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
-</tr>
-
-<tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-
-<tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+<td>Not Found, endpoint doesn&rsquo;t exist.</td>
 </tr>
 
 <tr>
 <td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
+<td>Internal Server Error, problem with our server. Try again later or email the system administrator - steve.vissault[at]usherbrooke.ca</td>
 </tr>
 
 <tr>
 <td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+<td>Service Unavailable &ndash; We&rsquo;re temporarily offline for maintenance.</td>
 </tr>
 </tbody>
 </table>
@@ -341,11 +538,9 @@ Remember — a happy kitten is an authenticated kitten!
             
             <div class="lang-selector">
                 
-                <a href="#" data-language-name="jl">Julia</a>
-                
-                <a href="#" data-language-name="r">R</a>
-                
                 <a href="#" data-language-name="javascript">Javascript</a>
+                
+                <a href="#" data-language-name="shell">Shell</a>
                 
             </div>
             

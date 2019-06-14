@@ -16,9 +16,10 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://mangal-wg/mangal-api/main/</guid>
-      <description>Introduction Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-This example API documentation page was created with DocuAPI, a multilingual documentation theme for the static site generator Hugo.</description>
+      <description>API Documentation Application Programming Interface (API) to support Mangal.io, an ecological interactions database.
+Authentication Authentification is mandatory only for POST, PUT &amp;amp; DELETE operations. We use the ORCID authentification service. Registration is open and accessible at http://poisotlab.biol.umontreal.ca/auth. We are currently developing templates to facilitate the conversion and publication of new ecological networks into mangal.
+GET doesn&amp;rsquo;t require authentification. If you have any question, please email me steve.vissault[at]usherbrooke.ca
+Endpoints    Endpoint Content description     \reference Original publications (doi, bibtex, authors etc.</description>
     </item>
     
     <item>
@@ -27,8 +28,8 @@ This example API documentation page was created with DocuAPI, a multilingual doc
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://mangal-wg/mangal-api/errors/</guid>
-      <description>Errors This error section is stored in a separate file, errors.md. DocuAPI allows you to split the single page documentation in as many files as needed. Files are included in the default Hugo page order . One way of ordering the pages is by setting the page `weight` in the front matter. Pages with lower weight will be listed first. The Kittn API uses the following error codes:
-   Error Code Meaning     400 Bad Request &amp;ndash; Your request sucks   401 Unauthorized &amp;ndash; Your API key is wrong   403 Forbidden &amp;ndash; The kitten requested is hidden for administrators only   404 Not Found &amp;ndash; The specified kitten could not be found   405 Method Not Allowed &amp;ndash; You tried to access a kitten with an invalid method   406 Not Acceptable &amp;ndash; You requested a format that isn&amp;rsquo;t json   410 Gone &amp;ndash; The kitten requested has been removed from our servers   418 I&amp;rsquo;m a teapot   429 Too Many Requests &amp;ndash; You&amp;rsquo;re requesting too many kittens!</description>
+      <description>Status code The mangal API uses the following error codes
+   Code Meaning     200 Successfull response from the API (GET, PUT, DELETE).   201 The request has been fulfilled, resulting in the creation of a new resource (POST).   400 Bad Request, API failed to validate the body content.   404 Not Found, endpoint doesn&amp;rsquo;t exist.   500 Internal Server Error, problem with our server.</description>
     </item>
     
   </channel>
