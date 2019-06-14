@@ -27,6 +27,34 @@ module.exports = function(sequelize, DataTypes) {
         gbif: {
             type: DataTypes.INTEGER,
             comment: "Unique identifier from the GBIF infrastructure",
+        },
+        col: {
+            type: DataTypes.STRING,
+            comment: "Unique identifier from the Catalog of Life infrastructure",
+        },
+        rank: {
+            type: {
+                type: DataTypes.ENUM,
+                comment: "Taxonomic rank",
+                values: [
+                    'kingdom', 
+                    'subkingdom', 
+                    'infrakingdom', 
+                    'superdivision', 
+                    'division', 
+                    'subdivision', 
+                    'phylum', 
+                    'class', 
+                    'superorder', 
+                    'order', 
+                    'superfamily', 
+                    'family', 
+                    'genus', 
+                    'subgenus', 
+                    'species', 
+                    'infraspecies'
+                ]
+            },
         }
     }, {
         underscored: true,
