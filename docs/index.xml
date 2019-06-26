@@ -16,10 +16,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://mangal-wg/mangal-api/main/</guid>
-      <description>API Documentation Application Programming Interface (API) to support Mangal.io, an ecological interactions database.
-Authentication Authentification is mandatory only for POST, PUT &amp;amp; DELETE operations. We use the ORCID authentification service. Registration is open and accessible at http://poisotlab.biol.umontreal.ca/auth. We are currently developing templates to facilitate the conversion and publication of new ecological networks into mangal.
-GET doesn&amp;rsquo;t require authentification. If you have any question, please email me steve.vissault[at]usherbrooke.ca
-Endpoints    Endpoint Content description     \reference Original publications (doi, bibtex, authors etc.</description>
+      <description>Mangal The Mangal project aims at archiving published ecological networks and at easing their retrieval. The database includes 172 datasets representing over 1300 ecological networks. This documentation is meant to describe all the the endpoints and parameters to developers who would like to use the Mangal RESTFul API.
+Authentication Authentification is mandatory only for POST, PUT &amp;amp; DELETE operations. We used an OAuth 2.0 strategy to secure the Mangal API services exploiting ORCID as a third party authentification service.</description>
     </item>
     
     <item>
@@ -29,7 +27,7 @@ Endpoints    Endpoint Content description     \reference Original publications (
       
       <guid>https://mangal-wg/mangal-api/errors/</guid>
       <description>Status code The mangal API uses the following error codes
-   Code Meaning     200 Successfull response from the API (GET, PUT, DELETE).   201 The request has been fulfilled, resulting in the creation of a new resource (POST).   400 Bad Request, API failed to validate the body content.   404 Not Found, endpoint doesn&amp;rsquo;t exist.   500 Internal Server Error, problem with our server.</description>
+   Code Meaning     200 Successfull response from the API (GET, PUT, DELETE).   201 The request has been fulfilled, resulting in the creation of a new resource (POST).   401 Unauthorized API call, user failed to authenticate.   400 Bad Request, API failed to validate the body content.   404 Not Found, endpoint doesn&amp;rsquo;t exist.</description>
     </item>
     
   </channel>

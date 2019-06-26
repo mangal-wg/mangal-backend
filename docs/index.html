@@ -64,17 +64,22 @@
     
         
 
-<h1 id="api-documentation">API Documentation</h1>
+<h1 id="mangal">Mangal</h1>
 
-<p>Application Programming Interface (API) to support <a href="http://poisotlab.biol.umontreal.ca/#/">Mangal.io</a>, an ecological interactions database.</p>
+<p><a href="http://www.mangal.io">The Mangal project</a> aims at archiving published ecological networks and at
+easing their retrieval. The database includes 172 datasets representing over <a href="http://poisotlab.biol.umontreal.ca/#/">1300 ecological
+networks</a>. This documentation is meant to describe all the
+the endpoints and parameters to developers who would like to use the Mangal RESTFul API.</p>
 
 <h1 id="authentication">Authentication</h1>
 
-<p>Authentification is mandatory only for <code>POST</code>, <code>PUT</code> &amp; <code>DELETE</code> operations. We use the ORCID authentification service. Registration is open and accessible at <a href="http://poisotlab.biol.umontreal.ca/auth">http://poisotlab.biol.umontreal.ca/auth</a>. We are currently developing templates to facilitate the conversion and publication of new ecological networks into mangal.</p>
+<p>Authentification is mandatory only for <code>POST</code>, <code>PUT</code> &amp; <code>DELETE</code> operations. We used an OAuth 2.0 strategy to secure the Mangal API services exploiting <a href="https://orcid.org/">ORCID</a> as a third party authentification service. The authentification procedure will be described soon (in the meantime, if you have question feel free to send email at steve.vissault[at]usherbrooke.ca). We are currently developing templates to facilitate the conversion and publication of new ecological networks into mangal.</p>
 
-<p><code>GET</code> doesn&rsquo;t require authentification. If you have any question, please email me steve.vissault[at]usherbrooke.ca</p>
+<p><strong>All <code>GET</code> methods don&rsquo;t require any authentification</strong>.</p>
 
 <h1 id="endpoints">Endpoints</h1>
+
+<p>Below, we briefly describe the content of each endpoint.</p>
 
 <table>
 <thead>
@@ -87,52 +92,52 @@
 <tbody>
 <tr>
 <td><code>\reference</code></td>
-<td>Original publications (doi, bibtex, authors etc.)</td>
+<td>Reference to the original publications (e.g. doi, bibtex, authors etc.)</td>
 </tr>
 
 <tr>
 <td><code>\dataset</code></td>
-<td>Collection of networks</td>
+<td>Metadata on the networks collection (e.g. generic description)</td>
 </tr>
 
 <tr>
 <td><code>\network</code></td>
-<td>Network collected at specific location and date.</td>
+<td>Metadata on the network collected (e.g. data and sampling location).</td>
 </tr>
 
 <tr>
 <td><code>\node</code></td>
-<td>Individu, taxa or population involved in the network</td>
+<td>Informations on the individu, taxa or population involved in the network</td>
 </tr>
 
 <tr>
 <td><code>\interaction</code></td>
-<td>Directed or undirected interaction among two nodes</td>
+<td>Direction, type, strength of the interaction among two nodes</td>
 </tr>
 
 <tr>
 <td><code>\taxonomy</code></td>
-<td>Homogeneized taxonomy / unique identifier from gbif, eol, col, itis, bold, ncbi</td>
+<td>Homogeneized and cleanup taxonomy with gbif, eol, col, itis, bold, ncbi IDs</td>
 </tr>
 
 <tr>
 <td><code>\trait</code></td>
-<td>Trait variables from a node or taxon (generic traits)</td>
+<td>Trait variables available for a node or taxon (generic traits)</td>
 </tr>
 
 <tr>
 <td><code>\environment</code></td>
-<td>Environment variables attached to a network</td>
+<td>Environment variables collected at the sampling data and location</td>
 </tr>
 
 <tr>
 <td><code>\attribute</code></td>
-<td>Variables use to describe interaction, trait, environment</td>
+<td>Variables used to describe interaction, trait, environment</td>
 </tr>
 </tbody>
 </table>
 
-<p><a href="https://raw.githubusercontent.com/mangal-wg/mangal-api/master/mangal_dev.png">Download DB diagram</a></p>
+<p><strong>Full database diagram:</strong> <a href="https://raw.githubusercontent.com/mangal-wg/mangal-api/master/mangal_dev.png">Download</a></p>
 
 <h1 id="generic-parameters">Generic parameters</h1>
 
@@ -174,9 +179,98 @@
 </tbody>
 </table>
 
+<h1 id="references">References</h1>
+
+<h2 id="get-method">GET Method</h2>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>
+
+<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;http://poisotlab.biol.umontreal.ca/api/v2/reference&#39;</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
+  <span class="p">})</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;http://poisotlab.biol.umontreal.ca/api/v2/reference&#34;</span></code></pre></div>
+<blockquote>
+<p>Output exemple</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&#34;doi&#34;</span><span class="p">:</span> <span class="s2">&#34;10.5962/bhl.title.11538&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;author&#34;</span><span class="p">:</span> <span class="s2">&#34;roberson&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;year&#34;</span><span class="p">:</span> <span class="s2">&#34;1929&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;jstor&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&#34;pmid&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&#34;bibtex&#34;</span><span class="p">:</span> <span class="s2">&#34;@book{bhl43820, title = {Flowers and insects; lists of visitors of four hundred and fifty-three flowers,  }, copyright = {Public domain.  Published 1923-1963 with notice but no evidence of copyright renewal found in Stanford Copyright Renewal Database.  Contact dcc@library.uiuc.edu for information.}, url = {https://www.biodiversitylibrary.org/item/43820}, publisher = {Carlinville, Ill.,n.p.}, author = {Robertson, Charles,}, year = {}, pages = {234}, keywords = {Bees|Fertilization of plants|Flowers|Illinois|Insects|Macoupin County|}}&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;paper_url&#34;</span><span class="p">:</span> <span class="s2">&#34;https://www.biodiversitylibrary.org/bibliography/11538#/summary&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;data_url&#34;</span><span class="p">:</span> <span class="s2">&#34;https://www.nceas.ucsb.edu/interactionweb/html/robertson_1929.html&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-21T21:17:04.520Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-21T21:17:04.520Z&#34;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="nt">&#34;doi&#34;</span><span class="p">:</span> <span class="s2">&#34;10.2307/3683041&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;author&#34;</span><span class="p">:</span> <span class="s2">&#34;elberling&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;year&#34;</span><span class="p">:</span> <span class="s2">&#34;1999&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;jstor&#34;</span><span class="p">:</span> <span class="s2">&#34;3683041&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;pmid&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&#34;bibtex&#34;</span><span class="p">:</span> <span class="s2">&#34;@article{10.2307/3683041, ISSN = {09067590, 16000587}, URL = {http://www.jstor.org/stable/3683041}, author = {Heidi Elberling and Jens M. Olesen}, journal = {Ecography}, number = {3}, pages = {314-323}, publisher = {[Nordic Society Oikos, Wiley]}, title = {The Structure of a High Latitude Plant-Flower Visitor System: The Dominance of Flies}, volume = {22}, year = {1999}}&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;paper_url&#34;</span><span class="p">:</span> <span class="s2">&#34;https://www.jstor.org/stable/3683041?seq=1#page_scan_tab_contents&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;data_url&#34;</span><span class="p">:</span> <span class="s2">&#34;https://www.nceas.ucsb.edu/interactionweb/data/plant_pollinator/excel/elberling&amp;olesen_1999.xls&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-22T20:09:13.872Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-22T20:09:13.872Z&#34;</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre></div>
+<h3 id="http-request">HTTP Request</h3>
+
+<p>List all references available in mangal</p>
+
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/reference</code></p>
+
+<p>Request specific reference <code>id</code></p>
+
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/reference/:id</code></p>
+
+<h3 id="specific-parameters">Specific parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Exemple</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>doi</code></td>
+<td>Search by Digital Object Identifier</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/reference?doi=10.2307/3683041</code></td>
+</tr>
+
+<tr>
+<td><code>author</code></td>
+<td>Search by first author</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/reference?author=kolpelke</code></td>
+</tr>
+
+<tr>
+<td><code>year</code></td>
+<td>Search by year of publication</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/reference?year=2007</code></td>
+</tr>
+
+<tr>
+<td><code>jstor</code></td>
+<td>Search by JSTOR ID</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/reference?jstor=3683041</code></td>
+</tr>
+</tbody>
+</table>
+
 <h1 id="datasets">Datasets</h1>
 
-<h2 id="get-all-datasets">Get all datasets</h2>
+<h2 id="get-method-1">GET Method</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>
 
 <span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;http://poisotlab.biol.umontreal.ca/api/v2/dataset&#39;</span><span class="p">)</span>
@@ -211,7 +305,7 @@
   <span class="nt">&#34;ref_id&#34;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
   <span class="nt">&#34;user_id&#34;</span><span class="p">:</span> <span class="mi">2</span>
 <span class="p">}]</span></code></pre></div>
-<h3 id="http-request">HTTP Request</h3>
+<h3 id="http-request-1">HTTP Request</h3>
 
 <p>List all datasets available in mangal</p>
 
@@ -221,7 +315,7 @@
 
 <p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset/:id</code></p>
 
-<h3 id="parameters">Parameters</h3>
+<h3 id="specific-parameters-1">Specific parameters</h3>
 
 <table>
 <thead>
@@ -250,70 +344,98 @@
 <td>Full text search in description</td>
 <td><code>http://poisotlab.biol.umontreal.ca/api/v2/dataset?description=%Ellesmere%</code></td>
 </tr>
-</tbody>
-</table>
-
-<h1 id="references">References</h1>
-
-<h2 id="get-all-datasets-1">Get all datasets</h2>
-
-<h3 id="http-request-1">HTTP REQUEST</h3>
-
-<p>List all datasets available in mangal</p>
-
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset</code></p>
-
-<p>Request specific entry based on the id</p>
-
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset/:id</code></p>
-
-<h3 id="parameters-1">Parameters</h3>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Exemple</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>q</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
 
 <tr>
-<td>sort</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-
-<tr>
-<td>page</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td><code>ref_id</code></td>
+<td>Retrieve all datasets attached to a specific reference</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/dataset?ref_id=7</code></td>
 </tr>
 </tbody>
 </table>
 
 <h1 id="networks">Networks</h1>
 
-<h2 id="get-all-datasets-2">Get all datasets</h2>
+<h2 id="get-method-2">GET Method</h2>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>
 
-<h3 id="http-request-2">HTTP REQUEST</h3>
+<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;http://poisotlab.biol.umontreal.ca/api/v2/network&#39;</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
+  <span class="p">})</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;http://poisotlab.biol.umontreal.ca/api/v2/network&#34;</span></code></pre></div>
+<blockquote>
+<p>Output exemple</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">1246</span><span class="p">,</span>
+    <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;havens_1992_19840601_1246&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;date&#34;</span><span class="p">:</span> <span class="s2">&#34;1984-06-01T04:00:00.000Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;geom&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;Point&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;coordinates&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="mf">-74.1672222222222</span><span class="p">,</span>
+        <span class="mf">44.4875</span>
+      <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Food web of pelagic communities of small lakes and ponds of the Lost Lake.&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;public&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;all_interactions&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-27T02:23:11.329Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-03-03T18:54:57.168Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;dataset_id&#34;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="nt">&#34;user_id&#34;</span><span class="p">:</span> <span class="mi">3</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">1247</span><span class="p">,</span>
+    <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;havens_1992_19840601_1247&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;date&#34;</span><span class="p">:</span> <span class="s2">&#34;1984-06-01T04:00:00.000Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;geom&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;Point&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;coordinates&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="mf">-74.2838888888889</span><span class="p">,</span>
+        <span class="mf">44.4619444444444</span>
+      <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Food web of pelagic communities of small lakes and ponds of the .&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;public&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;all_interactions&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-27T02:23:11.573Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-03-03T18:54:57.302Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;dataset_id&#34;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="nt">&#34;user_id&#34;</span><span class="p">:</span> <span class="mi">3</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">1227</span><span class="p">,</span>
+    <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;havens_1992_19840601_1227&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;date&#34;</span><span class="p">:</span> <span class="s2">&#34;1984-06-01T04:00:00.000Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;geom&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;Point&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;coordinates&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="mf">-75.0555555555556</span><span class="p">,</span>
+        <span class="mf">43.5277777777778</span>
+      <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Food web of pelagic communities of small lakes and ponds of the Chub Pond.&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;public&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;all_interactions&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-27T02:23:05.598Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-03-03T20:54:21.148Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;dataset_id&#34;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="nt">&#34;user_id&#34;</span><span class="p">:</span> <span class="mi">3</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre></div>
+<h3 id="http-request-2">HTTP Request</h3>
 
-<p>List all datasets available in mangal</p>
+<p>List all networks available in mangal</p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset</code></p>
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/network</code></p>
 
-<p>Request specific entry based on the id</p>
+<p>Request specific network <code>id</code></p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset/:id</code></p>
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/network/:id</code></p>
 
-<h3 id="parameters-2">Parameters</h3>
+<h3 id="specific-parameters-2">Specific parameters</h3>
 
 <table>
 <thead>
@@ -326,40 +448,99 @@
 
 <tbody>
 <tr>
-<td>q</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td><code>public</code></td>
+<td>The network is publicly available</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/network?public=false</code></td>
 </tr>
 
 <tr>
-<td>sort</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td><code>all_interactions</code></td>
+<td>If <code>true</code>, absence of interactions can be considered as real/true absences</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/network?all_interactions=true</code></td>
 </tr>
 
 <tr>
-<td>page</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td><code>dataset_id</code></td>
+<td>Retrieve all networks attached to a specific dataset</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/network?dataset_id=12</code></td>
 </tr>
 </tbody>
 </table>
 
 <h1 id="nodes">Nodes</h1>
 
-<h2 id="get-all-datasets-3">Get all datasets</h2>
+<h2 id="get-method-3">GET Method</h2>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>
 
-<h3 id="http-request-3">HTTP REQUEST</h3>
+<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;http://poisotlab.biol.umontreal.ca/api/v2/node&#39;</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
+  <span class="p">})</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;http://poisotlab.biol.umontreal.ca/api/v2/node&#34;</span></code></pre></div>
+<blockquote>
+<p>Output exemple</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">6447</span><span class="p">,</span>
+    <span class="nt">&#34;original_name&#34;</span><span class="p">:</span> <span class="s2">&#34;insects&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;node_level&#34;</span><span class="p">:</span> <span class="s2">&#34;taxon&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;network_id&#34;</span><span class="p">:</span> <span class="mi">926</span><span class="p">,</span>
+    <span class="nt">&#34;taxonomy_id&#34;</span><span class="p">:</span> <span class="mi">4650</span><span class="p">,</span>
+    <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-25T15:09:24.658Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-25T15:09:24.658Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;taxonomy&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">4650</span><span class="p">,</span>
+      <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Insecta&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;ncbi&#34;</span><span class="p">:</span> <span class="mi">50557</span><span class="p">,</span>
+      <span class="nt">&#34;tsn&#34;</span><span class="p">:</span> <span class="mi">4703</span><span class="p">,</span>
+      <span class="nt">&#34;eol&#34;</span><span class="p">:</span> <span class="mi">344</span><span class="p">,</span>
+      <span class="nt">&#34;bold&#34;</span><span class="p">:</span> <span class="mi">82</span><span class="p">,</span>
+      <span class="nt">&#34;gbif&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&#34;col&#34;</span><span class="p">:</span> <span class="s2">&#34;ae304a1e0beadcfec04932589049bb5a&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;rank&#34;</span><span class="p">:</span> <span class="s2">&#34;class&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-24T18:56:42.545Z&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-06-14T15:25:59.300Z&#34;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">6448</span><span class="p">,</span>
+    <span class="nt">&#34;node_level&#34;</span><span class="p">:</span> <span class="s2">&#34;taxon&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;original_name&#34;</span><span class="p">:</span> <span class="s2">&#34;Callinectes&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;network_id&#34;</span><span class="p">:</span> <span class="mi">926</span><span class="p">,</span>
+    <span class="nt">&#34;taxonomy_id&#34;</span><span class="p">:</span> <span class="mi">3823</span><span class="p">,</span>
+    <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-25T15:09:24.701Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-25T15:09:24.701Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;taxonomy&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">3823</span><span class="p">,</span>
+      <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Callinectes&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;ncbi&#34;</span><span class="p">:</span> <span class="mi">6762</span><span class="p">,</span>
+      <span class="nt">&#34;tsn&#34;</span><span class="p">:</span> <span class="mi">13951</span><span class="p">,</span>
+      <span class="nt">&#34;eol&#34;</span><span class="p">:</span> <span class="mi">46508442</span><span class="p">,</span>
+      <span class="nt">&#34;bold&#34;</span><span class="p">:</span> <span class="mi">4985</span><span class="p">,</span>
+      <span class="nt">&#34;gbif&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="nt">&#34;col&#34;</span><span class="p">:</span> <span class="s2">&#34;8c9d5b7b0ef67ba0ca49a80b06665541&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;rank&#34;</span><span class="p">:</span> <span class="s2">&#34;genus&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-22T14:55:39.819Z&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-06-14T15:25:29.810Z&#34;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre></div>
+<h3 id="http-request-3">HTTP Request</h3>
 
-<p>List all datasets available in mangal</p>
+<p>List all nodes available in mangal</p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset</code></p>
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/node</code></p>
 
-<p>Request specific entry based on the id</p>
+<p>Request specific node <code>id</code></p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset/:id</code></p>
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/node/:id</code></p>
 
-<h3 id="parameters-3">Parameters</h3>
+<aside class="success">
+<code>/node</code> will always return also <code>/taxonomy</code>. The nested <code>taxonomy</code> JSON referred to the taxonomic informations of the node.
+</aside>
+
+<h3 id="specific-parameters-3">Specific parameters</h3>
 
 <table>
 <thead>
@@ -372,40 +553,103 @@
 
 <tbody>
 <tr>
-<td>q</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td><code>original_name</code></td>
+<td>Search by taxon or IDs defined by the original author of the publication (exact match)</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/node?original_name=insects</code></td>
 </tr>
 
 <tr>
-<td>sort</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td><code>node_level</code></td>
+<td>Search by sampling unit with 3 options: population, taxon, individu</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/node?node_level=population</code></td>
 </tr>
 
 <tr>
-<td>page</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td><code>network_id</code></td>
+<td>Retrieve all nodes attached to a specific network</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/node?network_id=926</code></td>
 </tr>
 </tbody>
 </table>
 
 <h1 id="interactions">Interactions</h1>
 
-<h2 id="get-all-datasets-4">Get all datasets</h2>
+<h2 id="get-method-4">GET Method</h2>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>
 
-<h3 id="http-request-4">HTTP REQUEST</h3>
+<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;http://poisotlab.biol.umontreal.ca/api/v2/interaction&#39;</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
+  <span class="p">})</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;http://poisotlab.biol.umontreal.ca/api/v2/interaction&#34;</span></code></pre></div>
+<blockquote>
+<p>Output exemple</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">98124</span><span class="p">,</span>
+    <span class="nt">&#34;node_from&#34;</span><span class="p">:</span> <span class="mi">24589</span><span class="p">,</span>
+    <span class="nt">&#34;node_to&#34;</span><span class="p">:</span> <span class="mi">24554</span><span class="p">,</span>
+    <span class="nt">&#34;date&#34;</span><span class="p">:</span> <span class="s2">&#34;1983-01-01T00:00:00.000Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;direction&#34;</span><span class="p">:</span> <span class="s2">&#34;directed&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;herbivory&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;method&#34;</span><span class="p">:</span> <span class="s2">&#34;gut content&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;attr_id&#34;</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
+    <span class="nt">&#34;value&#34;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="nt">&#34;geom&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&#34;public&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;network_id&#34;</span><span class="p">:</span> <span class="mi">1474</span><span class="p">,</span>
+    <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-03-05T20:56:11.109Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-03-05T20:56:11.109Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;attribute&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
+      <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;number of individuals in gut&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Number of individuals in the gut content during analysis&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;unit&#34;</span><span class="p">:</span> <span class="s2">&#34;NA&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-03-04T17:11:22.765Z&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-03-04T17:11:22.765Z&#34;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">98427</span><span class="p">,</span>
+    <span class="nt">&#34;node_from&#34;</span><span class="p">:</span> <span class="mi">24628</span><span class="p">,</span>
+    <span class="nt">&#34;node_to&#34;</span><span class="p">:</span> <span class="mi">24633</span><span class="p">,</span>
+    <span class="nt">&#34;date&#34;</span><span class="p">:</span> <span class="s2">&#34;2004-04-01T00:00:00.000Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;direction&#34;</span><span class="p">:</span> <span class="s2">&#34;directed&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;predation&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;method&#34;</span><span class="p">:</span> <span class="s2">&#34;stable isotopes and gut content&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;attr_id&#34;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="nt">&#34;value&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&#34;geom&#34;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">&#34;public&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;network_id&#34;</span><span class="p">:</span> <span class="mi">1488</span><span class="p">,</span>
+    <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-03-06T14:52:01.494Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-03-06T14:52:01.494Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;attribute&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+      <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;presence/absence&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Presence or absence of interaction&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;unit&#34;</span><span class="p">:</span> <span class="s2">&#34;NA&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-03-01T16:03:38.993Z&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-03-01T16:03:38.993Z&#34;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre></div>
+<h3 id="http-request-4">HTTP Request</h3>
 
-<p>List all datasets available in mangal</p>
+<p>List all interactions available in mangal</p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset</code></p>
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/interaction</code></p>
 
-<p>Request specific entry based on the id</p>
+<p>Request specific interaction <code>id</code></p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset/:id</code></p>
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/interaction/:id</code></p>
 
-<h3 id="parameters-4">Parameters</h3>
+<aside class="success">
+<code>/interaction</code> will always return also <code>/attribute</code> used to quantify the strength of the interaction. <code>attribute.name</code> is the variable associated with <code>value</code> in the interaction table.
+</aside>
+
+<h3 id="specific-parameters-4">Specific parameters</h3>
 
 <table>
 <thead>
@@ -418,40 +662,106 @@
 
 <tbody>
 <tr>
-<td>q</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td><code>node_from</code></td>
+<td>Search by node id which the interaction originate from (e.g. predator)</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/interaction?node_from=24628</code></td>
 </tr>
 
 <tr>
-<td>sort</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td><code>node_to</code></td>
+<td>Search by node id which the interaction end to (e.g. prey)</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/interaction?node_to=24633</code></td>
 </tr>
 
 <tr>
-<td>page</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td><code>direction</code></td>
+<td>Search by edge direction. 3 options: directed, undirected or unknown</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/interaction?direction=unknown</code></td>
+</tr>
+
+<tr>
+<td><code>type</code></td>
+<td>Search by ecological interaction types from the following options: competition, amensalism, neutralism, commensalism, mutualism, parasitism, predation, herbivory, symbiosis, scavenger, detritivore, unspecified, consumption</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/interaction?type=predation</code></td>
+</tr>
+
+<tr>
+<td><code>attr_id</code></td>
+<td>Retrieve all interactions described by a specific attribute</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/interaction?attr_id=25</code></td>
+</tr>
+
+<tr>
+<td><code>network_id</code></td>
+<td>Retrieve all interactions attached to a specific network</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/interaction?network_id=926</code></td>
 </tr>
 </tbody>
 </table>
 
 <h1 id="taxonomy">Taxonomy</h1>
 
-<h2 id="get-all-datasets-5">Get all datasets</h2>
+<h2 id="get-method-5">GET Method</h2>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>
 
-<h3 id="http-request-5">HTTP REQUEST</h3>
+<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;http://poisotlab.biol.umontreal.ca/api/v2/taxonomy&#39;</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
+  <span class="p">})</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;http://poisotlab.biol.umontreal.ca/api/v2/taxonomy&#34;</span></code></pre></div>
+<blockquote>
+<p>Output exemple</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Acer negundo&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;ncbi&#34;</span><span class="p">:</span> <span class="mi">4023</span><span class="p">,</span>
+    <span class="nt">&#34;tsn&#34;</span><span class="p">:</span> <span class="mi">28749</span><span class="p">,</span>
+    <span class="nt">&#34;eol&#34;</span><span class="p">:</span> <span class="mi">583069</span><span class="p">,</span>
+    <span class="nt">&#34;bold&#34;</span><span class="p">:</span> <span class="mi">100987</span><span class="p">,</span>
+    <span class="nt">&#34;gbif&#34;</span><span class="p">:</span> <span class="mi">3189866</span><span class="p">,</span>
+    <span class="nt">&#34;col&#34;</span><span class="p">:</span> <span class="s2">&#34;90203e29e2f59e5754167f89b9eba3cc&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;rank&#34;</span><span class="p">:</span> <span class="s2">&#34;species&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-21T21:17:12.585Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-06-14T15:20:36.273Z&#34;</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Acer saccharinum&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;ncbi&#34;</span><span class="p">:</span> <span class="mi">75745</span><span class="p">,</span>
+    <span class="nt">&#34;tsn&#34;</span><span class="p">:</span> <span class="mi">28757</span><span class="p">,</span>
+    <span class="nt">&#34;eol&#34;</span><span class="p">:</span> <span class="mi">583072</span><span class="p">,</span>
+    <span class="nt">&#34;bold&#34;</span><span class="p">:</span> <span class="mi">101028</span><span class="p">,</span>
+    <span class="nt">&#34;gbif&#34;</span><span class="p">:</span> <span class="mi">3189837</span><span class="p">,</span>
+    <span class="nt">&#34;col&#34;</span><span class="p">:</span> <span class="s2">&#34;1582ed5db846e241f3e18da418a2a477&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;rank&#34;</span><span class="p">:</span> <span class="s2">&#34;species&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-21T21:17:12.637Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-06-14T15:20:36.328Z&#34;</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">5317</span><span class="p">,</span>
+    <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Uria aalge&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;ncbi&#34;</span><span class="p">:</span> <span class="mi">13746</span><span class="p">,</span>
+    <span class="nt">&#34;tsn&#34;</span><span class="p">:</span> <span class="mi">176974</span><span class="p">,</span>
+    <span class="nt">&#34;eol&#34;</span><span class="p">:</span> <span class="mi">45509343</span><span class="p">,</span>
+    <span class="nt">&#34;bold&#34;</span><span class="p">:</span> <span class="mi">10149</span><span class="p">,</span>
+    <span class="nt">&#34;gbif&#34;</span><span class="p">:</span> <span class="mi">2481342</span><span class="p">,</span>
+    <span class="nt">&#34;col&#34;</span><span class="p">:</span> <span class="s2">&#34;1f21d6d69cb8c09be9a27485d68bc4d1&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;rank&#34;</span><span class="p">:</span> <span class="s2">&#34;species&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-02-27T04:10:09.559Z&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-06-14T15:26:37.498Z&#34;</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre></div>
+<h3 id="http-request-5">HTTP Request</h3>
 
-<p>List all datasets available in mangal</p>
+<p>List all taxonomy items available in mangal</p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset</code></p>
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/taxonomy</code></p>
 
-<p>Request specific entry based on the id</p>
+<p>Request specific taxonomic <code>id</code></p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset/:id</code></p>
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/taxonomy/:id</code></p>
 
-<h3 id="parameters-5">Parameters</h3>
+<h3 id="specific-parameters-5">Specific parameters</h3>
 
 <table>
 <thead>
@@ -464,24 +774,103 @@
 
 <tbody>
 <tr>
-<td>q</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td><code>name</code></td>
+<td>Search by taxonomic name (exact match)</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/taxonomy?name=Uria aalge</code></td>
 </tr>
 
 <tr>
-<td>sort</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td><code>ncbi</code></td>
+<td>Search by unique taxonomic identifier from <a href="https://www.ncbi.nlm.nih.gov/">National Center for Biotechnology Information</a></td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/taxonomy?ncbi=13746</code></td>
 </tr>
 
 <tr>
-<td>page</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td><code>tsn</code></td>
+<td>Search by unique taxonomic identifier from <a href="https://www.itis.gov/">Integrated Taxonomic Information Sytem</a></td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/taxonomy?tsn=176974</code></td>
+</tr>
+
+<tr>
+<td><code>eol</code></td>
+<td>Search by unique taxonomic identifier from <a href="https://eol.org/">Encyclopedia of Life</a></td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/taxonomy?eol=583072</code></td>
+</tr>
+
+<tr>
+<td><code>bold</code></td>
+<td>Search by unique taxonomic identifier from <a href="http://www.boldsystems.org/">Barcode of Life</a></td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/taxonomy?bold=10149</code></td>
+</tr>
+
+<tr>
+<td><code>gbif</code></td>
+<td>Search by unique taxonomic identifier from <a href="https://www.gbif.org/">Global Biodiversity Information Facility</a></td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/taxonomy?gbif=2481342</code></td>
+</tr>
+
+<tr>
+<td><code>col</code></td>
+<td>Search by unique taxonomic identifier from <a href="https://www.catalogueoflife.org/">Catalogue of Life</a></td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/taxonomy?col=1f21d6d69cb8c09be9a27485d68bc4d1</code></td>
+</tr>
+
+<tr>
+<td><code>rank</code></td>
+<td>Retrieve all nodes with a specific taxonomic resolution from the list: kingdom, subkingdom, infrakingdom, superdivision, division, subdivision, phylum, class, superorder, order, superfamily, family, genus, subgenus, species, infraspecies</td>
+<td><code>http://poisotlab.biol.umontreal.ca/api/v2/taxonomy?rank=class</code></td>
 </tr>
 </tbody>
 </table>
+
+<h1 id="attributes">Attributes</h1>
+
+<h2 id="get-method-6">GET Method</h2>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>
+
+<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;http://poisotlab.biol.umontreal.ca/api/v2/attribute&#39;</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
+  <span class="p">})</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;http://poisotlab.biol.umontreal.ca/api/v2/attribute&#34;</span></code></pre></div>
+<blockquote>
+<p>Output exemple</p>
+</blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+        <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;dietary matrix&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Proportions of the consumer diets made up by the prey.&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;unit&#34;</span><span class="p">:</span> <span class="s2">&#34;NA&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-03-27T09:20:44.990Z&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-03-27T09:20:44.990Z&#34;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">41</span><span class="p">,</span>
+        <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;body size&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Average body length&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;unit&#34;</span><span class="p">:</span> <span class="s2">&#34;mm&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-03-28T20:27:51.716Z&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-03-28T20:27:51.716Z&#34;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
+        <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;habitat use&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;description&#34;</span><span class="p">:</span> <span class="s2">&#34;Which type of habitat is used by the species (aquatic/terrestrial/both)&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;unit&#34;</span><span class="p">:</span> <span class="s2">&#34;NA&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;created_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-04-10T15:01:59.318Z&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;updated_at&#34;</span><span class="p">:</span> <span class="s2">&#34;2019-04-10T15:01:59.318Z&#34;</span>
+    <span class="p">}</span>
+<span class="p">]</span></code></pre></div>
+<h3 id="http-request-6">HTTP Request</h3>
+
+<p>List all attributes items available in mangal</p>
+
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/attribute</code></p>
+
+<p>Request specific attribute <code>id</code></p>
+
+<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/attribute/:id</code></p>
 
     
         
@@ -507,6 +896,11 @@
 <tr>
 <td>201</td>
 <td>The request has been fulfilled, resulting in the creation of a new resource (<code>POST</code>).</td>
+</tr>
+
+<tr>
+<td>401</td>
+<td>Unauthorized API call, user failed to authenticate.</td>
 </tr>
 
 <tr>
