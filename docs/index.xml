@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>API Documentation</title>
-    <link>https://mangal-wg/mangal-api/</link>
+    <link>https://mangal-wg/</link>
     <description>Recent content on API Documentation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="https://mangal-wg/mangal-api/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://mangal-wg/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>API Reference</title>
-      <link>https://mangal-wg/mangal-api/main/</link>
+      <link>https://mangal-wg/main/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://mangal-wg/mangal-api/main/</guid>
+      <guid>https://mangal-wg/main/</guid>
       <description>Mangal The Mangal project aims at archiving published ecological networks and at easing their retrieval. The database includes 172 datasets representing over 1300 ecological networks. This documentation is meant to describe all the the endpoints and parameters to developers who would like to use the Mangal RESTFul API.
 Authentication Authentification is mandatory only for POST, PUT &amp;amp; DELETE operations. We used an OAuth 2.0 strategy to secure the Mangal API services exploiting ORCID as a third party authentification service.</description>
     </item>
     
     <item>
       <title>Errors</title>
-      <link>https://mangal-wg/mangal-api/errors/</link>
+      <link>https://mangal-wg/errors/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://mangal-wg/mangal-api/errors/</guid>
+      <guid>https://mangal-wg/errors/</guid>
       <description>Status code The mangal API uses the following error codes
    Code Meaning     200 Successfull response from the API (GET, PUT, DELETE).   201 The request has been fulfilled, resulting in the creation of a new resource (POST).   401 Unauthorized API call, user failed to authenticate.   400 Bad Request, API failed to validate the body content.   404 Not Found, endpoint doesn&amp;rsquo;t exist.</description>
     </item>
