@@ -33,29 +33,27 @@ module.exports = function(sequelize, DataTypes) {
             comment: "Unique identifier from the Catalog of Life infrastructure",
         },
         rank: {
-            type: {
-                type: DataTypes.ENUM,
-                comment: "Taxonomic rank",
-                values: [
-                    "kingdom", 
-                    "subkingdom", 
-                    "infrakingdom", 
-                    "superdivision", 
-                    "division", 
-                    "subdivision", 
-                    "phylum", 
-                    "class", 
-                    "superorder", 
-                    "order", 
-                    "superfamily", 
-                    "family", 
-                    "genus", 
-                    "subgenus", 
-                    "species", 
-                    "infraspecies"
-                ]
-            },
-        }
+            type: DataTypes.ENUM,
+            comment: "Taxonomic rank",
+            values: [
+                "kingdom", 
+                "subkingdom", 
+                "infrakingdom", 
+                "superdivision", 
+                "division", 
+                "subdivision", 
+                "phylum", 
+                "class", 
+                "superorder", 
+                "order", 
+                "superfamily", 
+                "family", 
+                "genus", 
+                "subgenus", 
+                "species", 
+                "infraspecies"
+            ]
+        },
     }, {
         underscored: true,
         freezeTableName: true,

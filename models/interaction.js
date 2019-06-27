@@ -50,7 +50,7 @@ module.exports = function(sequelize, DataTypes) {
                 "unspecified",
                 "consumption"
             ],
-            defaultValue: "unknown",
+            defaultValue: "unspecified",
             allowNull: false
         },
         method: {
