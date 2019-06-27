@@ -4,7 +4,6 @@ module.exports = function(sequelize, DataTypes) {
     var ref = sequelize.define('ref', {
         doi: {
             type: DataTypes.STRING,
-            defaultValue: "NA",
             comment: "DOI of the attached publication"
         },
         author: {
@@ -14,22 +13,18 @@ module.exports = function(sequelize, DataTypes) {
         },
         year: {
             type: DataTypes.STRING,
-            comment: "year of publication",
-            defaultValue: "NA"
+            comment: "year of publication"
         },
         jstor: {
           type: DataTypes.STRING,
-          defaultValue: "NA",
           comment: "JSTOR of the attached publication"
         },
         pmid: {
             type: DataTypes.STRING,
-            defaultValue: "NA",
             comment: "PMID of the attached publication"
         },
         bibtex: {
             type: DataTypes.TEXT,
-            defaultValue: "NA",
             comment: "BibTex of the attached publication"
         },
         paper_url: {
