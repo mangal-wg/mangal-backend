@@ -1,7 +1,7 @@
 "use strict"; 
 
 module.exports = function(sequelize, DataTypes) {
-    var taxonomy = sequelize.define('taxonomy', {
+    var taxonomy = sequelize.define("taxonomy", {
         name: {
             type: DataTypes.STRING,
             comment: "Scientific name of the recorded taxon",
@@ -37,22 +37,22 @@ module.exports = function(sequelize, DataTypes) {
                 type: DataTypes.ENUM,
                 comment: "Taxonomic rank",
                 values: [
-                    'kingdom', 
-                    'subkingdom', 
-                    'infrakingdom', 
-                    'superdivision', 
-                    'division', 
-                    'subdivision', 
-                    'phylum', 
-                    'class', 
-                    'superorder', 
-                    'order', 
-                    'superfamily', 
-                    'family', 
-                    'genus', 
-                    'subgenus', 
-                    'species', 
-                    'infraspecies'
+                    "kingdom", 
+                    "subkingdom", 
+                    "infrakingdom", 
+                    "superdivision", 
+                    "division", 
+                    "subdivision", 
+                    "phylum", 
+                    "class", 
+                    "superorder", 
+                    "order", 
+                    "superfamily", 
+                    "family", 
+                    "genus", 
+                    "subgenus", 
+                    "species", 
+                    "infraspecies"
                 ]
             },
         }
@@ -62,11 +62,11 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 taxonomy.hasMany(models.node, {
-                    foreignKey: 'taxonomy_id'
+                    foreignKey: "taxonomy_id"
                 }),
                 taxonomy.hasMany(models.trait, {
-                    onDelete: 'cascade',
-                    foreignKey: 'taxonomy_id'
+                    onDelete: "cascade",
+                    foreignKey: "taxonomy_id"
                 })
             },
         }
