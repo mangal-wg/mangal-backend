@@ -67,7 +67,7 @@
 <h1 id="mangal">Mangal</h1>
 
 <p><a href="http://www.mangal.io">The Mangal project</a> aims at archiving published ecological networks and at
-easing their retrieval. The database includes 172 datasets representing over <a href="http://poisotlab.biol.umontreal.ca/#/">1300 ecological
+easing their retrieval. The database includes 172 datasets representing over <a href="https://mangal.io/#/">1300 ecological
 networks</a>. This documentation is meant to describe all the
 the endpoints and parameters to developers who would like to use the Mangal RESTFul API.</p>
 
@@ -156,25 +156,25 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 <tr>
 <td><code>q</code></td>
 <td>Full search within the table, <strong>only working on string columns</strong>.</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/dataset?q=%insect%</code></td>
+<td><code>https://mangal.io/api/v2/dataset?q=%insect%</code></td>
 </tr>
 
 <tr>
 <td><code>sort</code></td>
 <td>Sort specific column</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/dataset?sort=-id</code></td>
+<td><code>https://mangal.io/api/v2/dataset?sort=-id</code></td>
 </tr>
 
 <tr>
 <td><code>page</code></td>
 <td>Request specific page</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/dataset?page=0</code></td>
+<td><code>https://mangal.io/api/v2/dataset?page=0</code></td>
 </tr>
 
 <tr>
 <td><code>count</code></td>
 <td>Number of entries returned (max. 1000)</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/dataset?count=50</code></td>
+<td><code>https://mangal.io/api/v2/dataset?count=50</code></td>
 </tr>
 </tbody>
 </table>
@@ -184,11 +184,11 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 <h2 id="get-method">GET Method</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>
 
-<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;http://poisotlab.biol.umontreal.ca/api/v2/reference&#39;</span><span class="p">)</span>
+<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;https://mangal.io/api/v2/reference&#39;</span><span class="p">)</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
   <span class="p">})</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;http://poisotlab.biol.umontreal.ca/api/v2/reference&#34;</span></code></pre></div>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;https://mangal.io/api/v2/reference&#34;</span></code></pre></div>
 <blockquote>
 <p>Output exemple</p>
 </blockquote>
@@ -224,11 +224,11 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 
 <p>List all references available in mangal</p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/reference</code></p>
+<p><code>GET https://mangal.io/api/v2/reference</code></p>
 
 <p>Request specific reference <code>id</code></p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/reference/:id</code></p>
+<p><code>GET https://mangal.io/api/v2/reference/:id</code></p>
 
 <h3 id="specific-parameters">Specific parameters</h3>
 
@@ -245,25 +245,25 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 <tr>
 <td><code>doi</code></td>
 <td>Search by Digital Object Identifier</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/reference?doi=10.2307/3683041</code></td>
+<td><code>https://mangal.io/api/v2/reference?doi=10.2307/3683041</code></td>
 </tr>
 
 <tr>
 <td><code>author</code></td>
 <td>Search by first author</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/reference?author=kolpelke</code></td>
+<td><code>https://mangal.io/api/v2/reference?author=kolpelke</code></td>
 </tr>
 
 <tr>
 <td><code>year</code></td>
 <td>Search by year of publication</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/reference?year=2007</code></td>
+<td><code>https://mangal.io/api/v2/reference?year=2007</code></td>
 </tr>
 
 <tr>
 <td><code>jstor</code></td>
 <td>Search by JSTOR ID</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/reference?jstor=3683041</code></td>
+<td><code>https://mangal.io/api/v2/reference?jstor=3683041</code></td>
 </tr>
 </tbody>
 </table>
@@ -273,11 +273,11 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 <h2 id="get-method-1">GET Method</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>
 
-<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;http://poisotlab.biol.umontreal.ca/api/v2/dataset&#39;</span><span class="p">)</span>
+<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;https://mangal.io/api/v2/dataset&#39;</span><span class="p">)</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
   <span class="p">})</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;http://poisotlab.biol.umontreal.ca/api/v2/dataset&#34;</span></code></pre></div>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;https://mangal.io/api/v2/dataset&#34;</span></code></pre></div>
 <blockquote>
 <p>Output exemple</p>
 </blockquote>
@@ -309,11 +309,11 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 
 <p>List all datasets available in mangal</p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset</code></p>
+<p><code>GET https://mangal.io/api/v2/dataset</code></p>
 
 <p>Request specific dataset <code>id</code></p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/dataset/:id</code></p>
+<p><code>GET https://mangal.io/api/v2/dataset/:id</code></p>
 
 <h3 id="specific-parameters-1">Specific parameters</h3>
 
@@ -330,25 +330,25 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 <tr>
 <td><code>name</code></td>
 <td>Search by unique name (<code>firstAuthor_pubYear</code>)</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/dataset?name=howking_1968</code></td>
+<td><code>https://mangal.io/api/v2/dataset?name=howking_1968</code></td>
 </tr>
 
 <tr>
 <td><code>date</code></td>
 <td>Search by creation date &ndash; format <code>YYYY-mm-dd</code></td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/dataset?date=1963-06-01</code></td>
+<td><code>https://mangal.io/api/v2/dataset?date=1963-06-01</code></td>
 </tr>
 
 <tr>
 <td><code>description</code></td>
 <td>Full text search in description</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/dataset?description=%Ellesmere%</code></td>
+<td><code>https://mangal.io/api/v2/dataset?description=%Ellesmere%</code></td>
 </tr>
 
 <tr>
 <td><code>ref_id</code></td>
 <td>Retrieve all datasets attached to a specific reference</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/dataset?ref_id=7</code></td>
+<td><code>https://mangal.io/api/v2/dataset?ref_id=7</code></td>
 </tr>
 </tbody>
 </table>
@@ -358,11 +358,11 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 <h2 id="get-method-2">GET Method</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>
 
-<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;http://poisotlab.biol.umontreal.ca/api/v2/network&#39;</span><span class="p">)</span>
+<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;https://mangal.io/api/v2/network&#39;</span><span class="p">)</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
   <span class="p">})</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;http://poisotlab.biol.umontreal.ca/api/v2/network&#34;</span></code></pre></div>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;https://mangal.io/api/v2/network&#34;</span></code></pre></div>
 <blockquote>
 <p>Output exemple</p>
 </blockquote>
@@ -429,11 +429,11 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 
 <p>List all networks available in mangal</p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/network</code></p>
+<p><code>GET https://mangal.io/api/v2/network</code></p>
 
 <p>Request specific network <code>id</code></p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/network/:id</code></p>
+<p><code>GET https://mangal.io/api/v2/network/:id</code></p>
 
 <h3 id="specific-parameters-2">Specific parameters</h3>
 
@@ -450,19 +450,19 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 <tr>
 <td><code>public</code></td>
 <td>The network is publicly available</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/network?public=false</code></td>
+<td><code>https://mangal.io/api/v2/network?public=false</code></td>
 </tr>
 
 <tr>
 <td><code>all_interactions</code></td>
 <td>If <code>true</code>, absence of interactions can be considered as real/true absences</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/network?all_interactions=true</code></td>
+<td><code>https://mangal.io/api/v2/network?all_interactions=true</code></td>
 </tr>
 
 <tr>
 <td><code>dataset_id</code></td>
 <td>Retrieve all networks attached to a specific dataset</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/network?dataset_id=12</code></td>
+<td><code>https://mangal.io/api/v2/network?dataset_id=12</code></td>
 </tr>
 </tbody>
 </table>
@@ -472,11 +472,11 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 <h2 id="get-method-3">GET Method</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>
 
-<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;http://poisotlab.biol.umontreal.ca/api/v2/node&#39;</span><span class="p">)</span>
+<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;https://mangal.io/api/v2/node&#39;</span><span class="p">)</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
   <span class="p">})</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;http://poisotlab.biol.umontreal.ca/api/v2/node&#34;</span></code></pre></div>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;https://mangal.io/api/v2/node&#34;</span></code></pre></div>
 <blockquote>
 <p>Output exemple</p>
 </blockquote>
@@ -530,11 +530,11 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 
 <p>List all nodes available in mangal</p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/node</code></p>
+<p><code>GET https://mangal.io/api/v2/node</code></p>
 
 <p>Request specific node <code>id</code></p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/node/:id</code></p>
+<p><code>GET https://mangal.io/api/v2/node/:id</code></p>
 
 <aside class="success">
 <code>/node</code> will always return also <code>/taxonomy</code>. The nested <code>taxonomy</code> JSON referred to the taxonomic informations of the node.
@@ -555,19 +555,19 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 <tr>
 <td><code>original_name</code></td>
 <td>Search by taxon or IDs defined by the original author of the publication (exact match)</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/node?original_name=insects</code></td>
+<td><code>https://mangal.io/api/v2/node?original_name=insects</code></td>
 </tr>
 
 <tr>
 <td><code>node_level</code></td>
 <td>Search by sampling unit with 3 options: population, taxon, individu</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/node?node_level=population</code></td>
+<td><code>https://mangal.io/api/v2/node?node_level=population</code></td>
 </tr>
 
 <tr>
 <td><code>network_id</code></td>
 <td>Retrieve all nodes attached to a specific network</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/node?network_id=926</code></td>
+<td><code>https://mangal.io/api/v2/node?network_id=926</code></td>
 </tr>
 </tbody>
 </table>
@@ -577,11 +577,11 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 <h2 id="get-method-4">GET Method</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>
 
-<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;http://poisotlab.biol.umontreal.ca/api/v2/interaction&#39;</span><span class="p">)</span>
+<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;https://mangal.io/api/v2/interaction&#39;</span><span class="p">)</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
   <span class="p">})</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;http://poisotlab.biol.umontreal.ca/api/v2/interaction&#34;</span></code></pre></div>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;https://mangal.io/api/v2/interaction&#34;</span></code></pre></div>
 <blockquote>
 <p>Output exemple</p>
 </blockquote>
@@ -639,11 +639,11 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 
 <p>List all interactions available in mangal</p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/interaction</code></p>
+<p><code>GET https://mangal.io/api/v2/interaction</code></p>
 
 <p>Request specific interaction <code>id</code></p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/interaction/:id</code></p>
+<p><code>GET https://mangal.io/api/v2/interaction/:id</code></p>
 
 <aside class="success">
 <code>/interaction</code> will always return also <code>/attribute</code> used to quantify the strength of the interaction. <code>attribute.name</code> is the variable associated with <code>value</code> in the interaction table.
@@ -664,37 +664,37 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 <tr>
 <td><code>node_from</code></td>
 <td>Search by node id which the interaction originate from (e.g. predator)</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/interaction?node_from=24628</code></td>
+<td><code>https://mangal.io/api/v2/interaction?node_from=24628</code></td>
 </tr>
 
 <tr>
 <td><code>node_to</code></td>
 <td>Search by node id which the interaction end to (e.g. prey)</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/interaction?node_to=24633</code></td>
+<td><code>https://mangal.io/api/v2/interaction?node_to=24633</code></td>
 </tr>
 
 <tr>
 <td><code>direction</code></td>
 <td>Search by edge direction. 3 options: directed, undirected or unknown</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/interaction?direction=unknown</code></td>
+<td><code>https://mangal.io/api/v2/interaction?direction=unknown</code></td>
 </tr>
 
 <tr>
 <td><code>type</code></td>
 <td>Search by ecological interaction types from the following options: competition, amensalism, neutralism, commensalism, mutualism, parasitism, predation, herbivory, symbiosis, scavenger, detritivore, unspecified, consumption</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/interaction?type=predation</code></td>
+<td><code>https://mangal.io/api/v2/interaction?type=predation</code></td>
 </tr>
 
 <tr>
 <td><code>attr_id</code></td>
 <td>Retrieve all interactions described by a specific attribute</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/interaction?attr_id=25</code></td>
+<td><code>https://mangal.io/api/v2/interaction?attr_id=25</code></td>
 </tr>
 
 <tr>
 <td><code>network_id</code></td>
 <td>Retrieve all interactions attached to a specific network</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/interaction?network_id=926</code></td>
+<td><code>https://mangal.io/api/v2/interaction?network_id=926</code></td>
 </tr>
 </tbody>
 </table>
@@ -704,11 +704,11 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 <h2 id="get-method-5">GET Method</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>
 
-<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;http://poisotlab.biol.umontreal.ca/api/v2/taxonomy&#39;</span><span class="p">)</span>
+<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;https://mangal.io/api/v2/taxonomy&#39;</span><span class="p">)</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
   <span class="p">})</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;http://poisotlab.biol.umontreal.ca/api/v2/taxonomy&#34;</span></code></pre></div>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;https://mangal.io/api/v2/taxonomy&#34;</span></code></pre></div>
 <blockquote>
 <p>Output exemple</p>
 </blockquote>
@@ -755,11 +755,11 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 
 <p>List all taxonomy items available in mangal</p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/taxonomy</code></p>
+<p><code>GET https://mangal.io/api/v2/taxonomy</code></p>
 
 <p>Request specific taxonomic <code>id</code></p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/taxonomy/:id</code></p>
+<p><code>GET https://mangal.io/api/v2/taxonomy/:id</code></p>
 
 <h3 id="specific-parameters-5">Specific parameters</h3>
 
@@ -776,49 +776,49 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 <tr>
 <td><code>name</code></td>
 <td>Search by taxonomic name (exact match)</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/taxonomy?name=Uria aalge</code></td>
+<td><code>https://mangal.io/api/v2/taxonomy?name=Uria aalge</code></td>
 </tr>
 
 <tr>
 <td><code>ncbi</code></td>
 <td>Search by unique taxonomic identifier from <a href="https://www.ncbi.nlm.nih.gov/">National Center for Biotechnology Information</a></td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/taxonomy?ncbi=13746</code></td>
+<td><code>https://mangal.io/api/v2/taxonomy?ncbi=13746</code></td>
 </tr>
 
 <tr>
 <td><code>tsn</code></td>
 <td>Search by unique taxonomic identifier from <a href="https://www.itis.gov/">Integrated Taxonomic Information Sytem</a></td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/taxonomy?tsn=176974</code></td>
+<td><code>https://mangal.io/api/v2/taxonomy?tsn=176974</code></td>
 </tr>
 
 <tr>
 <td><code>eol</code></td>
 <td>Search by unique taxonomic identifier from <a href="https://eol.org/">Encyclopedia of Life</a></td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/taxonomy?eol=583072</code></td>
+<td><code>https://mangal.io/api/v2/taxonomy?eol=583072</code></td>
 </tr>
 
 <tr>
 <td><code>bold</code></td>
 <td>Search by unique taxonomic identifier from <a href="http://www.boldsystems.org/">Barcode of Life</a></td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/taxonomy?bold=10149</code></td>
+<td><code>https://mangal.io/api/v2/taxonomy?bold=10149</code></td>
 </tr>
 
 <tr>
 <td><code>gbif</code></td>
 <td>Search by unique taxonomic identifier from <a href="https://www.gbif.org/">Global Biodiversity Information Facility</a></td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/taxonomy?gbif=2481342</code></td>
+<td><code>https://mangal.io/api/v2/taxonomy?gbif=2481342</code></td>
 </tr>
 
 <tr>
 <td><code>col</code></td>
 <td>Search by unique taxonomic identifier from <a href="https://www.catalogueoflife.org/">Catalogue of Life</a></td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/taxonomy?col=1f21d6d69cb8c09be9a27485d68bc4d1</code></td>
+<td><code>https://mangal.io/api/v2/taxonomy?col=1f21d6d69cb8c09be9a27485d68bc4d1</code></td>
 </tr>
 
 <tr>
 <td><code>rank</code></td>
 <td>Retrieve all nodes with a specific taxonomic resolution from the list: kingdom, subkingdom, infrakingdom, superdivision, division, subdivision, phylum, class, superorder, order, superfamily, family, genus, subgenus, species, infraspecies</td>
-<td><code>http://poisotlab.biol.umontreal.ca/api/v2/taxonomy?rank=class</code></td>
+<td><code>https://mangal.io/api/v2/taxonomy?rank=class</code></td>
 </tr>
 </tbody>
 </table>
@@ -828,11 +828,11 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 <h2 id="get-method-6">GET Method</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>
 
-<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;http://poisotlab.biol.umontreal.ca/api/v2/attribute&#39;</span><span class="p">)</span>
+<span class="nx">axio</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;https://mangal.io/api/v2/attribute&#39;</span><span class="p">)</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
   <span class="p">})</span>
-</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;http://poisotlab.biol.umontreal.ca/api/v2/attribute&#34;</span></code></pre></div>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">curl <span class="s2">&#34;https://mangal.io/api/v2/attribute&#34;</span></code></pre></div>
 <blockquote>
 <p>Output exemple</p>
 </blockquote>
@@ -866,11 +866,11 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 
 <p>List all attributes items available in mangal</p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/attribute</code></p>
+<p><code>GET https://mangal.io/api/v2/attribute</code></p>
 
 <p>Request specific attribute <code>id</code></p>
 
-<p><code>GET http://poisotlab.biol.umontreal.ca/api/v2/attribute/:id</code></p>
+<p><code>GET https://mangal.io/api/v2/attribute/:id</code></p>
 
     
         
