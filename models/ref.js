@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             comment: "DOI of the attached publication"
         },
-        author: {
+        first_author: {
             type: DataTypes.STRING,
             allowNull: false,
             comment: "firt author name"
