@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-	<meta name="generator" content="Hugo 0.37.1" />
+	<meta name="generator" content="Hugo 0.40.1" />
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -66,7 +66,7 @@
 
 <h1 id="mangal">Mangal</h1>
 
-<p><a href="http://www.mangal.io">The Mangal project</a> aims at archiving published ecological networks and at
+<p><a href="https://mangal.io">The Mangal project</a> aims at archiving published ecological networks and at
 easing their retrieval. The database includes 172 datasets representing over <a href="https://mangal.io/#/">1300 ecological
 networks</a>. This documentation is meant to describe all the
 the endpoints and parameters to developers who would like to use the Mangal RESTFul API.</p>
@@ -181,6 +181,70 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 
 <h1 id="references">References</h1>
 
+<h2 id="table-description">Table description</h2>
+
+<p>Information pertaining to a reference (scientific article, book, online website, etc.) characterizing an original collection of ecological networks. URLs of data and publication sourcesare included as well as persistent identifiers (when available) such as digital object identifiers(DOIs).</p>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>doi</td>
+<td><code>STRING</code></td>
+<td>DOI of the attached publication</td>
+</tr>
+
+<tr>
+<td>first_author</td>
+<td><code>STRING</code></td>
+<td>firt author name</td>
+</tr>
+
+<tr>
+<td>year</td>
+<td><code>STRING</code></td>
+<td>year of publication</td>
+</tr>
+
+<tr>
+<td>jstor</td>
+<td><code>STRING</code></td>
+<td>JSTOR of the attached publication</td>
+</tr>
+
+<tr>
+<td>pmid</td>
+<td><code>STRING</code></td>
+<td>PMID of the attached publication</td>
+</tr>
+
+<tr>
+<td>bibtex</td>
+<td><code>TEXT</code></td>
+<td>BibTex of the attached publication</td>
+</tr>
+
+<tr>
+<td>paper_url</td>
+<td><code>TEXT</code></td>
+<td>URL of the attached publication</td>
+</tr>
+
+<tr>
+<td>data_url</td>
+<td><code>TEXT</code></td>
+<td>URL of the attached data</td>
+</tr>
+</tbody>
+</table>
+
 <h2 id="get-method">GET Method</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>
 
@@ -249,9 +313,9 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 </tr>
 
 <tr>
-<td><code>author</code></td>
+<td><code>first_author</code></td>
 <td>Search by first author</td>
-<td><code>https://mangal.io/api/v2/reference?author=kolpelke</code></td>
+<td><code>https://mangal.io/api/v2/reference?first_author=kolpelke</code></td>
 </tr>
 
 <tr>
@@ -269,6 +333,52 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 </table>
 
 <h1 id="datasets">Datasets</h1>
+
+<h2 id="table-description-1">Table description</h2>
+
+<p>Metadata of the datasets attached to a reference. It includes a general description of the networks.</p>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>name</td>
+<td><code>STRING</code></td>
+<td>Name of the collected dataset</td>
+</tr>
+
+<tr>
+<td>date</td>
+<td><code>DATEONLY</code></td>
+<td>Collection date</td>
+</tr>
+
+<tr>
+<td>description</td>
+<td><code>TEXT</code></td>
+<td>Description of the dataset collected</td>
+</tr>
+
+<tr>
+<td>public</td>
+<td><code>BOOLEAN</code></td>
+<td>Is this available publicly</td>
+</tr>
+
+<tr>
+<td>ref_id</td>
+<td><code>INTEGER</code></td>
+<td>Foreign key - link table entries to references table</td>
+</tr>
+</tbody>
+</table>
 
 <h2 id="get-method-1">GET Method</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>
@@ -354,6 +464,64 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 </table>
 
 <h1 id="networks">Networks</h1>
+
+<h2 id="table-description-2">Table description</h2>
+
+<p>Metadata of the networks attached to a dataset. It provides the sampling location, date and specific description of the network.</p>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>name</td>
+<td><code>STRING</code></td>
+<td>Name of the collected network</td>
+</tr>
+
+<tr>
+<td>date</td>
+<td><code>DATEONLY</code></td>
+<td>Collection date</td>
+</tr>
+
+<tr>
+<td>geom</td>
+<td><code>GeoJSON</code></td>
+<td>location (any features: point, multipolygons etc.) of the network</td>
+</tr>
+
+<tr>
+<td>description</td>
+<td><code>TEXT</code></td>
+<td>Description of the network collected</td>
+</tr>
+
+<tr>
+<td>public</td>
+<td><code>BOOLEAN</code></td>
+<td>Is this network is available publicly?</td>
+</tr>
+
+<tr>
+<td>all_interactions</td>
+<td><code>BOOLEAN</code></td>
+<td>Is the network recording ALL presence AND absence of interactions</td>
+</tr>
+
+<tr>
+<td>dataset_id</td>
+<td><code>INTEGER</code></td>
+<td>Foreign key - link table entries to datasets table</td>
+</tr>
+</tbody>
+</table>
 
 <h2 id="get-method-2">GET Method</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>
@@ -469,6 +637,46 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 
 <h1 id="nodes">Nodes</h1>
 
+<h2 id="table-description-3">Table description</h2>
+
+<p>Information on the population, taxa or individu in the network. Each node has the original taxon name documented and taxonomic backbone provided in taxonomy.</p>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>original_name</td>
+<td><code>STRING</code></td>
+<td>Name of the recorded taxon in the publication</td>
+</tr>
+
+<tr>
+<td>node_level</td>
+<td><code>ENUM</code></td>
+<td>Level of the node either taxon, population or individual involved in the interaction</td>
+</tr>
+
+<tr>
+<td>network_id</td>
+<td><code>INTEGER</code></td>
+<td>Foreign key - link table entries to networks table</td>
+</tr>
+
+<tr>
+<td>taxonomy_id</td>
+<td><code>INTEGER</code></td>
+<td>Foreign key - link table entries to taxonomy table</td>
+</tr>
+</tbody>
+</table>
+
 <h2 id="get-method-3">GET Method</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>
 
@@ -573,6 +781,86 @@ the endpoints and parameters to developers who would like to use the Mangal REST
 </table>
 
 <h1 id="interactions">Interactions</h1>
+
+<h2 id="table-description-4">Table description</h2>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>node_from</td>
+<td><code>INTEGER</code></td>
+<td>Unique identifier of the first taxon (Foreign key linking to nodes)</td>
+</tr>
+
+<tr>
+<td>node_to</td>
+<td><code>INTEGER</code></td>
+<td>Unique identifier of the second taxon (Foreign key linking to nodes)</td>
+</tr>
+
+<tr>
+<td>date</td>
+<td><code>DATE</code></td>
+<td>Date of the recorded interaction</td>
+</tr>
+
+<tr>
+<td>direction</td>
+<td><code>ENUM</code></td>
+<td>Direction of the interaction either directed, undirected or unknown</td>
+</tr>
+
+<tr>
+<td>type</td>
+<td><code>ENUM</code></td>
+<td>Interaction type either competition, amensalism, neutralism, commensalism, mutualism, parasitism, predation, herbivory, symbiosis, scavenger, detritivore, unspecified or consumption</td>
+</tr>
+
+<tr>
+<td>method</td>
+<td><code>STRING</code></td>
+<td>Method: observation, biblio, experimental</td>
+</tr>
+
+<tr>
+<td>attr_id</td>
+<td><code>INTEGER</code></td>
+<td>Unique Identifier to retrieve the name of the variable measured (Foreign key linking to attributes table)</td>
+</tr>
+
+<tr>
+<td>value</td>
+<td><code>FLOAT</code></td>
+<td>Value of the attribute</td>
+</tr>
+
+<tr>
+<td>geom</td>
+<td><code>GeoJSON</code></td>
+<td>Location of the interaction (made for networks spatially explicit)</td>
+</tr>
+
+<tr>
+<td>public</td>
+<td><code>BOOLEAN</code></td>
+<td>Is this interaction available publicly?</td>
+</tr>
+
+<tr>
+<td>network_id</td>
+<td><code>INTEGER</code></td>
+<td>Foreign key - link table entries to networks table</td>
+</tr>
+</tbody>
+</table>
 
 <h2 id="get-method-4">GET Method</h2>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="k">import</span> <span class="nx">axios</span>

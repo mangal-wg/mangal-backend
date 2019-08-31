@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
         first_author: {
             type: DataTypes.STRING,
             allowNull: false,
-            comment: "firt author name"
+            comment: "first author name"
         },
         year: {
             type: DataTypes.STRING,
