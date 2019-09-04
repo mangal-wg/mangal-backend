@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         geom: {
             type: DataTypes.GEOMETRY,
-            comment: "location (any features: point, multipolygons etc.) of the network"
+            comment: "Location (any features: point, multipolygons etc.) of the network"
         },
         description: {
             type: DataTypes.TEXT,
