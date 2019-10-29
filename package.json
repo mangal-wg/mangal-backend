@@ -38,7 +38,7 @@
     "passport-http-bearer": "^1.0.1",
     "pg": "^6.1.0",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^3.24.3"
+    "sequelize": "^5.15.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
