@@ -1,6 +1,6 @@
 {
   "name": "mangal-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Backend server with API services for the mangal.io project",
   "main": "index.js",
   "scripts": {
@@ -27,23 +27,23 @@
   },
   "homepage": "https://github.com/mangal-wg/mangal-api#readme",
   "dependencies": {
-    "body-parser": "^1.15.2",
+    "body-parser": "^1.19.0",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
     "docco": "^0.7.0",
     "epilogue": "^0.7.0",
-    "express": "^4.14.0",
+    "express": "^4.17.1",
     "http": "0.0.0",
     "passport": "^0.3.2",
     "passport-http-bearer": "^1.0.1",
-    "pg": "^6.1.0",
-    "pg-hstore": "^2.3.2",
-    "sequelize": "^5.15.1"
+    "pg": "^6.4.2",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.22.4"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.1.0",
-    "nodemon": "^1.10.2",
+    "mocha": "^3.5.3",
+    "nodemon": "^1.19.4",
     "sequelize-cli": "^2.4.0",
     "supertest": "^2.0.0"
   }
